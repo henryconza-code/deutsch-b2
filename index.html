@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deutsch B2 — Curso Interactivo Completo</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%87%A9%F0%9F%87%AA%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0d0d0f; --panel:#17171a; --panel2:#1f1f23; --panel3:#26262b49; --text:#eaeaec; --muted:#8b8b94;
+  --accent:#5b6cf9; --accent2:#4451d6; --good:#22c55e; --bad:#ef4444; --border:#28282d; --gold:#e8a33d;
+  --radius:12px; --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 28px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Inter,Roboto,Helvetica,Arial,sans-serif;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;}
+button{font-family:inherit;cursor:pointer;}
+::selection{background:rgba(91,108,249,.35);}
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-thumb{background:#333338;border-radius:8px;}
+::-webkit-scrollbar-track{background:transparent;}
+
+/* ---------- CHROME NOTICE ---------- */
+#chromeNotice{
+  background:var(--accent); color:#fff; text-align:center; font-size:.82rem;
+  padding:8px 16px; display:none; align-items:center; justify-content:center; gap:10px;
+}
+#chromeNotice.show{display:flex;}
+#chromeNotice button{background:rgba(255,255,255,.22); border:none; color:#fff; border-radius:14px; padding:3px 11px; font-size:.75rem; font-weight:700;}
+
+/* ---------- TOP BAR ---------- */
+#topbar{
+  position:sticky; top:0; z-index:100;
+  background:rgba(13,13,15,.85); backdrop-filter:blur(10px) saturate(140%);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:12px; padding:12px 20px;
+}
+.brand{display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.05rem; letter-spacing:.2px; white-space:nowrap; cursor:pointer;}
+.brand .flag{font-size:1.4rem;}
+.brand small{display:block; font-weight:500; color:var(--muted); font-size:.68rem; letter-spacing:.5px;}
+#menuBtn{
+  margin-left:6px; border:1px solid var(--border); background:var(--panel2); color:var(--text);
+  padding:8px 16px; border-radius:24px; font-size:.85rem; font-weight:600; display:flex; align-items:center; gap:6px;
+  transition:.15s;
+}
+#menuBtn:hover{border-color:var(--accent); background:var(--panel);}
+#topProgress{margin-left:auto; display:flex; align-items:center; gap:10px; font-size:.78rem; color:var(--muted); white-space:nowrap;}
+.barOuter{width:130px; height:8px; background:var(--panel2); border-radius:6px; overflow:hidden; border:1px solid var(--border);}
+.barInner{height:100%; background:linear-gradient(90deg,var(--accent),var(--good)); width:0%; transition:width .4s;}
+
+/* ---------- BREADCRUMB ---------- */
+#breadcrumb{
+  max-width:1100px; margin:0 auto; padding:14px 20px 0; font-size:.82rem; color:var(--muted); display:flex; gap:6px; align-items:center;
+}
+#breadcrumb a{color:var(--accent); font-weight:600;}
+#breadcrumb a:hover{text-decoration:underline;}
+
+
+/* ---------- PAGE / FADE ---------- */
+#page{min-height:calc(100vh - 60px); animation:fadein .35s ease;}
+@keyframes fadein{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+/* ---------- HERO ---------- */
+.hero{position:relative; overflow:hidden; padding:56px 24px 40px; text-align:center; border-bottom:1px solid var(--border); color:#fff;}
+.hero .wm{position:absolute; font-size:230px; opacity:.13; top:-46px; right:-14px; transform:rotate(-8deg); pointer-events:none; line-height:1; user-select:none;}
+.hero h1{margin:0 0 8px; font-size:2rem; position:relative; letter-spacing:-.5px;}
+.hero p.sub{margin:0 auto; color:rgba(255,255,255,.90); font-size:1.02rem; position:relative; max-width:720px;}
+.hero .badge{display:inline-block; font-size:.72rem; letter-spacing:2.2px; text-transform:uppercase; background:rgba(255,255,255,.18); padding:5px 14px; border-radius:20px; margin-bottom:12px; position:relative; font-weight:700;}
+.hero.homehero{padding:74px 24px 50px;}
+.hero.homehero h1{font-size:2.6rem; background:linear-gradient(90deg,#fff,#c7cdfd); -webkit-background-clip:text; background-clip:text; color:transparent;}
+
+/* Fondos de sección: un único tono neutro y plano (minimalista) para semanas y módulos.
+   La identidad de cada sección viene del emoji, el título y la descripción, no del color. */
+.t-1,.t-2,.t-3,.t-4,.t-5,.t-6,.t-7,.t-8,.t-0,.t-9,
+.m-a,.m-b,.m-c,.m-d,.m-e,.m-f,.m-g,.m-h{
+  background:linear-gradient(160deg,#1c1c20,#131316);
+}
+
+.container{max-width:1100px; margin:0 auto; padding:30px 20px 70px;}
+
+/* ---------- SECTION HEADINGS (home) ---------- */
+.sectionhead{display:flex; align-items:baseline; justify-content:space-between; margin:44px 0 16px;}
+.sectionhead:first-of-type{margin-top:8px;}
+.sectionhead h2{margin:0; font-size:1.3rem;}
+.sectionhead span{color:var(--muted); font-size:.85rem;}
+
+/* ---------- GRID CARDS (home) ---------- */
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:16px;}
+.gcard{
+  border-radius:var(--radius); padding:20px; border:1px solid var(--border); position:relative; overflow:hidden; min-height:140px;
+  display:flex; flex-direction:column; justify-content:flex-end; box-shadow:var(--shadow); transition:.2s transform,.2s box-shadow,.2s border-color;
+  color:#fff;
+}
+.gcard:hover{transform:translateY(-4px); border-color:rgba(255,255,255,.25); box-shadow:0 14px 40px rgba(0,0,0,.45);}
+.gcard .wm2{position:absolute; font-size:76px; opacity:.20; top:-8px; right:-6px;}
+.gcard .kicker{font-size:.68rem; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.7); position:relative; margin-bottom:4px; font-weight:700;}
+.gcard b{font-size:1rem; position:relative; line-height:1.25;}
+.gcard span.desc{font-size:.8rem; color:rgba(255,255,255,.82); position:relative; margin-top:4px; display:block;}
+.gcard .prog{position:relative; margin-top:10px; height:5px; background:rgba(255,255,255,.18); border-radius:4px; overflow:hidden;}
+.gcard .prog i{display:block; height:100%; background:#fff;}
+
+/* ---------- DAY TABS ---------- */
+.daytabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px;}
+.daytab{padding:9px 15px; border-radius:10px; border:1px solid var(--border); background:var(--panel2); font-size:.85rem; color:var(--muted); transition:.15s;}
+.daytab:hover{border-color:var(--accent);}
+.daytab.active{background:var(--panel); color:var(--text); border-color:var(--accent); box-shadow:0 0 0 1px var(--accent) inset;}
+.daytab .chk{margin-right:6px;}
+
+/* ---------- CARDS ---------- */
+.card{background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px; margin-bottom:20px; box-shadow:var(--shadow);}
+.card h2{margin-top:0; font-size:1.18rem;}
+.card h3{font-size:1.02rem; color:var(--accent); margin-top:24px;}
+.note{background:rgba(91,108,249,.08); border-left:3px solid var(--accent); padding:10px 14px; border-radius:6px; margin:10px 0; font-size:.92rem;}
+.warn{background:rgba(239,68,68,.08); border-left:3px solid var(--bad); padding:10px 14px; border-radius:6px; margin:10px 0; font-size:.92rem;}
+.gold{background:rgba(232,163,61,.08); border-left:3px solid var(--gold); padding:10px 14px; border-radius:6px; margin:10px 0; font-size:.92rem;}
+table.g{border-collapse:collapse; width:100%; margin:12px 0; font-size:.88rem;}
+table.g th, table.g td{border:1px solid var(--border); padding:7px 10px; text-align:left;}
+table.g th{background:var(--panel2); color:var(--accent);}
+.small{font-size:.85rem; color:var(--muted);}
+blockquote.model{border-left:3px solid var(--gold); background:rgba(232,163,61,.06); margin:10px 0; padding:12px 16px; border-radius:6px; font-style:italic; line-height:1.55;}
+
+/* ---------- EXERCISES ---------- */
+.exblock{border-top:1px dashed var(--border); padding-top:16px; margin-top:16px;}
+.exblock h4{margin:0 0 10px; font-size:.95rem;}
+.exitem{margin-bottom:12px; line-height:2.1;}
+.exitem input.blank{width:110px; margin:0 4px; padding:4px 6px; border-radius:6px; border:1px solid var(--border); background:var(--bg); color:var(--text); font-size:.92rem; text-align:center;}
+.exitem input.blank.ok{border-color:var(--good); background:rgba(34,197,94,.14);}
+.exitem input.blank.bad{border-color:var(--bad); background:rgba(239,68,68,.14);}
+.exrow-num{color:var(--muted); margin-right:4px;}
+textarea.freeans{width:100%; min-height:80px; margin-top:6px; padding:10px; border-radius:8px; border:1px solid var(--border); background:var(--bg); color:var(--text); font-family:inherit; font-size:.9rem; resize:vertical;}
+.btnrow{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;}
+.btn{border:1px solid var(--border); background:var(--panel2); color:var(--text); padding:8px 15px; border-radius:9px; font-size:.85rem; transition:.15s;}
+.btn:hover{border-color:var(--accent);}
+.btn.primary{background:var(--accent); color:#fff; border-color:transparent; font-weight:700;}
+.btn.primary:hover{background:var(--accent2);}
+.btn.small{padding:5px 11px; font-size:.78rem;}
+.solution{display:none; margin-top:8px; padding:10px 12px; background:var(--panel2); border-radius:8px; font-size:.88rem; border:1px dashed var(--border);}
+.solution.show{display:block;}
+.result{font-size:.85rem; margin-top:6px; font-weight:600;}
+.result.ok{color:var(--good);} .result.bad{color:var(--bad);}
+
+/* ---------- VOCAB / FLASHCARDS ---------- */
+.vocabgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:12px;}
+.flip{perspective:1000px; height:140px; cursor:pointer;}
+.flip-inner{position:relative; width:100%; height:100%; transition:transform .5s; transform-style:preserve-3d;}
+.flip.flipped .flip-inner{transform:rotateY(180deg);}
+.flip-face{position:absolute; inset:0; backface-visibility:hidden; border-radius:12px; border:1px solid var(--border); padding:12px; display:flex; flex-direction:column; justify-content:center; background:var(--panel2);}
+.flip-face.back{transform:rotateY(180deg); background:#23232a; overflow:auto;}
+.flip-face .w{font-weight:700; font-size:.98rem;}
+.flip-face .tr{color:var(--accent); font-size:.9rem; margin-top:4px;}
+.flip-face .ex{font-size:.78rem; color:var(--muted); margin-top:6px;}
+
+/* ---------- FRIDAY / MODEL TASK CARD ---------- */
+.fricard{border:1px solid #e8a33d55; background:rgba(232,163,61,.06);}
+.fricard h2{color:var(--gold);}
+
+/* ---------- CHECKLIST ---------- */
+.checklist label{display:flex; gap:8px; align-items:flex-start; margin:8px 0; font-size:.92rem; cursor:pointer;}
+.checklist input{margin-top:3px;}
+
+/* ---------- ACCORDION ---------- */
+.acc{border:1px solid var(--border); border-radius:10px; margin-bottom:10px; overflow:hidden; background:var(--panel2);}
+.acc summary{padding:12px 16px; cursor:pointer; font-weight:600; list-style:none; display:flex; justify-content:space-between; align-items:center;}
+.acc summary::-webkit-details-marker{display:none;}
+.acc summary:after{content:'+'; font-size:1.2rem; color:var(--accent);}
+.acc[open] summary:after{content:'–';}
+.acc .accbody{padding:0 16px 14px;}
+
+/* ---------- STAT ROW (home) ---------- */
+.statrow{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin:22px 0 6px;}
+.stat{background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center;}
+.stat b{display:block; font-size:1.5rem;}
+.stat span{font-size:.78rem; color:var(--muted);}
+
+.stepnum{display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background:var(--accent); color:#fff; font-size:.75rem; font-weight:700; margin-right:8px;}
+
+/* ---------- WEEKEND BLOCKS ---------- */
+.weekendcard{border:1px solid #5b6cf955; background:rgba(91,108,249,.06);}
+.sundaycard{border:1px solid #22c55e55; background:rgba(34,197,94,.06);}
+
+/* ---------- AUDIO RECORDER ---------- */
+.rec-widget{border:1px solid var(--border); border-radius:12px; padding:14px 16px; background:var(--panel2); margin-top:10px;}
+.rec-widget .recdot{display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--bad); margin-right:6px; animation:pulse 1.2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.25;}}
+.btn.recording{background:var(--bad); color:#fff; border-color:transparent; font-weight:700;}
+
+footer{text-align:center; color:var(--muted); font-size:.8rem; padding:34px 10px 46px;}
+</style>
+</head>
+<body>
+
+<div id="chromeNotice">
+  <span>💡 Esta página está optimizada para <b>Google Chrome</b> (la grabadora de voz y la transcripción automática funcionan mejor ahí). Estás usando otro navegador.</span>
+  <button onclick="document.getElementById('chromeNotice').classList.remove('show')">Entendido</button>
+</div>
+<div id="topbar">
+  <div class="brand" onclick="goHome()"><span class="flag">🇩🇪</span><div>Deutsch B2<small>Curso interactivo completo · optimizado para Chrome</small></div></div>
+  <button id="menuBtn" onclick="goHome()">🏠 Menú principal</button>
+  <div id="topProgress">
+    <span id="progressLabel">0/56 días</span>
+    <div class="barOuter"><div class="barInner" id="barInner"></div></div>
+  </div>
+</div>
+<div id="breadcrumb"></div>
+<div id="page"></div>
+
+<footer>Curso de Alemán B2 · generado a partir de Curso_Aleman_B2_Completo_v2.md y Modulos_Complementarios_B2.md</footer>
+
+<script>
+/* ============================================================
+   SHARED HELPERS
+   ============================================================ */
+function escapeHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function normalize(s){ return (s||'').toString().trim().toLowerCase().replace(/[.,;!?]+$/,'').replace(/\s+/g,' '); }
+function answerMatches(userVal, ansSpec){
+  const alts = Array.isArray(ansSpec) ? ansSpec : [ansSpec];
+  const u = normalize(userVal);
+  return alts.some(a=>normalize(a)===u);
+}
+function fill(id, label, items){ return {kind:'fill', id, label, items}; }
+function open_(id, label, items){ return {kind:'open', id, label, items}; }
+function free(id, label, prompt){ return {kind:'free', id, label, prompt}; }
+
+/* ============================================================
+   THEME REGISTRY (weeks 1-8 + modules A-H)
+   ============================================================ */
+const THEME = {
+  0:{cls:'t-0', emoji:'📘'}, 1:{cls:'t-1', emoji:'💼'}, 2:{cls:'t-2', emoji:'🏠'}, 3:{cls:'t-3', emoji:'📡'},
+  4:{cls:'t-4', emoji:'🌿'}, 5:{cls:'t-5', emoji:'🧘'}, 6:{cls:'t-6', emoji:'💰'}, 7:{cls:'t-7', emoji:'🌍'},
+  8:{cls:'t-8', emoji:'🎓'}, 9:{cls:'t-9', emoji:'📋'},
+};
+
+/* ============================================================
+   WEEK DATA (Curso_Aleman_B2_Completo_v2.md)
+   ============================================================ */
+const w1days = [
+{day:1, dlabel:'Lunes', title:'Los cuatro casos y las preposiciones de Akkusativ/Dativ',
+ theory:`
+ <p>El alemán marca la función de cada sustantivo con un <b>caso</b>. Es la base de todo lo demás; sin dominar esto, la gramática B2 se derrumba.</p>
+ <table class="g"><tr><th>Caso</th><th>Función principal</th><th>Pregunta</th></tr>
+ <tr><td><b>Nominativ</b></td><td>Sujeto</td><td>Wer? Was?</td></tr>
+ <tr><td><b>Akkusativ</b></td><td>Objeto directo</td><td>Wen? Was?</td></tr>
+ <tr><td><b>Dativ</b></td><td>Objeto indirecto</td><td>Wem?</td></tr>
+ <tr><td><b>Genitiv</b></td><td>Posesión / complemento del nombre</td><td>Wessen?</td></tr></table>
+ <h3>Artículos por caso</h3>
+ <table class="g"><tr><th></th><th>masc.</th><th>fem.</th><th>neutro</th><th>plural</th></tr>
+ <tr><td>Nom.</td><td>der / ein</td><td>die / eine</td><td>das / ein</td><td>die / –</td></tr>
+ <tr><td>Akk.</td><td><b>den / einen</b></td><td>die / eine</td><td>das / ein</td><td>die / –</td></tr>
+ <tr><td>Dat.</td><td><b>dem / einem</b></td><td><b>der / einer</b></td><td><b>dem / einem</b></td><td><b>den …n / –n</b></td></tr>
+ <tr><td>Gen.</td><td><b>des …s / eines …s</b></td><td>der / einer</td><td><b>des …s / eines …s</b></td><td>der / –</td></tr></table>
+ <div class="warn">⚠️ Dos trampas clásicas: en <b>Dativ plural</b> el sustantivo añade <b>-n</b> (<i>mit den Kindern</i>); en <b>Genitiv masc./neutro</b> añade <b>-s/-es</b> (<i>des Autos, des Hauses</i>).</div>
+ <p><b>Siempre Akkusativ:</b> durch, für, gegen, ohne, um (+ bis, entlang)<br>
+ <b>Siempre Dativ:</b> aus, bei, mit, nach, seit, von, zu (+ ab, außer, gegenüber)<br>
+ <b>Wechselpräpositionen (Akk. o Dat.):</b> an, auf, hinter, in, neben, über, unter, vor, zwischen — movimiento (Wohin?) → Akk.; posición (Wo?) → Dat.</p>
+ `,
+ exercises:[ fill('1.1','Ejercicio 1.1 – Completa con el artículo correcto',[
+   {text:'Ich habe ___ Arbeitsvertrag (m.) noch nicht unterschrieben.', ans:['den']},
+   {text:'Der Chef spricht mit ___ neuen Mitarbeiterin (f.).', ans:['der']},
+   {text:'Wir arbeiten seit ___ Jahr (n.) an diesem Projekt.', ans:['einem']},
+   {text:'Er geht jeden Morgen durch ___ Park (m.) zur Arbeit.', ans:['den']},
+   {text:'Die Firma liegt gegenüber ___ Bahnhof (m.).', ans:['dem']},
+   {text:'Sie legt die Unterlagen auf ___ Tisch (m.). (Wohin?)', ans:['den']},
+   {text:'Die Unterlagen liegen auf ___ Tisch (m.). (Wo?)', ans:['dem']},
+   {text:'Nach ___ Besprechung (f.) gehen wir essen.', ans:['der']},
+   {text:'Er arbeitet mit ___ Kollegen (Pl.) gut zusammen.', ans:['den']},
+   {text:'Ohne ___ Computer (m.) kann ich nicht arbeiten.', ans:[['einen','den']]},
+ ])]
+},
+{day:2, dlabel:'Martes', title:'Las preposiciones de Genitiv',
+ theory:`
+ <p>En B2, el lenguaje formal (correos, informes, contratos) usa preposiciones de <b>Genitiv</b>.</p>
+ <table class="g"><tr><th>Preposición</th><th>Significado</th><th>Ejemplo</th></tr>
+ <tr><td><b>wegen</b></td><td>por, a causa de</td><td>Wegen des Termins muss ich früher gehen.</td></tr>
+ <tr><td><b>trotz</b></td><td>a pesar de</td><td>Trotz der Probleme läuft das Projekt gut.</td></tr>
+ <tr><td><b>während</b></td><td>durante</td><td>Während der Freistellung bekomme ich mein Gehalt.</td></tr>
+ <tr><td><b>aufgrund</b></td><td>debido a</td><td>Aufgrund der Umstrukturierung gab es Kündigungen.</td></tr>
+ <tr><td><b>anhand</b></td><td>mediante</td><td>Anhand der Daten analysieren wir die Fehler.</td></tr>
+ <tr><td><b>bezüglich</b></td><td>respecto a</td><td>Bezüglich Ihrer Anfrage melde ich mich morgen.</td></tr>
+ <tr><td><b>innerhalb</b></td><td>dentro de</td><td>Innerhalb einer Woche bekommen Sie eine Antwort.</td></tr>
+ <tr><td><b>außerhalb</b></td><td>fuera de</td><td>Außerhalb der Arbeitszeit bin ich nicht erreichbar.</td></tr>
+ <tr><td><b>(an)statt</b></td><td>en vez de</td><td>Statt einer E-Mail schickte er einen Brief.</td></tr></table>
+ <div class="note">💡 En el habla coloquial se oye wegen/trotz + Dativ, pero en el examen B2 usa siempre <b>Genitiv</b>.</div>`,
+ exercises:[
+   fill('1.2','Ejercicio 1.2 – Preposición + artículo en Genitiv',[
+     {text:'___ ___ Krankheit (f.) meines Kollegen muss ich seine Aufgaben übernehmen.', ans:['Wegen','der']},
+     {text:'___ ___ hohen Gehalts (n.) hat er die Stelle abgelehnt.', ans:['Trotz','des']},
+     {text:'___ ___ Probezeit (f.) kann man schneller kündigen.', ans:['Während','der']},
+     {text:'Die Antwort kommt ___ ___ nächsten Tage (Pl.).', ans:['innerhalb','der']},
+     {text:'___ ___ schlechten Wirtschaftslage (f.) wurden viele Stellen abgebaut.', ans:['Aufgrund','der']},
+   ]),
+   open_('1.3','Ejercicio 1.3 – Transforma la oración subordinada en preposición + Genitiv',[
+     {q:'Weil das Wetter schlecht war, fiel das Firmenfest aus.', a:'Wegen des schlechten Wetters fiel das Firmenfest aus.'},
+     {q:'Während er in Deutschland arbeitete, lernte er Deutsch.', a:'Während seiner Arbeit in Deutschland lernte er Deutsch.'},
+     {q:'Obwohl er viel Erfahrung hat, fand er keine Stelle.', a:'Trotz seiner großen Erfahrung fand er keine Stelle.'},
+   ])
+ ]
+},
+{day:3, dlabel:'Miércoles', title:'La declinación del adjetivo I',
+ theory:`
+ <p>Cuando el adjetivo va delante del sustantivo, lleva terminación. Tres patrones:</p>
+ <h3>Tabla 1 – Después de artículo determinado</h3>
+ <table class="g"><tr><th></th><th>masc.</th><th>fem.</th><th>neutro</th><th>plural</th></tr>
+ <tr><td>Nom.</td><td>der gut<b>e</b> Job</td><td>die neu<b>e</b> Stelle</td><td>das hoh<b>e</b> Gehalt</td><td>die nett<b>en</b> Kollegen</td></tr>
+ <tr><td>Akk.</td><td>den gut<b>en</b> Job</td><td>die neu<b>e</b> Stelle</td><td>das hoh<b>e</b> Gehalt</td><td>die nett<b>en</b> Kollegen</td></tr>
+ <tr><td>Dat.</td><td>dem gut<b>en</b> Job</td><td>der neu<b>en</b> Stelle</td><td>dem hoh<b>en</b> Gehalt</td><td>den nett<b>en</b> Kollegen</td></tr>
+ <tr><td>Gen.</td><td>des gut<b>en</b> Jobs</td><td>der neu<b>en</b> Stelle</td><td>des hoh<b>en</b> Gehalts</td><td>der nett<b>en</b> Kollegen</td></tr></table>
+ <div class="note">💡 Con artículo determinado solo 5 casillas llevan <b>-e</b> (Nom. m/f/n + Akk. f/n); el resto es <b>-en</b>.</div>
+ <h3>Tabla 2 – Después de artículo indeterminado (ein/eine/kein/mein…)</h3>
+ <table class="g"><tr><th></th><th>masc.</th><th>fem.</th><th>neutro</th><th>plural (kein/mein)</th></tr>
+ <tr><td>Nom.</td><td>ein gut<b>er</b> Job</td><td>eine neu<b>e</b> Stelle</td><td>ein hoh<b>es</b> Gehalt</td><td>keine nett<b>en</b> Kollegen</td></tr>
+ <tr><td>Akk.</td><td>einen gut<b>en</b> Job</td><td>eine neu<b>e</b> Stelle</td><td>ein hoh<b>es</b> Gehalt</td><td>keine nett<b>en</b> Kollegen</td></tr>
+ <tr><td>Dat.</td><td>einem gut<b>en</b> Job</td><td>einer neu<b>en</b> Stelle</td><td>einem hoh<b>en</b> Gehalt</td><td>keinen nett<b>en</b> Kollegen</td></tr>
+ <tr><td>Gen.</td><td>eines gut<b>en</b> Jobs</td><td>einer neu<b>en</b> Stelle</td><td>eines hoh<b>en</b> Gehalts</td><td>keiner nett<b>en</b> Kollegen</td></tr></table>
+ <div class="note">💡 Lógica: donde <i>ein</i> no muestra el género (Nom. m., Nom./Akk. n.), el adjetivo lo muestra: <b>-er, -es</b>.</div>`,
+ exercises:[ fill('1.4','Ejercicio 1.4 – Completa las terminaciones',[
+   {text:'Ich suche einen neu___ Job mit einem gut___ Gehalt.', ans:['en','en']},
+   {text:'Die freundlich___ Kollegin hilft dem neu___ Mitarbeiter.', ans:['e','en']},
+   {text:'Das ist ein interessant___ Angebot von einer bekannt___ Firma.', ans:['es','en']},
+   {text:'Er arbeitet in der groß___ Abteilung mit den erfahren___ Ingenieuren.', ans:['en','en']},
+   {text:'Trotz des niedrig___ Gehalts nahm sie die spannend___ Stelle an.', ans:['en','e']},
+ ])]
+},
+{day:4, dlabel:'Jueves', title:'La declinación del adjetivo II – sin artículo',
+ theory:`
+ <h3>Tabla 3 – Sin artículo</h3>
+ <p>El adjetivo asume las terminaciones del artículo determinado (¡excepto Genitiv m/n: <b>-en</b>!).</p>
+ <table class="g"><tr><th></th><th>masc.</th><th>fem.</th><th>neutro</th><th>plural</th></tr>
+ <tr><td>Nom.</td><td>gut<b>er</b> Kaffee</td><td>frisch<b>e</b> Milch</td><td>kalt<b>es</b> Wasser</td><td>nett<b>e</b> Leute</td></tr>
+ <tr><td>Akk.</td><td>gut<b>en</b> Kaffee</td><td>frisch<b>e</b> Milch</td><td>kalt<b>es</b> Wasser</td><td>nett<b>e</b> Leute</td></tr>
+ <tr><td>Dat.</td><td>gut<b>em</b> Kaffee</td><td>frisch<b>er</b> Milch</td><td>kalt<b>em</b> Wasser</td><td>nett<b>en</b> Leuten</td></tr>
+ <tr><td>Gen.</td><td>gut<b>en</b> Kaffees</td><td>frisch<b>er</b> Milch</td><td>kalt<b>en</b> Wassers</td><td>nett<b>er</b> Leute</td></tr></table>
+ <p class="small">Casos frecuentes: <i>mit freundlichen Grüßen</i> (Dat. Pl.) · <i>bei großer Nachfrage</i> (Dat. f.) · <i>langjährige Berufserfahrung</i> (Nom./Akk. f.)</p>`,
+ exercises:[
+   fill('1.5','Ejercicio 1.5 – Completa (mezcla de las tres tablas)',[
+     {text:'Wir suchen motiviert___ Mitarbeiter (Pl.) mit gut___ Deutschkenntnissen (Pl.).', ans:['e','en']},
+     {text:'Der Vertrag mit der neu___ Firma bietet flexibl___ Arbeitszeiten (Pl.).', ans:['en','e']},
+     {text:'Nach langjährig___ Erfahrung (f.) im Qualitätsmanagement möchte ich mich selbstständig machen.', ans:['er']},
+     {text:'Das klein___ Unternehmen zahlt seinen fleißig___ Angestellten ein fair___ Gehalt.', ans:['e','en','es']},
+     {text:'Trotz stark___ Konkurrenz (f.) wächst die Firma.', ans:['er']},
+   ]),
+   free('1.6','Ejercicio 1.6 – Práctica libre','Escribe 5 frases sobre tu trabajo ideal usando: 2 preposiciones de Genitiv, 3 adjetivos declinados con distintos artículos. (Envíalas a Claude para corrección.)')
+ ]
+}];
+
+const w1vocab = [
+['📝','die Bewerbung, -en','la solicitud de empleo','Ich habe meine Bewerbung gestern abgeschickt. → Envié mi solicitud de empleo ayer.'],
+['🎤','das Vorstellungsgespräch, -e','la entrevista de trabajo','Das Vorstellungsgespräch dauerte eine Stunde. → La entrevista duró una hora.'],
+['📄','der Lebenslauf, -läufe','el currículum','Mein Lebenslauf ist auf Deutsch und Englisch verfügbar. → Mi currículum está disponible en alemán e inglés.'],
+['✉️','sich bewerben um + Akk.','postularse a','Ich bewerbe mich um die Stelle als Ingenieur. → Me postulo al puesto de ingeniero.'],
+['💼','die Stelle, -n','el puesto (de trabajo)','Die Stelle ist ab sofort zu besetzen. → El puesto está disponible de inmediato.'],
+['🏢','der Arbeitgeber, -','el empleador','Mein Arbeitgeber bietet flexible Arbeitszeiten an. → Mi empleador ofrece horarios flexibles.'],
+['🧑‍💻','der Arbeitnehmer, -','el trabajador / empleado','Arbeitnehmer haben Anspruch auf bezahlten Urlaub. → Los trabajadores tienen derecho a vacaciones pagadas.'],
+['🛤️','der Werdegang, -gänge','la trayectoria profesional','Erzählen Sie mir von Ihrem beruflichen Werdegang. → Cuénteme sobre su trayectoria profesional.'],
+['🎓','die Qualifikation, -en','la cualificación','Für diese Stelle sind besondere Qualifikationen nötig. → Para este puesto se necesitan cualificaciones especiales.'],
+['💪','die Stärke, -n','el punto fuerte','Meine größte Stärke ist meine Organisationsfähigkeit. → Mi mayor fortaleza es mi capacidad de organización.'],
+['📈','die Berufserfahrung','la experiencia laboral','Er hat zehn Jahre Berufserfahrung im Vertrieb. → Tiene diez años de experiencia laboral en ventas.'],
+['📋','der Arbeitsvertrag, -verträge','el contrato de trabajo','Der Arbeitsvertrag wird für zwei Jahre abgeschlossen. → El contrato se firma por dos años.'],
+['💶','das Gehalt, Gehälter','el salario','Das Gehalt wird am Monatsende überwiesen. → El salario se transfiere a fin de mes.'],
+['🤝','die Gehaltsverhandlung, -en','la negociación salarial','Die Gehaltsverhandlung verlief erfolgreich. → La negociación salarial resultó exitosa.'],
+['⏰','die Arbeitszeit, -en','la jornada laboral','Die Arbeitszeit beträgt 40 Stunden pro Woche. → La jornada laboral es de 40 horas semanales.'],
+['🏖️','der Urlaubsanspruch, -sprüche','el derecho a vacaciones','Der Urlaubsanspruch beträgt 30 Tage im Jahr. → El derecho a vacaciones es de 30 días al año.'],
+['🕒','die Probezeit, -en','el período de prueba','Während der Probezeit kann man schneller kündigen. → Durante el período de prueba se puede rescindir más rápido.'],
+['➕','die Überstunde, -n','la hora extra','Überstunden werden extra bezahlt. → Las horas extra se pagan aparte.'],
+['🛡️','die Sozialleistungen (Pl.)','las prestaciones sociales','Zu den Sozialleistungen gehört die Krankenversicherung. → Entre las prestaciones sociales está el seguro médico.'],
+['🔀','befristet / unbefristet','temporal / indefinido','Der Vertrag ist zunächst befristet, später unbefristet. → El contrato es temporal al principio, luego indefinido.'],
+['⏳','Teilzeit / Vollzeit','media jornada / jornada completa','Sie arbeitet Teilzeit, ihr Mann Vollzeit. → Ella trabaja media jornada, su marido jornada completa.'],
+['💰','die Vergütung, -en','la remuneración','Die Vergütung richtet sich nach der Erfahrung. → La remuneración depende de la experiencia.'],
+['🎯','zuständig sein für + Akk.','ser responsable de','Sie ist zuständig für das Marketing. → Ella es responsable del marketing.'],
+['👔','der Vorgesetzte, -n','el superior / jefe','Mein Vorgesetzter lobt gute Leistungen. → Mi superior elogia el buen desempeño.'],
+['🏬','die Abteilung, -en','el departamento','Er leitet die Abteilung für Finanzen. → Él dirige el departamento de finanzas.'],
+['🗓️','die Besprechung, -en','la reunión','Die wöchentliche Besprechung findet montags statt. → La reunión semanal se celebra los lunes.'],
+['✅','die Aufgabe, -n','la tarea','Diese Aufgabe muss bis Freitag erledigt werden. → Esta tarea debe estar lista para el viernes.'],
+['🙋','Verantwortung übernehmen','asumir responsabilidad','Als Teamleiter übernimmt er viel Verantwortung. → Como jefe de equipo, asume mucha responsabilidad.'],
+['🤝','die Zusammenarbeit','la colaboración','Die Zusammenarbeit zwischen den Abteilungen funktioniert gut. → La colaboración entre departamentos funciona bien.'],
+['🏆','die Leistung, -en','el rendimiento','Seine Leistung wurde vom Chef gelobt. → Su rendimiento fue elogiado por el jefe.'],
+['📅','der Termin, -e','la cita / el plazo','Ich habe morgen einen wichtigen Termin. → Mañana tengo una cita importante.'],
+['🏠','im Homeoffice arbeiten','trabajar desde casa','Freitags arbeite ich im Homeoffice. → Los viernes trabajo desde casa.'],
+['💬','die Rückmeldung, -en','la retroalimentación','Ich erwarte eine schnelle Rückmeldung von Ihnen. → Espero una respuesta rápida de su parte.'],
+['📤','die Kündigung, -en','el despido / la renuncia','Er hat die Kündigung schriftlich eingereicht. → Presentó la renuncia por escrito.'],
+['📆','die Kündigungsfrist, -en','el plazo de preaviso','Die Kündigungsfrist beträgt drei Monate. → El plazo de preaviso es de tres meses.'],
+['📜','der Aufhebungsvertrag, -verträge','el acuerdo de rescisión','Beide Seiten unterschrieben den Aufhebungsvertrag. → Ambas partes firmaron el acuerdo de rescisión.'],
+['💵','die Abfindung, -en','la indemnización','Er erhielt eine großzügige Abfindung. → Recibió una indemnización generosa.'],
+['🕊️','die Freistellung, -en','la liberación (de funciones)','Während der Freistellung bekommt er weiter sein Gehalt. → Durante la liberación sigue cobrando su sueldo.'],
+['🚀','sich selbstständig machen','establecerse por cuenta propia','Viele Ingenieure machen sich selbstständig. → Muchos ingenieros se establecen por cuenta propia.'],
+['📃','das Arbeitszeugnis, -se','el certificado laboral','Das Arbeitszeugnis bewertet die Leistung positiv. → El certificado laboral evalúa el desempeño positivamente.'],
+['🏛️','die Agentur für Arbeit','la oficina de empleo','Er hat sich bei der Agentur für Arbeit gemeldet. → Se presentó en la oficina de empleo.'],
+['🚫','arbeitslos','desempleado','Nach der Kündigung war sie drei Monate arbeitslos. → Tras el despido estuvo desempleada tres meses.'],
+['🏗️','die Existenzgründung, -en','la creación de una empresa','Die Existenzgründung erfordert einen soliden Plan. → Crear una empresa requiere un plan sólido.'],
+['💸','der Gründungszuschuss, -schüsse','la subvención para autónomos','Der Gründungszuschuss unterstützt neue Selbstständige. → La subvención para autónomos apoya a los nuevos emprendedores.'],
+['📚','die Weiterbildung, -en','la formación continua','Die Firma zahlt die Weiterbildung ihrer Mitarbeiter. → La empresa paga la formación continua de sus empleados.'],
+['🧠','die Fähigkeit, -en','la capacidad / habilidad','Kommunikationsfähigkeit ist eine wichtige Fähigkeit. → La capacidad de comunicación es una habilidad importante.'],
+['🏁','das Ziel erreichen','alcanzar la meta','Sie hat ihr berufliches Ziel erreicht. → Ella alcanzó su meta profesional.'],
+['🧾','der Nachweis, -e','el comprobante / certificado','Ein Nachweis über die Qualifikation ist erforderlich. → Se requiere un comprobante de la cualificación.'],
+['🔎','die Kenntnisse (Pl.)','los conocimientos','Gute Deutschkenntnisse sind Voraussetzung. → Buenos conocimientos de alemán son un requisito.'],
+['🌱','sich weiterentwickeln','desarrollarse (profesionalmente)','Er möchte sich beruflich weiterentwickeln. → Quiere desarrollarse profesionalmente.'],
+['🎓','der Abschluss, Abschlüsse','el título / la graduación','Sie hat einen Abschluss in Wirtschaftsingenieurwesen. → Tiene un título en ingeniería industrial.'],
+['☑️','die Voraussetzung, -en','el requisito','Berufserfahrung ist eine wichtige Voraussetzung. → La experiencia laboral es un requisito importante.'],
+['🏫','die Schulung, -en','la capacitación','Neue Mitarbeiter erhalten eine Schulung. → Los nuevos empleados reciben una capacitación.'],
+['🧳','Erfahrung sammeln','adquirir experiencia','Im Ausland kann man wertvolle Erfahrung sammeln. → En el extranjero se puede adquirir experiencia valiosa.'],
+['🔥','ehrgeizig','ambicioso','Sie ist sehr ehrgeizig und zielstrebig. → Es muy ambiciosa y decidida.'],
+];
+
+/* ---------------- WEEK 2 ---------------- */
+const w2days = [
+{day:1, dlabel:'Lunes', title:'Relativo en Nominativ, Akkusativ y Dativ',
+ theory:`<p>La oración de relativo describe un sustantivo sin empezar una frase nueva. El pronombre relativo concuerda en <b>género y número</b> con el sustantivo al que se refiere, pero su <b>caso</b> lo determina su función dentro de la oración de relativo. El verbo va al final.</p>
+ <table class="g"><tr><th></th><th>masc.</th><th>fem.</th><th>neutro</th><th>plural</th></tr>
+ <tr><td>Nom.</td><td>der</td><td>die</td><td>das</td><td>die</td></tr>
+ <tr><td>Akk.</td><td>den</td><td>die</td><td>das</td><td>die</td></tr>
+ <tr><td>Dat.</td><td>dem</td><td>der</td><td>dem</td><td><b>denen</b> ⚠️</td></tr>
+ <tr><td>Gen.</td><td><b>dessen</b></td><td><b>deren</b></td><td><b>dessen</b></td><td><b>deren</b></td></tr></table>
+ <p><i>Die Wohnung, <b>die</b> 80 m² hat, kostet 250.000 €.</i> (sujeto → Nom.)<br>
+ <i>Der Makler, <b>den</b> ich angerufen habe, meldet sich morgen.</i> (objeto directo → Akk.)<br>
+ <i>Die Mieter, <b>denen</b> die Wohnung gefällt, unterschreiben heute.</i> (Dat. Pl.)</p>
+ <div class="note">💡 Método: 1) género/número del sustantivo de referencia → fila. 2) función en la oración de relativo → columna. 3) verbo al final.</div>`,
+ exercises:[ fill('2.1','Ejercicio 2.1 – Completa con el pronombre relativo',[
+   {text:'Das Haus, ___ wir gekauft haben, liegt in Speyer.', ans:['das']},
+   {text:'Die Nachbarn, ___ ich geholfen habe, sind sehr nett. (helfen + Dat.)', ans:['denen']},
+   {text:'Der Vertrag, ___ auf dem Tisch liegt, ist der Mietvertrag.', ans:['der']},
+   {text:'Die Wohnung, ___ wir besichtigt haben, war zu teuer.', ans:['die']},
+   {text:'Der Investor, ___ die Bank einen Kredit gegeben hat, kauft zwei Häuser.', ans:['dem']},
+ ])]
+},
+{day:2, dlabel:'Martes', title:'Relativo en Genitiv (dessen/deren) y con preposición',
+ theory:`<p><b>Genitiv relativo = "cuyo/cuya":</b> masc./neutro → dessen · fem./plural → deren.</p>
+ <p><i>Der Eigentümer, <b>dessen</b> Wohnung leer steht, will verkaufen.</i><br><i>Die Familie, <b>deren</b> Kinder studieren, sucht eine größere Wohnung.</i></p>
+ <div class="warn">⚠️ Después de dessen/deren no hay artículo: <s>dessen die Wohnung</s> → dessen Wohnung.</div>
+ <p><b>Relativo con preposición:</b> la preposición va delante del pronombre y determina su caso.</p>
+ <p><i>Das Haus, <b>in dem</b> ich wohne, wurde 1990 gebaut.</i><br><i>Der Makler, <b>mit dem</b> ich gesprochen habe, ist kompetent.</i><br><i>Die Kunden, <b>für die</b> ich arbeite, kommen aus Spanien.</i></p>`,
+ exercises:[ fill('2.2','Ejercicio 2.2 – Completa',[
+   {text:'Der Kollege, ___ Frau auch hier arbeitet, geht in Rente.', ans:['dessen']},
+   {text:'Die Stadt, in ___ ich wohne, hat 50.000 Einwohner.', ans:['der']},
+   {text:'Die Investoren, ___ Kapital begrenzt ist, suchen kleinere Objekte.', ans:['deren']},
+   {text:'Das Projekt, an ___ wir arbeiten, ist fast fertig. (arbeiten an + Dat.)', ans:['dem']},
+   {text:'Die Bank, von ___ ich den Kredit bekommen habe, hat gute Konditionen.', ans:['der']},
+ ])]
+},
+{day:3, dlabel:'Miércoles', title:'Relativo con was, wo y wor-',
+ theory:`<p><b>"was"</b> se usa con: alles, etwas, nichts, vieles, das (<i>Alles, <b>was</b> er sagt, stimmt.</i>); una oración completa (<i>Er hat die Prüfung bestanden, <b>was</b> mich sehr freut.</i>); un superlativo neutro.</p>
+ <p><b>"wo"</b> para lugares: <i>Die Stadt, <b>wo</b> ich wohne… = …in der ich wohne…</i> Obligatorio con nombres propios: <i>Speyer, <b>wo</b> ich lebe, liegt am Rhein.</i></p>
+ <p><b>"wo(r) + preposición"</b> cuando la referencia es toda una oración o etwas/nichts: <i>Er hat mir geholfen, <b>worüber</b> ich mich sehr gefreut habe.</i> (sich freuen über) · <i>Es gibt nichts, <b>wovor</b> ich Angst habe.</i></p>`,
+ exercises:[ fill('2.3','Ejercicio 2.3 – was / wo / wor- o pronombre normal',[
+   {text:'Es gibt vieles, ___ ich an Deutschland schätze.', ans:['was']},
+   {text:'Mannheim, ___ ich eine Wohnung besitze, ist eine Investitionsstadt.', ans:['wo']},
+   {text:'Die Miete wurde erhöht, ___ sich die Mieter beschwert haben. (sich beschweren über)', ans:['worüber']},
+   {text:'Das Haus, ___ Dach renoviert wurde, hat an Wert gewonnen.', ans:['dessen']},
+   {text:'Das ist genau das, ___ ich gesucht habe.', ans:['was']},
+ ])]
+},
+{day:4, dlabel:'Jueves', title:'Ejercicios mixtos e integración',
+ theory:`<p>Repaso e integración de todo lo visto esta semana sobre oraciones de relativo.</p>`,
+ exercises:[
+   open_('2.4','Ejercicio 2.4 – Une las frases con una oración de relativo',[
+     {q:'Der Makler hat mir ein Haus gezeigt. Das Haus hat einen Garten.', a:'Der Makler hat mir ein Haus gezeigt, das einen Garten hat.'},
+     {q:'Die Mieterin zahlt pünktlich. Ich habe der Mieterin den Vertrag verlängert.', a:'Die Mieterin, der ich den Vertrag verlängert habe, zahlt pünktlich.'},
+     {q:'Das ist der Notar. Bei dem Notar haben wir den Kaufvertrag unterschrieben.', a:'Das ist der Notar, bei dem wir den Kaufvertrag unterschrieben haben.'},
+     {q:'Die Eigentümer verkaufen ihr Haus. Ihre Kinder sind ausgezogen.', a:'Die Eigentümer, deren Kinder ausgezogen sind, verkaufen ihr Haus.'},
+     {q:'Er hat den Kredit bekommen. Darüber ist er sehr glücklich.', a:'Er hat den Kredit bekommen, worüber er sehr glücklich ist.'},
+   ]),
+   free('2.5','Ejercicio 2.5 – Práctica libre','Describe tu vivienda ideal en 6 frases, cada una con una oración de relativo distinta (Nom., Akk., Dat., Gen., con preposición, con "wo").')
+ ]
+}];
+
+const w2vocab = [
+['🏠','die Eigentumswohnung, -en','el piso en propiedad','Sie hat eine Eigentumswohnung in Heidelberg gekauft. → Compró un piso en propiedad en Heidelberg.'],
+['🧑‍💼','der Makler, -','el agente inmobiliario','Der Makler verlangt eine hohe Provision. → El agente cobra una comisión alta.'],
+['💶','die Nebenkosten (Pl.)','los gastos adicionales','Die Nebenkosten betragen 250 Euro im Monat. → Los gastos adicionales son de 250 euros al mes.'],
+['📜','der Mietvertrag, -verträge','el contrato de alquiler','Der Mietvertrag wurde für zwei Jahre abgeschlossen. → El contrato de alquiler se firmó por dos años.'],
+['🔐','die Kaution, -en','la fianza','Die Kaution beträgt drei Monatsmieten. → La fianza equivale a tres meses de alquiler.'],
+['🔧','die Instandhaltung, -en','el mantenimiento','Der Eigentümer ist für die Instandhaltung verantwortlich. → El propietario es responsable del mantenimiento.'],
+['🏛️','die Grunderwerbsteuer, -n','el impuesto de transmisiones','Die Grunderwerbsteuer variiert je nach Bundesland. → Varía según el estado federado.'],
+['🔑','vermieten','alquilar (como propietario)','Ich vermiete zwei Wohnungen in Mannheim. → Alquilo dos pisos en Mannheim.'],
+['👀','besichtigen','visitar (un inmueble)','Wir haben gestern drei Wohnungen besichtigt. → Ayer visitamos tres pisos.'],
+['🏦','die Finanzierung, -en','la financiación','Die Finanzierung steht, wir können kaufen. → La financiación está lista, podemos comprar.'],
+['📈','der Wert, -e','el valor','Der Wert der Immobilie ist gestiegen. → El valor del inmueble ha subido.'],
+['🧾','der Eigentümer, -','el propietario','Der Eigentümer will das Haus sanieren. → El propietario quiere renovar la casa.'],
+['🏗️','der Neubau, -ten','la construcción nueva','Neubauten haben oft eine bessere Energieeffizienz. → Suelen tener mejor eficiencia energética.'],
+['🏚️','der Altbau, -ten','el edificio antiguo','Altbauten haben hohe Decken und Charme. → Tienen techos altos y encanto.'],
+['📋','das Grundbuch, -bücher','el registro de la propiedad','Der Eigentümer steht im Grundbuch. → El propietario figura en el registro.'],
+['✍️','der Notar, -e','el notario','Ohne Notar ist der Kaufvertrag ungültig. → Sin notario, el contrato no es válido.'],
+['💰','die Anzahlung, -en','el pago inicial / entrada','Wir haben eine Anzahlung von 20 Prozent geleistet. → Hicimos una entrada del 20%.'],
+['📉','der Zins, -en','el interés','Die Zinsen für Baukredite sind gestiegen. → Los intereses de las hipotecas han subido.'],
+['🏘️','das Mehrfamilienhaus, -häuser','el edificio plurifamiliar','Er besitzt die Hälfte eines Mehrfamilienhauses. → Posee la mitad de un edificio plurifamiliar.'],
+['📐','die Wohnfläche, -n','la superficie habitable','Die Wohnfläche beträgt 85 Quadratmeter. → La superficie habitable es de 85 m².'],
+['🚪','der Mieter, -','el inquilino','Die Mieter kümmern sich gut um die Wohnung. → Los inquilinos cuidan bien el piso.'],
+['📄','die Nebenkostenabrechnung, -en','la liquidación de gastos','Kommt einmal im Jahr. → La liquidación de gastos llega una vez al año.'],
+['🛠️','renovieren / sanieren','renovar / rehabilitar','Das Bad muss dringend renoviert werden. → El baño necesita una renovación urgente.'],
+['💸','die Rendite, -n','la rentabilidad','Diese Wohnung bringt eine Rendite von vier Prozent. → Da una rentabilidad del 4%.'],
+['🏙️','die Lage, -n','la ubicación','Bei Immobilien zählt vor allem die Lage. → Lo que más cuenta es la ubicación.'],
+['🗺️','das Grundstück, -e','el terreno / la parcela','Das Grundstück ist 500 Quadratmeter groß. → El terreno tiene 500 m².'],
+['⚖️','die Hausverwaltung, -en','la administración de fincas','Kümmert sich um las reparaciones. → Se ocupa de las reparaciones.'],
+['📊','die Mieteinnahmen (Pl.)','los ingresos por alquiler','Von den Mieteinnahmen zahlt er den Kredit ab. → Con los ingresos paga el crédito.'],
+['🧱','die Immobilie, -n','el inmueble','Immobilien gelten als sichere Geldanlage. → Se consideran una inversión segura.'],
+['🔍','die Besichtigung, -en','la visita (a un inmueble)','Die Besichtigung findet am Samstag statt. → Tiene lugar el sábado.'],
+['📝','der Kaufvertrag, -verträge','el contrato de compraventa','Wird beim Notar unterschrieben. → Se firma ante notario.'],
+['🏦','das Darlehen, -','el préstamo','Das Darlehen läuft über 20 Jahre. → Tiene un plazo de 20 años.'],
+['💼','die Provision, -en','la comisión','Die Provision des Maklers beträgt 3,57 Prozent. → La comisión del agente es del 3,57%.'],
+['📃','die Teilungserklärung, -en','la declaración de división','Regelt das Eigentum an den Wohnungen. → Regula la propiedad de los pisos.'],
+['⚡','der Energieausweis, -e','el certificado energético','Beim Verkauf ist ein Energieausweis Pflicht. → Es obligatorio en la venta.'],
+['🧮','die Abschreibung, -en (AfA)','la amortización','Die Abschreibung senkt die Steuerlast. → Reduce la carga fiscal.'],
+['🤝','der Käufer, - / der Verkäufer, -','el comprador / el vendedor','Käufer und Verkäufer einigen sich auf den Preis. → Acuerdan el precio.'],
+['📅','die Übergabe, -n','la entrega','Erfolgt am 1. März. → La entrega del piso se realiza el 1 de marzo.'],
+['🧾','die Eigentümerversammlung, -en','la junta de propietarios','Findet einmal jährlich statt. → Se celebra una vez al año.'],
+['💧','die Betriebskosten (Pl.)','los gastos de explotación','Dazu gehören Wasser und Müllabfuhr. → Incluyen agua y basura.'],
+];
+
+/* ---------------- WEEK 3 ---------------- */
+const w3days = [
+{day:1, dlabel:'Lunes', title:'Konjunktiv II presente – formas y usos',
+ theory:`<p>El Konjunktiv II expresa lo <b>irreal, hipotético o cortés</b>. Es LA estructura estrella del B2.</p>
+ <h3>1. Forma con würde (la más común)</h3><p><i>würde + infinitivo</i>: <i>Ich würde mehr lesen, wenn ich Zeit hätte.</i></p>
+ <h3>2. Formas propias (obligatorias, nunca uses würde con ellas)</h3>
+ <table class="g"><tr><th>Infinitivo</th><th>Konjunktiv II</th><th>Traducción</th></tr>
+ <tr><td>sein</td><td><b>wäre</b></td><td>yo sería/estaría</td></tr>
+ <tr><td>haben</td><td><b>hätte</b></td><td>yo tendría</td></tr>
+ <tr><td>können</td><td><b>könnte</b></td><td>yo podría</td></tr>
+ <tr><td>müssen</td><td><b>müsste</b></td><td>yo tendría que</td></tr>
+ <tr><td>dürfen</td><td><b>dürfte</b></td><td>yo podría (permiso)</td></tr>
+ <tr><td>sollen</td><td><b>sollte</b></td><td>yo debería</td></tr>
+ <tr><td>wollen</td><td><b>wollte</b></td><td>yo querría</td></tr>
+ <tr><td>wissen</td><td><b>wüsste</b></td><td>yo sabría</td></tr>
+ <tr><td>geben (es gibt)</td><td>es <b>gäbe</b></td><td>habría</td></tr>
+ <tr><td>brauchen</td><td><b>bräuchte</b></td><td>yo necesitaría</td></tr></table>
+ <p><b>Usos:</b> 1) deseos irreales <i>(Wenn ich doch mehr Zeit hätte!)</i> 2) cortesía <i>(Könnten Sie mir bitte helfen?)</i> 3) consejos <i>(Du solltest...)</i> 4) hipótesis <i>(Ohne Internet wäre das Leben anders.)</i></p>`,
+ exercises:[ fill('3.1','Ejercicio 3.1 – Completa en Konjunktiv II',[
+   {text:'Wenn ich mehr Zeit ___ (haben), ___ ich jeden Tag Zeitung ___ (lesen).', ans:['hätte','würde','lesen']},
+   {text:'___ (können) Sie mir bitte die Unterlagen schicken?', ans:['Könnten']},
+   {text:'An deiner Stelle ___ (sein) ich vorsichtiger mit sozialen Netzwerken.', ans:['wäre']},
+   {text:'Es ___ (geben) weniger Missverständnisse, wenn wir direkter kommunizieren ___ (werden → würden).', ans:['gäbe','würden']},
+   {text:'Ich ___ (wissen) gern, wann der Artikel veröffentlicht wird.', ans:['wüsste']},
+ ])]
+},
+{day:2, dlabel:'Martes', title:'Konjunktiv II pasado',
+ theory:`<p>Para hipótesis sobre el pasado (lo que habría ocurrido, pero no ocurrió): <b>hätte/wäre + Partizip II</b>.</p>
+ <p>Con verbos que forman el Perfekt con <i>haben</i> → <b>hätte</b>: <i>Ich hätte dich angerufen.</i><br>
+ Con verbos de movimiento/cambio de estado (Perfekt con <i>sein</i>) → <b>wäre</b>: <i>Ich wäre früher gekommen.</i></p>
+ <p><i>Ich <b>hätte</b> den Artikel <b>gelesen</b>, wenn ich ihn gefunden <b>hätte</b>.</i><br><i>Ohne Navi <b>wären</b> wir nie <b>angekommen</b>.</i></p>
+ <div class="warn">⚠️ Solo existe UNA forma de pasado en Konjunktiv II (no hay distinción Präteritum/Perfekt/Plusquamperfekt).</div>`,
+ exercises:[ fill('3.2','Ejercicio 3.2 – Transforma al Konjunktiv II pasado',[
+   {text:'Er hat den Fehler nicht bemerkt. → Er ___ den Fehler ___, wenn er aufmerksamer gewesen wäre.', ans:['hätte','bemerkt']},
+   {text:'Wir sind zu spät gekommen. → Ohne den Stau ___ wir pünktlich ___.', ans:['wären','gekommen']},
+   {text:'Sie hat die Stelle nicht bekommen. → Mit besseren Deutschkenntnissen ___ sie die Stelle ___.', ans:['hätte','bekommen']},
+   {text:'Ich habe das Angebot abgelehnt. → An deiner Stelle ___ ich das Angebot auch ___.', ans:['hätte','abgelehnt']},
+ ])]
+},
+{day:3, dlabel:'Miércoles', title:'Oraciones condicionales irreales',
+ theory:`<p><b>Estructura:</b> Wenn + Konjunktiv II (verbo al final), Konjunktiv II + …</p>
+ <p><b>Presente irreal:</b> <i>Wenn ich reich wäre, würde ich nicht mehr arbeiten.</i> · <i>Wenn es kein Internet gäbe, würden wir Briefe schreiben.</i></p>
+ <p><b>Pasado irreal:</b> <i>Wenn ich das gewusst hätte, hätte ich anders entschieden.</i> · <i>Wenn er früher gegangen wäre, hätte er den Zug erreicht.</i></p>
+ <p><b>Sin "wenn"</b> (estilo elevado): <i>Hätte ich das gewusst, hätte ich anders entschieden.</i></p>
+ <p><b>Mezcla pasado → presente:</b> <i>Wenn ich damals Deutsch gelernt hätte, hätte ich jetzt bessere Chancen.</i></p>`,
+ exercises:[ open_('3.3','Ejercicio 3.3 – Forma oraciones condicionales irreales',[
+   {q:'(ich / mehr Zeit haben) → (ich / ein Buch schreiben) [presente]', a:'Wenn ich mehr Zeit hätte, würde ich ein Buch schreiben.'},
+   {q:'(das Handy / nicht existieren) → (wir / anders kommunizieren) [presente]', a:'Wenn das Handy nicht existierte / nicht existieren würde, würden wir anders kommunizieren.'},
+   {q:'(sie / die Nachricht lesen) → (sie / nicht in die Falle tappen) [pasado]', a:'Wenn sie die Nachricht gelesen hätte, wäre sie nicht in die Falle getappt.'},
+   {q:'(du / mich informieren) → (ich / dir helfen können) [pasado]', a:'Wenn du mich informiert hättest, hätte ich dir helfen können.'},
+ ])]
+},
+{day:4, dlabel:'Jueves', title:'Konjunktiv II con verbos modales en pasado',
+ theory:`<p>La estructura más difícil (y más preguntada en B2): <b>hätte + infinitivo + modal en infinitivo</b> (¡doble infinitivo!).</p>
+ <p><i>Ich <b>hätte</b> dich anrufen <b>sollen</b>.</i> (Debería haberte llamado.)<br><i>Er <b>hätte</b> das Problem lösen <b>können</b>.</i><br><i>Wir <b>hätten</b> früher anfangen <b>müssen</b>.</i></p>
+ <div class="warn">⚠️ Siempre con <b>hätte</b> (nunca wäre), y el modal va al FINAL en infinitivo.</div>
+ <p>En subordinada, <i>hätte</i> se coloca ANTES de los dos infinitivos: <i>Er sagt, dass ich dich <b>hätte anrufen sollen</b>.</i></p>
+ <p class="small">Uso típico: reproches y arrepentimientos. <i>Das hättest du mir sagen müssen!</i></p>`,
+ exercises:[
+   open_('3.4','Ejercicio 3.4 – Expresa el reproche / la posibilidad perdida',[
+     {q:'Ihr habt nicht aufgepasst. (müssen)', a:'Ihr hättet aufpassen müssen.'},
+     {q:'Sie hat den Bericht nicht gelesen. (sollen)', a:'Sie hätte den Bericht lesen sollen.'},
+     {q:'Wir haben das Haus nicht gekauft. (können)', a:'Wir hätten das Haus kaufen können.'},
+     {q:'Er hat den Termin vergessen. (nicht dürfen)', a:'Er hätte den Termin nicht vergessen dürfen.'},
+   ]),
+   free('3.5','Ejercicio 3.5 – Práctica libre','Escribe 5 frases: "Was ich in meinem Leben anders gemacht hätte" — 2 con condicional pasado, 2 con modales en Konjunktiv II pasado, 1 mezcla pasado → presente.')
+ ]
+}];
+
+const w3vocab = [
+['📰','die Nachricht, -en','la noticia / el mensaje','Die Nachricht verbreitete sich schnell. → Se difundió rápido.'],
+['🗞️','die Schlagzeile, -n','el titular','Die Schlagzeile war übertrieben. → El titular era exagerado.'],
+['🔍','die Quelle, -n','la fuente','Man sollte immer die Quelle prüfen. → Hay que comprobar la fuente.'],
+['✅','glaubwürdig','creíble','Diese Zeitung gilt als glaubwürdig. → Se considera creíble.'],
+['📱','sich informieren über + Akk.','informarse sobre','Ich informiere mich täglich über die Wirtschaft. → Me informo a diario.'],
+['🎥','die Berichterstattung, -en','la cobertura informativa','War ausgewogen. → La cobertura fue equilibrada.'],
+['📢','veröffentlichen','publicar','Der Artikel wurde gestern veröffentlicht. → Se publicó ayer.'],
+['🔒','der Datenschutz','la protección de datos','Streng geregelt in Deutschland. → Estrictamente regulada.'],
+['🌐','das soziale Netzwerk, -e','la red social','Beeinflussen die öffentliche Meinung. → Influyen en la opinión pública.'],
+['🎯','beeinflussen','influir en','Werbung beeinflusst unser Kaufverhalten. → Influye en la compra.'],
+['⚠️','die Falschmeldung, -en','la noticia falsa','Verbreiten sich schneller als Fakten. → Se difunden más rápido.'],
+['🗣️','die Meinungsfreiheit','la libertad de expresión','Ein Grundrecht. → Es un derecho fundamental.'],
+['📺','der Sender, -','la cadena / emisora','Bietet seriöse Nachrichten. → Ofrece noticias serias.'],
+['🎙️','das Interview, -s','la entrevista','Im Interview äußerte er sich zur Krise. → Se pronunció sobre la crisis.'],
+['✍️','der Journalist, -en','el periodista','Recherchiert seit Monaten. → Investiga desde hace meses.'],
+['🔎','recherchieren','investigar (periodismo)','Vor dem Kauf gründlich recherchiert. → Investigó a fondo.'],
+['💬','sich äußern zu + Dat.','pronunciarse sobre','Wollte sich dazu nicht äußern. → No quiso pronunciarse.'],
+['📊','die Umfrage, -n','la encuesta','Laut einer Umfrage… → Según una encuesta.'],
+['🧠','die öffentliche Meinung','la opinión pública','Die Medien prägen sie. → Los medios la moldean.'],
+['🚫','zensieren','censurar','In Diktaturen wird die Presse zensiert. → Se censura la prensa.'],
+['📡','übertragen','transmitir / retransmitir','Das Spiel wird live übertragen. → En directo.'],
+['🤳','der Einfluss, Einflüsse','la influencia','Der Einfluss der sozialen Medien wächst. → Crece.'],
+['🧾','der Artikel, -','el artículo','Behandelt den Immobilienmarkt. → Trata del mercado inmobiliario.'],
+['👁️','wahrnehmen','percibir','Jeder nimmt Nachrichten anders wahr. → Cada uno percibe distinto.'],
+['🔔','abonnieren','suscribirse a','Ich habe den Newsletter abonniert. → Me suscribí.'],
+['⚖️','objektiv / subjektiv','objetivo / subjetivo','Ein guter Bericht sollte objektiv sein.'],
+['🗨️','der Kommentar, -e','el comentario','Löste eine Debatte aus. → Desató un debate.'],
+['📉','die Auflage, -n','la tirada','Sinkt seit Jahren. → Baja desde hace años.'],
+['🎭','täuschen','engañar','Manche Werbung täuscht die Verbraucher.'],
+['🔗','verlinken / teilen','enlazar / compartir','Hat den Artikel auf LinkedIn geteilt.'],
+['🧩','die Information, -en','la información','Zu viele überfordern uns. → Nos sobrepasan.'],
+['📖','der Verbraucher, -','el consumidor','Sollten kritisch bleiben. → Deberían ser críticos.'],
+['🚨','die Werbung, -en','la publicidad','Basiert auf unseren Daten. → Personalizada.'],
+['🕵️','überprüfen','verificar','Bevor du etwas teilst. → Verifica los hechos.'],
+['💡','die Digitalisierung','la digitalización','Verändert die Medienlandschaft.'],
+];
+
+/* ---------------- WEEK 4 ---------------- */
+const w4days = [
+{day:1, dlabel:'Lunes', title:'Vorgangspassiv – presente y Präteritum',
+ theory:`<p>El pasivo pone el foco en la <b>acción</b>, no en quién la realiza. <b>Formación:</b> werden (conjugado) + Partizip II (al final).</p>
+ <table class="g"><tr><th>Tiempo</th><th>Activa</th><th>Pasiva</th></tr>
+ <tr><td>Presente</td><td>Man baut das Haus.</td><td>Das Haus <b>wird gebaut</b>.</td></tr>
+ <tr><td>Präteritum</td><td>Man baute das Haus.</td><td>Das Haus <b>wurde gebaut</b>.</td></tr></table>
+ <p>El objeto Akkusativ de la activa → sujeto (Nom.) de la pasiva. El sujeto de la activa desaparece o aparece con <b>von + Dativ</b> (agente) o <b>durch + Akkusativ</b> (medio/causa): <i>Die Wohnung wird <b>von der Hausverwaltung</b> verwaltet.</i></p>
+ <div class="warn">⚠️ Los objetos en Dativ se mantienen en Dativ (nunca pasan a sujeto): <i>Man hilft den Betroffenen.</i> → <i><b>Den Betroffenen</b> wird geholfen.</i></div>`,
+ exercises:[ open_('4.1','Ejercicio 4.1 – Transforma a pasiva (mismo tiempo)',[
+   {q:'Man trennt in Deutschland den Müll.', a:'In Deutschland wird der Müll getrennt.'},
+   {q:'Die Stadt baute neue Radwege.', a:'Neue Radwege wurden (von der Stadt) gebaut.'},
+   {q:'Man renoviert das alte Gebäude.', a:'Das alte Gebäude wird renoviert.'},
+   {q:'Die Firma reduzierte den Energieverbrauch.', a:'Der Energieverbrauch wurde (von der Firma) reduziert.'},
+   {q:'Man hilft den Umweltorganisationen mit Spenden.', a:'Den Umweltorganisationen wird mit Spenden geholfen.'},
+ ])]
+},
+{day:2, dlabel:'Martes', title:'Passiv Perfekt y con verbos modales',
+ theory:`<p><b>Passiv Perfekt:</b> sein + Partizip II + worden. <i>Das Haus <b>ist</b> 2020 <b>gebaut worden</b>.</i></p>
+ <div class="warn">⚠️ ¡"worden", no "geworden"! (geworden = werden como verbo principal: <i>Er ist Lehrer geworden.</i>)</div>
+ <p><b>Passiv Plusquamperfekt:</b> war + Partizip II + worden. <i>Das Haus <b>war</b> schon <b>verkauft worden</b>, als wir anriefen.</i></p>
+ <p><b>Passiv con modales:</b> Modal + Partizip II + werden (infinitivo, al final).</p>
+ <table class="g"><tr><th>Tiempo</th><th>Ejemplo</th></tr>
+ <tr><td>Presente</td><td>Der Müll <b>muss getrennt werden</b>.</td></tr>
+ <tr><td>Präteritum</td><td>Das Gebäude <b>konnte</b> nicht <b>gerettet werden</b>.</td></tr>
+ <tr><td>Subordinada</td><td>…, dass der Müll <b>getrennt werden muss</b>.</td></tr></table>`,
+ exercises:[ fill('4.2','Ejercicio 4.2 – Completa',[
+   {text:'Das Gesetz ___ letztes Jahr ___ ___. (verabschieden, Perfekt)', ans:['ist','verabschiedet','worden']},
+   {text:'Die alten Fenster müssen ___ ___. (austauschen)', ans:['ausgetauscht','werden']},
+   {text:'Die Heizung konnte nicht mehr ___ ___. (reparieren)', ans:['repariert','werden']},
+   {text:'In der Zeitung steht, dass mehr Bäume ___ ___ ___. (pflanzen, müssen)', ans:['gepflanzt','werden','müssen']},
+   {text:'Bis 2024 ___ das Dach bereits ___ ___. (dämmen, Plusquamperfekt)', ans:['war','gedämmt','worden']},
+ ])]
+},
+{day:3, dlabel:'Miércoles', title:'Zustandspassiv vs. Vorgangspassiv',
+ theory:`<table class="g"><tr><th>Tipo</th><th>Formación</th><th>Significado</th></tr>
+ <tr><td><b>Vorgangspassiv</b></td><td>werden + P.II</td><td>el PROCESO: <i>Die Tür wird geöffnet.</i></td></tr>
+ <tr><td><b>Zustandspassiv</b></td><td>sein + P.II</td><td>el RESULTADO/ESTADO: <i>Die Tür ist geöffnet.</i></td></tr></table>
+ <p><i>Die Wohnung <b>wird renoviert</b>.</i> (obras en curso) vs. <i>Die Wohnung <b>ist renoviert</b>.</i> (ya renovada) · <i>Der Vertrag <b>ist unterschrieben</b>.</i></p>`,
+ exercises:[ fill('4.3','Ejercicio 4.3 – ¿Vorgangs- o Zustandspassiv? Elige y conjuga',[
+   {text:'Achtung, das Büro ___ gerade ___ (putzen) – bitte nicht stören!', ans:['wird','geputzt']},
+   {text:'Alles fertig: Die Verträge ___ ___ (unterschreiben).', ans:['sind','unterschrieben']},
+   {text:'Der Energieausweis ___ schon 2023 ___ (ausstellen). [proceso, Präteritum]', ans:['wurde','ausgestellt']},
+   {text:'Das Fenster ___ ___ (schließen) – deshalb ist es so warm hier. [estado]', ans:['ist','geschlossen']},
+ ])]
+},
+{day:4, dlabel:'Jueves', title:'Alternativas al pasivo',
+ theory:`<p>El alemán B2 exige variar. Tres sustitutos del pasivo con matiz de "poderse hacer":</p>
+ <table class="g"><tr><th>Estructura</th><th>Ejemplo</th><th>Equivale a</th></tr>
+ <tr><td><b>man</b></td><td>Man kann das Problem lösen.</td><td>Das Problem kann gelöst werden.</td></tr>
+ <tr><td><b>sich lassen + Inf.</b></td><td>Das Problem <b>lässt sich</b> lösen.</td><td>…kann gelöst werden.</td></tr>
+ <tr><td><b>sein + zu + Inf.</b></td><td>Das Problem <b>ist zu lösen</b>.</td><td>…muss/kann gelöst werden.</td></tr>
+ <tr><td><b>Adjetivo en -bar</b></td><td>Das Problem ist <b>lösbar</b>.</td><td>…kann gelöst werden.</td></tr></table>
+ <p><i>Alte Gebäude <b>lassen sich</b> energetisch sanieren.</i> · <i>Der Antrag <b>ist</b> bis Freitag <b>einzureichen</b>.</i> · <i>Diese Materialien sind <b>recycelbar</b>.</i></p>`,
+ exercises:[
+   open_('4.4','Ejercicio 4.4 – Expresa la misma idea con la estructura indicada',[
+     {q:'Der Fehler kann leicht korrigiert werden. (sich lassen)', a:'Der Fehler lässt sich leicht korrigieren.'},
+     {q:'Die Rechnung muss bis Monatsende bezahlt werden. (sein + zu)', a:'Die Rechnung ist bis Monatsende zu bezahlen.'},
+     {q:'Das Wasser kann getrunken werden. (-bar)', a:'Das Wasser ist trinkbar.'},
+     {q:'Diese Frage lässt sich schwer beantworten. (Passiv mit Modalverb)', a:'Diese Frage kann schwer / nur schwer beantwortet werden.'},
+   ]),
+   free('4.5','Ejercicio 4.5 – Práctica libre','Describe en 6 frases cómo se renueva energéticamente un edificio (das Dach dämmen, die Fenster austauschen, eine Wärmepumpe einbauen, die Fassade sanieren…). Usa: 2 pasivas con modal, 1 Perfekt pasivo, 1 Zustandspassiv, 2 alternativas al pasivo.')
+ ]
+}];
+
+const w4vocab = [
+['🌡️','der Klimawandel','el cambio climático','Betrifft uns alle. → Nos afecta a todos.'],
+['☀️','die erneuerbaren Energien (Pl.)','las energías renovables','Deutschland investiert darin. → Alemania invierte en ellas.'],
+['⚡','der Verbrauch','el consumo','Der Energieverbrauch muss gesenkt werden. → Debe reducirse.'],
+['♻️','nachhaltig','sostenible','Wir sollten nachhaltiger leben. → Vivir más sostenible.'],
+['🗑️','die Mülltrennung','la separación de residuos','Ist in Deutschland Pflicht. → Es obligatoria.'],
+['💸','verschwenden','despilfarrar','Wir verschwenden zu viel Wasser.'],
+['🏗️','sanieren','rehabilitar','Das Gebäude wird energetisch saniert.'],
+['🧱','die Dämmung, -en','el aislamiento','Eine gute Dämmung spart Heizkosten.'],
+['🌱','umweltfreundlich','ecológico','Das Material ist umweltfreundlich.'],
+['🏭','der CO₂-Ausstoß','las emisiones de CO₂','Soll bis 2030 sinken. → Deben bajar para 2030.'],
+['🔥','die Heizung, -en','la calefacción','Wurde durch eine Wärmepumpe ersetzt.'],
+['🌬️','die Wärmepumpe, -n','la bomba de calor','Wird staatlich gefördert. → Recibe subvenciones.'],
+['☀️','die Solaranlage, -n','la instalación solar','Wurde auf dem Dach installiert.'],
+['📉','senken / reduzieren','reducir','Die Kosten lassen sich deutlich senken.'],
+['🏠','die Energieeffizienz','la eficiencia energética','Neubauten haben eine hohe Energieeffizienz.'],
+['💶','die Förderung, -en','la subvención','Für die Sanierung gibt es staatliche Förderungen.'],
+['🌍','die Umwelt','el medio ambiente','Jeder kann etwas für die Umwelt tun.'],
+['🚮','entsorgen','desechar / eliminar','Batterien müssen getrennt entsorgt werden.'],
+['🔄','wiederverwenden / recyceln','reutilizar / reciclar','Glas kann fast unendlich recycelt werden.'],
+['🌳','der Rohstoff, -e','la materia prima','Werden immer knapper. → Escasean cada vez más.'],
+['💨','die Luftverschmutzung','la contaminación del aire','Ein Problem in Großstädten.'],
+['🚲','das Verkehrsmittel, -','el medio de transporte','Öffentliche schonen die Umwelt.'],
+['⛽','der Kraftstoff, -e','el combustible','Fossile sollen ersetzt werden.'],
+['🌾','das Gleichgewicht','el equilibrio','Das ökologische Gleichgewicht ist bedroht.'],
+['🛡️','schützen / der Schutz','proteger / la protección','Die Natur muss geschützt werden.'],
+['📜','das Gesetz, -e','la ley','Das neue Gesetz wurde verabschiedet.'],
+['🏘️','die Modernisierung, -en','la modernización','Erhöht den Wert der Wohnung.'],
+['💡','der Strom','la electricidad','Wird immer teurer. → Cada vez más cara.'],
+['🌧️','die Folge, -n','la consecuencia','Die Folgen des Klimawandels sind spürbar.'],
+['⚠️','bedrohen','amenazar','Viele Tierarten sind bedroht.'],
+['🧯','vermeiden','evitar','Plastikmüll lässt sich vermeiden.'],
+['📊','der Anteil, -e','la proporción / cuota','Der Anteil erneuerbarer Energien steigt.'],
+['🌐','verantwortungsvoll','responsable','Mit Ressourcen umgehen.'],
+['🏡','der Energieverbrauch','el consumo energético','Wurde halbiert. → Se redujo a la mitad.'],
+['🔋','speichern','almacenar','Solarstrom kann in Batterien gespeichert werden.'],
+];
+
+/* ---------------- WEEK 5 ---------------- */
+const w5days = [
+{day:1, dlabel:'Lunes', title:'Conectores bipartitos I',
+ theory:`<p>Los conectores bipartitos (zweiteilige Konnektoren) unen elementos en dos partes.</p>
+ <table class="g"><tr><th>Conector</th><th>Significado</th><th>Ejemplo</th></tr>
+ <tr><td><b>nicht nur … sondern auch</b></td><td>no solo… sino también</td><td>Sport ist nicht nur gesund, sondern macht auch Spaß.</td></tr>
+ <tr><td><b>sowohl … als auch</b></td><td>tanto… como</td><td>Sowohl Ernährung als auch Bewegung sind wichtig.</td></tr>
+ <tr><td><b>entweder … oder</b></td><td>o… o</td><td>Entweder gehst du zum Arzt, oder du bleibst zu Hause.</td></tr>
+ <tr><td><b>weder … noch</b></td><td>ni… ni</td><td>Er treibt weder Sport, noch ernährt er sich gesund.</td></tr>
+ <tr><td><b>zwar … aber</b></td><td>es cierto que… pero</td><td>Zwar habe ich wenig Zeit, aber ich gehe trotzdem joggen.</td></tr></table>`,
+ exercises:[ open_('5.1','Ejercicio 5.1 – Une con el conector indicado',[
+   {q:'Ich spiele Geige. Ich tanze gern. (sowohl … als auch)', a:'Sowohl das Geigenspielen als auch das Tanzen machen mir Spaß.'},
+   {q:'Er isst kein Gemüse. Er isst kein Obst. (weder … noch)', a:'Er isst weder Gemüse noch Obst.'},
+   {q:'Yoga entspannt. Yoga stärkt die Muskeln. (nicht nur … sondern auch)', a:'Yoga entspannt nicht nur, sondern stärkt auch die Muskeln.'},
+   {q:'Du machst eine Pause. Du wirst krank. (entweder … oder)', a:'Entweder machst du eine Pause, oder du wirst krank.'},
+   {q:'Das Fitnessstudio ist teuer. Es lohnt sich. (zwar … aber)', a:'Zwar ist das Fitnessstudio teuer, aber es lohnt sich.'},
+ ])]
+},
+{day:2, dlabel:'Martes', title:'Conectores bipartitos II – je … desto',
+ theory:`<p><b>je + comparativo …, desto/umso + comparativo …</b> = "cuanto más…, más…"</p>
+ <p>Estructura: <i>Je</i> + comparativo + [sujeto…] + <b>verbo al final</b>, <i>desto</i> + comparativo + <b>verbo en 2ª posición</b> + sujeto.</p>
+ <p><i><b>Je mehr</b> ich mich bewege, <b>desto besser</b> fühle ich mich.</i><br><i><b>Je früher</b> man mit dem Sport beginnt, <b>desto leichter</b> fällt es.</i><br><i><b>Je gesünder</b> die Ernährung ist, <b>umso weniger</b> Probleme hat man später.</i></p>`,
+ exercises:[ open_('5.2','Ejercicio 5.2 – Forma oraciones con je … desto',[
+   {q:'viel Stress haben → schlecht schlafen', a:'Je mehr Stress ich habe, desto schlechter schlafe ich.'},
+   {q:'regelmäßig trainieren → fit werden', a:'Je regelmäßiger man trainiert, desto fitter wird man.'},
+   {q:'wenig Zucker essen → gesund bleiben', a:'Je weniger Zucker man isst, desto gesünder bleibt man.'},
+   {q:'früh aufstehen → produktiv sein', a:'Je früher ich aufstehe, desto produktiver bin ich.'},
+ ])]
+},
+{day:3, dlabel:'Miércoles', title:'Causa y consecuencia',
+ theory:`<p>Tres tipos de palabra conectora — cada uno con SU posición del verbo:</p>
+ <table class="g"><tr><th>Tipo</th><th>Palabras</th><th>Posición del verbo</th></tr>
+ <tr><td>Konjunktionen (pos. 0)</td><td>denn, aber, oder, und, sondern</td><td>verbo en 2ª posición normal</td></tr>
+ <tr><td>Subjunktionen</td><td>weil, da, obwohl, während, sodass</td><td>verbo AL FINAL</td></tr>
+ <tr><td>Adverbios conectores (pos. 1)</td><td>deshalb, deswegen, daher, folglich, trotzdem, dennoch</td><td>verbo INMEDIATAMENTE después</td></tr></table>
+ <p><b>Causa:</b> weil/da (sub.) · denn (conj.) · nämlich (pos. 3) &nbsp; <b>Consecuencia:</b> deshalb, deswegen, daher, folglich, infolgedessen · sodass (sub.)</p>
+ <p><i>Ich treibe Sport, <b>weil</b> es mir guttut.</i> (verbo al final) vs. <i>Ich treibe Sport, <b>denn</b> es tut mir gut.</i> (2ª posición) vs. <i>Es tut mir gut; <b>deshalb</b> treibe ich Sport.</i></p>`,
+ exercises:[ open_('5.3','Ejercicio 5.3 – Reescribe la misma frase de tres maneras',[
+   {q:'Er ist erschöpft. Er macht Urlaub. — con weil / denn / deshalb', a:'1) Er macht Urlaub, weil er erschöpft ist. 2) Er macht Urlaub, denn er ist erschöpft. 3) Er ist erschöpft; deshalb macht er Urlaub.'},
+   {q:'Sie ernährt sich gesund. Sie wird selten krank. — con da / folglich / sodass', a:'Da sie sich gesund ernährt, wird sie selten krank. / Sie ernährt sich gesund; folglich wird sie selten krank. / Sie ernährt sich gesund, sodass sie selten krank wird.'},
+ ])]
+},
+{day:4, dlabel:'Jueves', title:'Conectores concesivos',
+ theory:`<p>Expresan contraste inesperado ("aunque, sin embargo"):</p>
+ <table class="g"><tr><th>Palabra</th><th>Tipo</th><th>Ejemplo</th></tr>
+ <tr><td><b>obwohl</b></td><td>subjunción</td><td>Obwohl er müde ist, arbeitet er weiter.</td></tr>
+ <tr><td><b>trotzdem / dennoch</b></td><td>adverbio</td><td>Er ist müde; trotzdem arbeitet er weiter.</td></tr>
+ <tr><td><b>zwar … aber</b></td><td>bipartito</td><td>Zwar ist er müde, aber er arbeitet weiter.</td></tr>
+ <tr><td><b>allerdings / jedoch</b></td><td>adverbio (matiz)</td><td>Das Training hilft; allerdings braucht man Geduld.</td></tr>
+ <tr><td><b>trotz + Genitiv</b></td><td>preposición</td><td>Trotz seiner Müdigkeit arbeitet er weiter.</td></tr></table>
+ <div class="note">💡 En el examen B2 se valora usar el MISMO contenido con estructuras variadas: obwohl ↔ trotzdem ↔ trotz + Gen.</div>`,
+ exercises:[
+   open_('5.4','Ejercicio 5.4 – Transforma',[
+     {q:'Obwohl sie wenig Zeit hat, kocht sie jeden Tag frisch. — con trotzdem', a:'Sie hat wenig Zeit; trotzdem kocht sie jeden Tag frisch.'},
+     {q:'…mismo, con trotz + Genitiv', a:'Trotz ihrer knappen Zeit kocht sie jeden Tag frisch.'},
+     {q:'…mismo, con zwar … aber', a:'Zwar hat sie wenig Zeit, aber sie kocht jeden Tag frisch.'},
+   ]),
+   free('5.5','Ejercicio 5.5 – Práctica libre','"Wie hältst du die Balance zwischen Arbeit und Freizeit?" — escribe 8 frases usando al menos 6 conectores DIFERENTES de esta semana (mínimo: 1 bipartito, 1 je…desto, 1 causal, 1 consecutivo, 1 concesivo).')
+ ]
+}];
+
+const w5vocab = [
+['🥗','die Ernährung','la alimentación','Eine ausgewogene Ernährung ist die Basis der Gesundheit.'],
+['🩺','die Vorsorgeuntersuchung, -en','el chequeo preventivo','Ich gehe jedes Jahr zur Vorsorgeuntersuchung.'],
+['😌','sich erholen','recuperarse / descansar','Am Wochenende erhole ich mich vom Stress.'],
+['⚖️','der Ausgleich','la compensación / el equilibrio','Geigespielen ist mein Ausgleich zur Arbeit.'],
+['🏋️','die Belastung, -en','la carga / el estrés','Die berufliche Belastung war zu hoch.'],
+['🚭','verzichten auf + Akk.','renunciar a','Er verzichtet seit Monaten auf Zucker.'],
+['😟','sich Sorgen machen um + Akk.','preocuparse por','Sie macht sich Sorgen um ihre Gesundheit.'],
+['🌸','das Wohlbefinden','el bienestar','Bewegung steigert das Wohlbefinden.'],
+['🥦','ausgewogen','equilibrado','Er isst ausgewogen und treibt Sport.'],
+['🧘','der Stressabbau','la reducción del estrés','Tanzen ist ideal zum Stressabbau.'],
+['💤','der Schlafmangel','la falta de sueño','Schadet der Konzentration.'],
+['🏃','sich bewegen / die Bewegung','moverse / el ejercicio','Je mehr man sich bewegt, desto fitter bleibt man.'],
+['🍎','gesundheitsbewusst','consciente de la salud','Immer mehr Menschen leben so.'],
+['💊','das Medikament, -e','el medicamento','Ist verschreibungspflichtig.'],
+['🤒','die Beschwerden (Pl.)','las molestias','Bei anhaltenden Beschwerden zum Arzt gehen.'],
+['🧑‍⚕️','die Krankenkasse, -n','el seguro médico','Übernimmt die Kosten.'],
+['🛌','die Erschöpfung','el agotamiento','Litt er unter Erschöpfung.'],
+['🍺','der Verzicht, -e','la renuncia','Der Verzicht auf Alkohol tat ihm gut.'],
+['🕰️','die Gewohnheit, -en','el hábito','Gesunde Gewohnheiten muss man trainieren.'],
+['🧗','herausfordernd','desafiante','Ein neuer Sport ist anfangs herausfordernd.'],
+['🩹','vorbeugen + Dat.','prevenir','Bewegung beugt vielen Krankheiten vor.'],
+['🥱','unter Druck stehen','estar bajo presión','Vor der Deadline stand das Team unter Druck.'],
+['🌿','die Entspannung','la relajación','Musik hilft mir bei der Entspannung.'],
+['🏥','behandeln / die Behandlung','tratar / el tratamiento','Die Behandlung dauert sechs Wochen.'],
+['🍽️','die Mahlzeit, -en','la comida (del día)','Drei regelmäßige Mahlzeiten sind empfehlenswert.'],
+['🚴','die Ausdauer','la resistencia','Radfahren verbessert die Ausdauer.'],
+['😊','das Gleichgewicht','el equilibrio','Arbeit und Freizeit im Gleichgewicht.'],
+['📵','abschalten','desconectar','Im Urlaub kann ich endlich abschalten.'],
+['🧠','die Konzentration','la concentración','Pausen fördern die Konzentration.'],
+['⏳','die Freizeit','el tiempo libre','In meiner Freizeit tanze ich und spiele Geige.'],
+['🎾','eine Sportart erlernen','aprender un deporte','Nächstes Jahr möchte ich Tennis erlernen.'],
+['🧬','die Auswirkung, -en auf + Akk.','el efecto sobre','Stress hat negative Auswirkungen auf den Körper.'],
+['🍵','wohltuend','reconfortante','Ein Spaziergang am Rhein ist wohltuend.'],
+['📆','der Alltag','la vida cotidiana','Sport gehört fest zu meinem Alltag.'],
+['💪','stärken','fortalecer','Schlaf stärkt das Immunsystem.'],
+];
+
+/* ---------------- WEEK 6 ---------------- */
+const w6days = [
+{day:1, dlabel:'Lunes', title:'Nomen-Verb-Verbindungen I',
+ theory:`<p>Las Nomen-Verb-Verbindungen (colocaciones sustantivo-verbo) son típicas del alemán formal y profesional.</p>
+ <table class="g"><tr><th>Verbindung</th><th>Verbo simple</th><th>Ejemplo</th></tr>
+ <tr><td>eine Entscheidung treffen</td><td>entscheiden</td><td>Wir müssen heute eine Entscheidung treffen.</td></tr>
+ <tr><td>zur Verfügung stehen</td><td>verfügbar sein</td><td>Ich stehe Ihnen gern zur Verfügung.</td></tr>
+ <tr><td>zur Verfügung stellen</td><td>geben</td><td>Die Bank stellt das Kapital zur Verfügung.</td></tr>
+ <tr><td>in Frage kommen</td><td>möglich sein</td><td>Diese Wohnung kommt für uns nicht in Frage.</td></tr>
+ <tr><td>eine Frage stellen</td><td>fragen</td><td>Darf ich Ihnen eine Frage stellen?</td></tr>
+ <tr><td>Bescheid geben/sagen</td><td>informieren</td><td>Geben Sie mir bitte Bescheid.</td></tr>
+ <tr><td>einen Vertrag abschließen</td><td>sich einigen</td><td>Wir haben den Vertrag gestern abgeschlossen.</td></tr>
+ <tr><td>eine Rolle spielen</td><td>wichtig sein</td><td>Die Lage spielt eine große Rolle.</td></tr>
+ <tr><td>Kritik üben an + Dat.</td><td>kritisieren</td><td>Er übte Kritik an dem Plan.</td></tr>
+ <tr><td>einen Beitrag leisten zu</td><td>beitragen</td><td>Jeder kann einen Beitrag zum Umweltschutz leisten.</td></tr>
+ <tr><td>Wert legen auf + Akk.</td><td>wichtig finden</td><td>Ich lege Wert auf Pünktlichkeit.</td></tr>
+ <tr><td>zum Ergebnis kommen</td><td>folgern</td><td>Die Analyse kommt zum Ergebnis, dass…</td></tr></table>`,
+ exercises:[ fill('6.1','Ejercicio 6.1 – Sustituye el verbo simple por la Nomen-Verb-Verbindung',[
+   {text:'Der Kunde fragt viel. → Der Kunde ___ viele ___.', ans:['stellt','Fragen']},
+   {text:'Wir haben uns mit der Bank geeinigt. → Wir haben mit der Bank einen Vertrag ___.', ans:['abgeschlossen']},
+   {text:'Der Preis ist bei der Entscheidung sehr wichtig. → Der Preis ___ bei der Entscheidung eine große ___.', ans:['spielt','Rolle']},
+   {text:'Informieren Sie mich bitte bis Freitag. → ___ Sie mir bitte bis Freitag ___.', ans:['Geben','Bescheid']},
+   {text:'Diese Finanzierung ist für uns nicht möglich. → Diese Finanzierung ___ für uns nicht ___ ___.', ans:['kommt','in','Frage']},
+ ])]
+},
+{day:2, dlabel:'Martes', title:'Nomen-Verb-Verbindungen II',
+ theory:`<table class="g"><tr><th>Verbindung</th><th>Significado</th><th>Ejemplo</th></tr>
+ <tr><td>in Anspruch nehmen</td><td>usar / requerir</td><td>Er nahm die Beratung in Anspruch.</td></tr>
+ <tr><td>Rücksicht nehmen auf + Akk.</td><td>tener consideración con</td><td>Wir nehmen Rücksicht auf Ihre Wünsche.</td></tr>
+ <tr><td>zum Ausdruck bringen</td><td>expresar</td><td>Er brachte seine Zweifel zum Ausdruck.</td></tr>
+ <tr><td>in Betracht ziehen</td><td>considerar</td><td>Wir ziehen mehrere Optionen in Betracht.</td></tr>
+ <tr><td>Einfluss nehmen auf + Akk.</td><td>influir en</td><td>Die Zinsen nehmen Einfluss auf den Markt.</td></tr>
+ <tr><td>zur Kenntnis nehmen</td><td>tomar nota de</td><td>Ich habe Ihre Absage zur Kenntnis genommen.</td></tr>
+ <tr><td>Maßnahmen ergreifen</td><td>tomar medidas</td><td>Die Regierung ergreift Maßnahmen gegen die Inflation.</td></tr>
+ <tr><td>einen Antrag stellen</td><td>solicitar</td><td>Er stellte einen Antrag auf Förderung.</td></tr>
+ <tr><td>Verantwortung tragen für</td><td>ser responsable de</td><td>Der Verwalter trägt die Verantwortung für das Gebäude.</td></tr>
+ <tr><td>in Kraft treten</td><td>entrar en vigor</td><td>Das Gesetz tritt im Januar in Kraft.</td></tr>
+ <tr><td>Abschied nehmen von + Dat.</td><td>despedirse de</td><td>Er nahm Abschied von seinen Kollegen.</td></tr>
+ <tr><td>sich Gedanken machen über + Akk.</td><td>reflexionar sobre</td><td>Ich mache mir Gedanken über meine Zukunft.</td></tr></table>
+ <div class="note">💡 Apréndelas como UNIDAD completa (con su preposición).</div>`,
+ exercises:[ fill('6.2','Ejercicio 6.2 – Completa con la Verbindung correcta',[
+   {text:'Vor der Investition sollte man mehrere Objekte in ___ ___.', ans:['Betracht','ziehen']},
+   {text:'Die neue Regelung ___ am 1. Januar in ___.', ans:['tritt','Kraft']},
+   {text:'Für den Gründungszuschuss muss man einen ___ bei der Agentur für Arbeit ___.', ans:['Antrag','stellen']},
+   {text:'Er hat seine Unzufriedenheit deutlich zum ___ ___.', ans:['Ausdruck','gebracht']},
+   {text:'Die Beratung können Sie kostenlos in ___ ___.', ans:['Anspruch','nehmen']},
+ ])]
+},
+{day:3, dlabel:'Miércoles', title:'Nominalización (Nominalisierung)',
+ theory:`<p>El alemán formal transforma oraciones en sustantivos ("Nominalstil").</p>
+ <table class="g"><tr><th>Oración (Verbalstil)</th><th>Nominalización (Nominalstil)</th></tr>
+ <tr><td>Wenn/Als er ankam, …</td><td>Bei seiner Ankunft …</td></tr>
+ <tr><td>Nachdem der Vertrag unterschrieben wurde, …</td><td>Nach der Unterschrift des Vertrags …</td></tr>
+ <tr><td>Bevor wir kaufen, …</td><td>Vor dem Kauf …</td></tr>
+ <tr><td>Obwohl es Risiken gibt, …</td><td>Trotz der Risiken …</td></tr>
+ <tr><td>Weil die Nachfrage steigt, …</td><td>Wegen/Aufgrund der steigenden Nachfrage …</td></tr>
+ <tr><td>Während er studierte, …</td><td>Während seines Studiums …</td></tr>
+ <tr><td>Damit Kosten gespart werden, …</td><td>Zur Kosteneinsparung … / Zum Sparen von Kosten …</td></tr>
+ <tr><td>Indem man vergleicht, …</td><td>Durch den Vergleich …</td></tr></table>
+ <p class="small"><b>Formación del sustantivo:</b> infinitivo sustantivado (kaufen → das Kaufen) · -ung (finanzieren → die Finanzierung) · sustantivos propios (ankommen → die Ankunft).</p>`,
+ exercises:[ fill('6.3','Ejercicio 6.3 – Nominaliza',[
+   {text:'Bevor Sie den Vertrag unterschreiben, lesen Sie alles genau. → ___ des Vertrags lesen Sie alles genau. (Vor + ...)', ans:[['Vor der Unterschrift','Vor dem Unterschreiben']]},
+   {text:'Nachdem die Wohnung renoviert wurde, stieg ihr Wert. → ___ der Wohnung stieg ihr Wert.', ans:[['Nach der Renovierung','Nach der']]},
+   {text:'Weil die Zinsen gesunken sind, lohnt sich der Kredit. → ___ der gesunkenen Zinsen lohnt sich der Kredit.', ans:[['Wegen','Aufgrund']]},
+   {text:'Obwohl der Markt schwankt, investiert er weiter. → ___ der Marktschwankungen investiert er weiter.', ans:['Trotz']},
+ ])]
+},
+{day:4, dlabel:'Jueves', title:'Verbalización y práctica integrada',
+ theory:`<p><b>Dirección inversa (Nominal → Verbal):</b></p>
+ <table class="g"><tr><th>Nominal</th><th>Verbal</th></tr>
+ <tr><td>Bei Vertragsabschluss …</td><td>Wenn der Vertrag abgeschlossen wird, …</td></tr>
+ <tr><td>Zur Senkung der Kosten …</td><td>Damit die Kosten gesenkt werden, … / Um die Kosten zu senken, …</td></tr>
+ <tr><td>Trotz mehrfacher Aufforderung …</td><td>Obwohl er mehrfach aufgefordert wurde, …</td></tr>
+ <tr><td>Durch regelmäßiges Training …</td><td>Indem man regelmäßig trainiert, …</td></tr></table>
+ <p class="small"><b>Correspondencias clave:</b> bei → wenn/als · nach → nachdem · vor → bevor · trotz → obwohl · wegen/aufgrund → weil/da · zu/zur/zum → damit/um…zu · durch → indem</p>`,
+ exercises:[
+   open_('6.4','Ejercicio 6.4 – Verbaliza',[
+     {q:'Nach Abschluss der Renovierung wird die Wohnung vermietet. → Nachdem…', a:'Nachdem die Renovierung abgeschlossen wurde/worden ist, wird die Wohnung vermietet.'},
+     {q:'Zur Finanzierung des Kaufs nahm er ein Darlehen auf. → Um…', a:'Um den Kauf zu finanzieren, nahm er ein Darlehen auf.'},
+     {q:'Trotz sorgfältiger Planung gab es Verzögerungen. → Obwohl…', a:'Obwohl sorgfältig geplant wurde / Obwohl er sorgfältig geplant hatte, gab es Verzögerungen.'},
+     {q:'Durch den Vergleich mehrerer Angebote spart man Geld. → Indem…', a:'Indem man mehrere Angebote vergleicht, spart man Geld.'},
+   ]),
+   free('6.5','Ejercicio 6.5 – Práctica libre','Explica en 6-8 frases (¡en alemán!) a un cliente ficticio por qué invertir en inmuebles en Alemania. Obligatorio: 5 Nomen-Verb-Verbindungen y 2 nominalizaciones.')
+ ]
+}];
+
+const w6vocab = [
+['💰','die Investition, -en','la inversión','Diese Investition zahlt sich langfristig aus.'],
+['📈','die Rendite, -n','la rentabilidad','Die Rendite liegt bei vier Prozent pro Jahr.'],
+['🏦','das Eigenkapital','el capital propio','Ohne Eigenkapital ist die Finanzierung schwierig.'],
+['📊','der Zinssatz, -sätze','el tipo de interés','Der Zinssatz wurde von der Bank erhöht.'],
+['🧾','die Steuererklärung, -en','la declaración de la renta','Muss bis Juli abgegeben werden.'],
+['🧮','die Abschreibung, -en','la amortización','Mindert das zu versteuernde Einkommen.'],
+['💳','das Darlehen, -','el préstamo','Wird in 20 Jahren zurückgezahlt.'],
+['💸','die Ausgaben (Pl.)','los gastos','Wir müssen unsere Ausgaben im Blick behalten.'],
+['💵','der Gewinn, -e','la ganancia','Die Firma machte im letzten Jahr Gewinn.'],
+['⚖️','haften für + Akk.','responder de','Der Geschäftsführer haftet für die Schulden.'],
+['📉','der Verlust, -e','la pérdida','Können steuerlich geltend gemacht werden.'],
+['🏛️','die Steuer, -n','el impuesto','Auf Mieteinnahmen zahlt man Steuern.'],
+['💼','das Einkommen, -','los ingresos','Stammt aus mehreren Quellen.'],
+['🧑‍💼','der Selbstständige, -n','el autónomo','Müssen sich selbst versichern.'],
+['📄','der Businessplan, -pläne','el plan de negocio','Braucht man einen überzeugenden.'],
+['🏢','das Unternehmen, -','la empresa','Er gründet nächstes Jahr ein eigenes.'],
+['📅','die Frist, -en','el plazo','Läuft Ende des Monats ab.'],
+['💶','der Umsatz, -sätze','la facturación','Ist um zehn Prozent gestiegen.'],
+['🧾','die Rechnung, -en','la factura','Ist innerhalb von 14 Tagen zu bezahlen.'],
+['🪙','die Geldanlage, -n','la inversión (de dinero)','Immobilien gelten als sichere Geldanlage.'],
+['📈','der Aufschwung','el auge','Die Region erlebt einen wirtschaftlichen Aufschwung.'],
+['📉','die Krise, -n','la crisis','In der Krise sanken die Immobilienpreise.'],
+['🛡️','absichern','asegurar / proteger','Mit einer Versicherung sichert man sich ab.'],
+['🤝','verhandeln','negociar','Über den Preis lässt sich verhandeln.'],
+['🏦','das Konto, Konten','la cuenta','Für die Firma ein separates Konto eröffnet.'],
+['💹','die Inflation','la inflación','Entwertet das Ersparte.'],
+['💲','die Kosten (Pl.)','los costes','Dürfen nicht unterschätzt werden.'],
+['🧠','die Beratung, -en','el asesoramiento','Spart Geld und Nerven.'],
+['📋','der Vertrag, Verträge','el contrato','Lesen Sie ihn vor der Unterschrift genau.'],
+['🎯','das Risiko, Risiken','el riesgo','Jede Investition ist mit Risiken verbunden.'],
+['💰','sparen / das Ersparte','ahorrar / los ahorros','Er hat jahrelang für die Anzahlung gespart.'],
+['🧾','die Buchhaltung','la contabilidad','Mache ich mit einer Software.'],
+['📊','der Wettbewerb','la competencia','Auf dem Markt ist hart.'],
+['🏷️','die Nachfrage nach + Dat.','la demanda de','Nach Wohnungen steigt weiter.'],
+['📦','das Angebot, -e','la oferta','An Neubauten ist begrenzt.'],
+['💡','sich lohnen','valer la pena','Langfristig lohnt sich die Investition.'],
+];
+
+/* ---------------- WEEK 7 ---------------- */
+const w7days = [
+{day:1, dlabel:'Lunes', title:'Konjunktiv I – formas y uso',
+ theory:`<p>El Konjunktiv I se usa para el <b>discurso indirecto</b> (reportar lo que otro dijo con distancia neutral). Es el lenguaje de las noticias y del examen B2.</p>
+ <table class="g"><tr><th></th><th>sagen</th><th>haben</th><th>können</th><th>sein ⚠️</th></tr>
+ <tr><td>ich</td><td>sage*</td><td>habe*</td><td>könne</td><td><b>sei</b></td></tr>
+ <tr><td>du</td><td>sagest</td><td>habest</td><td>könnest</td><td>sei(e)st</td></tr>
+ <tr><td>er/sie/es</td><td><b>sage</b></td><td><b>habe</b></td><td><b>könne</b></td><td><b>sei</b></td></tr>
+ <tr><td>wir</td><td>sagen*</td><td>haben*</td><td>können*</td><td>seien</td></tr>
+ <tr><td>ihr</td><td>saget</td><td>habet</td><td>könnet</td><td>seiet</td></tr>
+ <tr><td>sie/Sie</td><td>sagen*</td><td>haben*</td><td>können*</td><td><b>seien</b></td></tr></table>
+ <p class="small">*Las formas idénticas al indicativo se sustituyen por <b>Konjunktiv II</b>: <i>Sie sagen, sie <b>hätten</b> keine Zeit.</i></p>
+ <p><b>Ejemplo:</b> Directo: <i>"Die Lage ist stabil und wir haben einen Plan."</i> → Indirecto: <i>Der Minister sagt, die Lage <b>sei</b> stabil und man <b>habe</b> einen Plan.</i></p>`,
+ exercises:[ open_('7.1','Ejercicio 7.1 – Pasa a discurso indirecto',[
+   {q:'Die Bürgermeisterin sagt: "Die Stadt braucht mehr Wohnungen."', a:'Die Bürgermeisterin sagt, die Stadt brauche mehr Wohnungen.'},
+   {q:'Der Experte erklärt: "Die Integration funktioniert gut."', a:'Der Experte erklärt, die Integration funktioniere gut.'},
+   {q:'Die Nachbarn behaupten: "Wir haben nichts gehört."', a:'Die Nachbarn behaupten, sie hätten nichts gehört. (Konj. II porque "haben" = indicativo)'},
+   {q:'Der Sprecher betont: "Es gibt keine Probleme."', a:'Der Sprecher betont, es gebe keine Probleme.'},
+ ])]
+},
+{day:2, dlabel:'Martes', title:'Konjunktiv I en pasado y discurso indirecto completo',
+ theory:`<p><b>Pasado en discurso indirecto:</b> habe/sei + Partizip II (una sola forma para todos los pasados).</p>
+ <p>Directo: <i>"Ich habe die Rede gehört."</i> → Indirecto: <i>Er sagt, er <b>habe</b> die Rede <b>gehört</b>.</i><br>
+ Directo: <i>"Wir sind umgezogen."</i> → Indirecto: <i>Sie sagen, sie <b>seien umgezogen</b>.</i></p>
+ <p><b>Preguntas y peticiones:</b> con interrogativo (<i>Sie fragt, wann die Versammlung stattfinde.</i>) · sí/no → <b>ob</b> · imperativo → <b>sollen/mögen</b>.</p>
+ <p class="small"><b>Cambios de perspectiva:</b> ich→er, mein→sein, hier→dort, heute→an diesem Tag, morgen→am nächsten Tag.</p>`,
+ exercises:[ open_('7.2','Ejercicio 7.2 – Pasa a discurso indirecto (¡atención a los cambios!)',[
+   {q:'Der Politiker sagte: "Ich habe mich immer für die Bürger engagiert."', a:'Der Politiker sagte, er habe sich immer für die Bürger engagiert.'},
+   {q:'Die Journalistin fragte: "Sind Sie mit dem Ergebnis zufrieden?"', a:'Die Journalistin fragte, ob er/sie mit dem Ergebnis zufrieden sei.'},
+   {q:'Der Vermieter sagte: "Die Miete wird nächstes Jahr nicht erhöht."', a:'Der Vermieter sagte, die Miete werde im nächsten Jahr nicht erhöht.'},
+   {q:'Die Expertin erklärte: "Das Ehrenamt ist für die Gesellschaft unverzichtbar."', a:'Die Expertin erklärte, das Ehrenamt sei für die Gesellschaft unverzichtbar.'},
+ ])]
+},
+{day:3, dlabel:'Miércoles', title:'Verbos modales en sentido subjetivo',
+ theory:`<p>En B2, los modales adquieren un segundo significado: expresan <b>suposición</b> o <b>afirmación ajena</b>.</p>
+ <table class="g"><tr><th>Modal</th><th>Certeza</th><th>Ejemplo</th></tr>
+ <tr><td><b>muss</b></td><td>~95%</td><td>Er muss zu Hause sein.</td></tr>
+ <tr><td><b>müsste</b></td><td>~80%</td><td>Sie müsste schon angekommen sein.</td></tr>
+ <tr><td><b>dürfte</b></td><td>~70%</td><td>Das dürfte stimmen.</td></tr>
+ <tr><td><b>könnte</b></td><td>~50%</td><td>Er könnte im Urlaub sein.</td></tr>
+ <tr><td><b>kann nicht</b></td><td>imposible</td><td>Das kann nicht wahr sein!</td></tr></table>
+ <p><b>Afirmación ajena:</b> <b>soll</b> = "dicen que" (<i>Er soll sehr reich sein.</i>) · <b>will</b> = "él afirma que (dudoso)" (<i>Sie will nichts gewusst haben.</i>)</p>
+ <p class="small">En pasado: modal + Partizip II + haben/sein: <i>Er muss das gewusst <b>haben</b>.</i> · <i>Sie soll ausgewandert <b>sein</b>.</i></p>`,
+ exercises:[
+   open_('7.3','Ejercicio 7.3 – ¿Qué expresa cada frase? Traduce el matiz',[
+     {q:'Der Nachbar soll ausgewandert sein.', a:'DICEN que el vecino emigró (rumor).'},
+     {q:'Sie will das Dokument nie gesehen haben.', a:'Ella AFIRMA no haber visto nunca el documento (el hablante duda).'},
+     {q:'Das Paket müsste morgen ankommen.', a:'El paquete DEBERÍA llegar mañana (probabilidad alta).'},
+     {q:'Er kann das nicht allein geschafft haben.', a:'Es IMPOSIBLE que lo haya logrado solo.'},
+     {q:'Die Preise dürften weiter steigen.', a:'Los precios PROBABLEMENTE seguirán subiendo.'},
+   ]),
+   fill('7.4','Ejercicio 7.4 – Expresa con un modal subjetivo',[
+     {text:'Estoy casi seguro de que él está enfermo (no vino a trabajar). → Er ___', ans:[['muss krank sein']]},
+     {text:'Dicen que la empresa tiene problemas. → Die Firma ___', ans:[['soll Probleme haben']]},
+     {text:'Ella afirma haber pagado, pero no hay comprobante. → Sie ___', ans:[['will bezahlt haben']]},
+     {text:'Es probable que la ley cambie pronto. → Das Gesetz ___', ans:[['dürfte sich bald ändern']]},
+   ])
+ ]
+},
+{day:4, dlabel:'Jueves', title:'Integración – reportar una noticia',
+ theory:`<p>Practica la conversión completa de una noticia a discurso indirecto y la valoración con modales subjetivos.</p>`,
+ exercises:[
+   open_('7.5','Ejercicio 7.5 – Texto completo',[
+     {q:'Lee y pasa a discurso indirecto (empieza con "In dem Artikel steht, …"): "Die Mieten in deutschen Großstädten sind im letzten Jahr um fünf Prozent gestiegen. Experten erwarten eine weitere Steigerung. Die Regierung plant neue Maßnahmen. Viele Bürger können sich das Wohnen in der Stadt nicht mehr leisten."',
+      a:'In dem Artikel steht, die Mieten in deutschen Großstädten seien im letzten Jahr um fünf Prozent gestiegen. Experten erwarteten eine weitere Steigerung. Die Regierung plane neue Maßnahmen. Viele Bürger könnten sich das Wohnen in der Stadt nicht mehr leisten.'}
+   ]),
+   free('7.6','Ejercicio 7.6 – Práctica libre','Busca una noticia real en Deutsche Welle (Top-Thema) y resume 4-5 frases en discurso indirecto. Añade 2 frases con modales subjetivos expresando tu valoración (Das dürfte…, Die Lage könnte…).')
+ ]
+}];
+
+const w7vocab = [
+['🌍','die Gesellschaft, -en','la sociedad','Wird immer vielfältiger.'],
+['🤝','die Integration','la integración','Sprache ist der Schlüssel zur Integration.'],
+['🌈','die Vielfalt','la diversidad','Bereichert das Land.'],
+['🛂','die Herkunft','el origen','Sollte keine Rolle spielen.'],
+['🙋','sich engagieren für + Akk.','comprometerse con','Sie engagiert sich für Geflüchtete.'],
+['🧷','der Zusammenhalt','la cohesión','In der Nachbarschaft ist stark.'],
+['⚖️','die Gleichberechtigung','la igualdad de derechos','Im Grundgesetz verankert.'],
+['✈️','die Auswanderung / die Einwanderung','la emigración / inmigración','Nach Deutschland hat zugenommen.'],
+['🔄','sich anpassen an + Akk.','adaptarse a','Schnell an die neue Kultur angepasst.'],
+['🫶','das Ehrenamt, -ämter','el voluntariado','Millionen Deutsche üben es aus.'],
+['🗳️','die Wahl, -en','la elección','Bei der letzten Wahl war die Beteiligung hoch.'],
+['🏛️','der Staat, -en','el estado','Fördert die Existenzgründung.'],
+['📜','das Grundgesetz','la Ley Fundamental (Constitución alemana)','Garantiert die Menschenwürde.'],
+['🧑‍🤝‍🧑','die Minderheit, -en','la minoría','Müssen geschützt werden.'],
+['💬','das Vorurteil, -e','el prejuicio','Lassen sich durch Begegnung abbauen.'],
+['🤲','die Toleranz','la tolerancia','Grundlage des Zusammenlebens.'],
+['🏘️','die Nachbarschaft, -en','el vecindario','Man hilft sich gegenseitig.'],
+['👵','die Generation, -en','la generación','Der Austausch ist wertvoll.'],
+['🧓','die Alterung','el envejecimiento','Der Gesellschaft ist eine Herausforderung.'],
+['💼','der Fachkräftemangel','la escasez de mano de obra cualificada','Betrifft viele Branchen.'],
+['🗣️','die Debatte, -n','el debate','Über Zuwanderung ist emotional.'],
+['🤔','die Herausforderung, -en','el desafío','Die Digitalisierung stellt neue vor uns.'],
+['⚡','der Konflikt, -e','el conflicto','Sollten friedlich gelöst werden.'],
+['🫂','unterstützen','apoyar','Der Verein unterstützt Familien in Not.'],
+['🎭','die Kultur, -en','la cultura','Er lebt zwischen zwei Kulturen.'],
+['🏳️','die Staatsbürgerschaft, -en','la ciudadanía','Sie hat die deutsche beantragt.'],
+['⚙️','beitragen zu + Dat.','contribuir a','Jeder kann zum Zusammenhalt beitragen.'],
+['🔓','die Chancengleichheit','la igualdad de oportunidades','Bildung schafft sie.'],
+['🌐','mehrsprachig','plurilingüe','Haben Vorteile im Beruf.'],
+['🧭','die Werte (Pl.)','los valores','Gemeinsame verbinden die Gesellschaft.'],
+['🏠','die Wohnungsnot','la escasez de vivienda','In Großstädten wächst sie.'],
+['📢','die Demonstration, -en','la manifestación','Tausende nahmen teil.'],
+['🤝','der Verein, -e','la asociación','Er ist Mitglied in einem Sportverein.'],
+['🧑‍⚖️','das Recht, -e auf + Akk.','el derecho a','Auf freie Meinungsäußerung.'],
+['🌉','die Begegnung, -en','el encuentro','Bauen Vorurteile ab.'],
+];
+
+/* ---------------- WEEK 8 ---------------- */
+const w8days = [
+{day:1, dlabel:'Lunes', title:'Partizip I y II como adjetivo',
+ theory:`<p><b>Partizip I</b> (activo, "que hace"): infinitivo + <b>d</b> + terminación de adjetivo. <i>das lachende Kind</i> · <i>steigende Preise</i> · <i>die wachsende Nachfrage</i>.</p>
+ <p><b>Partizip II</b> (pasivo/resultado, "hecho"): participio + terminación de adjetivo. <i>die renovierte Wohnung</i> · <i>der unterschriebene Vertrag</i> · <i>das gedämmte Dach</i>.</p>
+ <div class="note">💡 <i>die steigenden Mieten</i> = QUE SUBEN (proceso activo) vs. <i>die gestiegenen Mieten</i> = SUBIDOS (resultado). Se declinan exactamente como adjetivos.</div>`,
+ exercises:[ fill('8.1','Ejercicio 8.1 – ¿Partizip I o II? Completa con terminación',[
+   {text:'Die ___ (steigen) Zinsen machen Kredite teurer.', ans:[['steigenden']]},
+   {text:'Der frisch ___ (renovieren) Altbau hat an Wert gewonnen.', ans:[['renovierte']]},
+   {text:'Das ___ (kommen) Jahr wird entscheidend.', ans:[['kommende']]},
+   {text:'Die gut ___ (ausbilden) Fachkräfte fehlen überall.', ans:[['ausgebildeten']]},
+   {text:'Ein ___ (überzeugen) Businessplan öffnet Türen.', ans:[['überzeugender']]},
+ ])]
+},
+{day:2, dlabel:'Martes', title:'Partizipialkonstruktionen ↔ Relativsätze',
+ theory:`<p>Los textos formales comprimen oraciones de relativo en construcciones de participio. En el examen B2 hay que saber "descomprimirlas":</p>
+ <table class="g"><tr><th>Partizipialkonstruktion</th><th>Relativsatz</th></tr>
+ <tr><td>die im letzten Jahr gestiegenen Mieten</td><td>die Mieten, die im letzten Jahr gestiegen sind</td></tr>
+ <tr><td>der von der Bank finanzierte Kauf</td><td>der Kauf, der von der Bank finanziert wurde</td></tr>
+ <tr><td>die an dem Projekt arbeitenden Ingenieure</td><td>die Ingenieure, die an dem Projekt arbeiten</td></tr>
+ <tr><td>das zu sanierende Gebäude</td><td>das Gebäude, das saniert werden muss</td></tr></table>
+ <p class="small"><b>Regla de lectura:</b> todo lo que está entre el artículo y el sustantivo se lee "de atrás hacia adelante" como oración de relativo.</p>`,
+ exercises:[
+   open_('8.2','Ejercicio 8.2 – Transforma en oración de relativo',[
+     {q:'Die vor kurzem verabschiedete Regelung tritt im Januar in Kraft.', a:'Die Regelung, die vor kurzem verabschiedet wurde, tritt im Januar in Kraft.'},
+     {q:'Die auf dem Markt angebotenen Wohnungen sind überteuert.', a:'Die Wohnungen, die auf dem Markt angeboten werden, sind überteuert.'},
+     {q:'Der sein Unternehmen gründende Ingenieur braucht einen Plan.', a:'Der Ingenieur, der sein Unternehmen gründet, braucht einen Plan.'},
+     {q:'Die zu zahlenden Steuern sind im Vertrag aufgelistet.', a:'Die Steuern, die zu zahlen sind / gezahlt werden müssen, sind im Vertrag aufgelistet.'},
+   ]),
+   fill('8.3','Ejercicio 8.3 – Y ahora al revés: comprime',[
+     {text:'Die Kunden, die aus Spanien kommen, brauchen Beratung auf Spanisch. → Die ___ Kunden …', ans:[['aus Spanien kommenden']]},
+     {text:'Das Haus, das 1985 gebaut wurde, braucht eine neue Heizung. → Das ___ Haus …', ans:[['1985 gebaute']]},
+   ])
+ ]
+},
+{day:3, dlabel:'Miércoles', title:'Repaso personalizado',
+ theory:`<p><b>Plan de trabajo (30 min de gramática):</b></p>
+ <p><span class="stepnum">1</span>Abre tu "lista de errores personales" de las 7 semanas.<br>
+ <span class="stepnum">2</span>Identifica tus 3 temas más débiles.<br>
+ <span class="stepnum">3</span>Pídele a Claude: <i>"Genérame 10 ejercicios sobre [tema] a nivel B2"</i> — corrección inmediata incluida.<br>
+ <span class="stepnum">4</span>Repite los ejercicios que fallaste en las semanas anteriores (sin mirar las soluciones).</p>
+ <h3>Checklist de autoevaluación B2 — ¿puedes…?</h3>
+ <div class="checklist" id="checklistB2"></div>`,
+ exercises:[]
+},
+{day:4, dlabel:'Jueves', title:'Simulación de examen',
+ theory:`<p><b>Jueves — Lesen + Schreiben (90 min):</b> descarga un modelo oficial gratuito del Goethe-Zertifikat B2 o telc B2. Haz la parte de Lesen con tiempo real (65 min Goethe). Corrige con la clave incluida y anota los tipos de error.</p>
+ <p><b>Viernes — Hören + redacción final:</b> parte de Hören del modelo (40 min aprox.). Redacción tipo examen (ver tarea del viernes) → envíamela para corrección final con evaluación según criterios B2.</p>
+ <h3>Redemittel para la redacción argumentativa B2 (¡memorízalos!)</h3>
+ <ul>
+ <li><b>Introducir el tema:</b> Zurzeit wird viel darüber diskutiert, ob… · Das Thema … ist heutzutage von großer Bedeutung.</li>
+ <li><b>Dar tu opinión:</b> Meiner Meinung/Ansicht nach … · Ich bin davon überzeugt, dass … · Ich stehe auf dem Standpunkt, dass …</li>
+ <li><b>Argumentar:</b> Ein wichtiges Argument dafür/dagegen ist … · Dafür/Dagegen spricht, dass … · Man darf nicht vergessen, dass …</li>
+ <li><b>Ejemplificar:</b> Ein gutes Beispiel dafür ist … · Aus eigener Erfahrung kann ich sagen, dass …</li>
+ <li><b>Contrastar:</b> Einerseits …, andererseits … · Im Gegensatz dazu … · Es lässt sich nicht leugnen, dass …</li>
+ <li><b>Concluir:</b> Zusammenfassend lässt sich sagen, dass … · Abschließend möchte ich betonen, dass … · Alles in allem …</li>
+ </ul>`,
+ exercises:[]
+}];
+
+const checklistItems = [
+ 'Declinar adjetivos sin pensar en las tablas',
+ 'Usar 5 preposiciones de Genitiv con naturalidad',
+ 'Formar oraciones de relativo con dessen/deren y con preposición',
+ 'Expresar hipótesis pasadas (hätte/wäre + P.II) y reproches (hätte + Inf. + Modal)',
+ 'Usar el pasivo en 4 tiempos y con modales',
+ 'Conectar ideas con 10+ conectores distintos',
+ 'Usar 10 Nomen-Verb-Verbindungen',
+ 'Reportar en Konjunktiv I',
+ 'Entender modales subjetivos (soll/will/dürfte)',
+ 'Leer Partizipialkonstrukionen sin bloquearte',
+];
+
+const WEEKS = [
+  {id:1, title:'Arbeit und Beruf', subtitle:'Los casos, las preposiciones y la declinación del adjetivo', days:w1days, vocab:w1vocab, friday:'Escribe 150 palabras: "Mein beruflicher Werdegang und meine Pläne" (tu trayectoria y tus planes de independizarte). Usa mínimo: 2 preposiciones de Genitiv, 5 adjetivos declinados, 8 palabras del vocabulario. Envíamela para corrección detallada.'},
+  {id:2, title:'Wohnen und Immobilien', subtitle:'Las oraciones de relativo (Relativsätze)', days:w2days, vocab:w2vocab, friday:'Escribe un correo formal a un Makler (140 palabras) pidiendo información sobre un piso: preséntate, di qué buscas, haz 3 preguntas concretas. Usa mínimo 4 oraciones de relativo y fórmulas formales (Sehr geehrte/r…, Mit freundlichen Grüßen).'},
+  {id:3, title:'Medien und Kommunikation', subtitle:'El Konjunktiv II', days:w3days, vocab:w3vocab, friday:'Escribe 150 palabras: "Was hätte ich in meinem Leben anders gemacht?" Usa mínimo: 3 condicionales irreales (presente y pasado), 2 modales en Konjunktiv II pasado, 6 palabras del vocabulario de medios.'},
+  {id:4, title:'Umwelt und Nachhaltigkeit', subtitle:'El Passiv (la voz pasiva)', days:w4days, vocab:w4vocab, friday:'Escribe 140 palabras: "Wie wird ein Altbau energetisch saniert?" — describe el proceso paso a paso usando mínimo: 4 pasivas (distintos tiempos), 1 pasiva con modal, 2 alternativas al pasivo.'},
+  {id:5, title:'Gesundheit und Lebensstil', subtitle:'Los conectores (Konnektoren)', days:w5days, vocab:w5vocab, friday:'Escribe 150 palabras: "Wie halte ich die Balance zwischen Arbeit und Freizeit?" Usa mínimo 6 conectores distintos (obligatorio: 1 bipartito, 1 je…desto, 1 concesivo) y 8 palabras del vocabulario.'},
+  {id:6, title:'Wirtschaft und Finanzen', subtitle:'Nomen-Verb-Verbindungen y nominalización', days:w6days, vocab:w6vocab, friday:'Escribe 160 palabras: "Warum lohnt es sich, in deutsche Immobilien zu investieren?" — como si se lo explicaras a un cliente. Obligatorio: 5 Nomen-Verb-Verbindungen, 2 nominalizaciones, 8 palabras del vocabulario.'},
+  {id:7, title:'Gesellschaft und Zusammenleben', subtitle:'El discurso indirecto (Konjunktiv I) y los modales subjetivos', days:w7days, vocab:w7vocab, friday:'Busca una noticia real (Deutsche Welle, Tagesschau) y resúmela en discurso indirecto (140 palabras): 6+ frases en Konjunktiv I, 2 frases con modales subjetivos (tu valoración), 6 palabras del vocabulario.'},
+  {id:8, title:'Repaso intensivo', subtitle:'Participios como adjetivo + repaso general', days:w8days, redemittelWeek:true, friday:'Redacción tipo examen B2 (180–200 palabras), tema: "Immer mehr Menschen machen sich selbstständig. Welche Vor- und Nachteile hat die Selbstständigkeit?" Estructura: introducción, 2 ventajas + 2 desventajas con ejemplos, tu opinión, conclusión. Usa los Redemittel. Te la evaluaré siguiendo los criterios del examen B2.'},
+];
+
+/* ============================================================
+   EXTRA PRACTICE — article declension (der/die/das → den/dem/des/einen…)
+   ============================================================ */
+const ARTICLE_PRACTICE = {
+1: fill('W1-art','Práctica extra — Semana 1 (Arbeit und Beruf)',[
+  {text:'Ich brauche ___ Lebenslauf (m., Akk.) für die Bewerbung.', ans:[['einen']]},
+  {text:'Er spricht mit ___ Vorgesetzten (m., Dat.) über die Gehaltserhöhung.', ans:[['dem']]},
+  {text:'Wegen ___ Kündigungsfrist (f., Gen.) muss ich noch drei Monate arbeiten.', ans:[['der']]},
+  {text:'___ neue Mitarbeiterin (f., Nom.) beginnt am Montag.', ans:[['Die']]},
+  {text:'Ohne ___ Qualifikationen (Pl., Akk.) ist die Bewerbung chancenlos.', ans:[['die']]},
+]),
+2: fill('W2-art','Práctica extra — Semana 2 (Wohnen und Immobilien)',[
+  {text:'___ Makler (m., Nom.) hat mir drei Wohnungen gezeigt.', ans:[['Der']]},
+  {text:'Ich vertraue ___ Hausverwaltung (f., Dat.).', ans:[['der']]},
+  {text:'Der Preis ___ Wohnung (f., Gen.) ist sehr hoch.', ans:[['der']]},
+  {text:'Wir haben ___ Kaufvertrag (m., Akk.) unterschrieben.', ans:[['den']]},
+  {text:'Trotz ___ hohen Zinsen (Pl., Gen.) kaufen viele Immobilien.', ans:[['der']]},
+]),
+3: fill('W3-art','Práctica extra — Semana 3 (Medien und Kommunikation)',[
+  {text:'___ Journalist (m., Nom.) recherchiert seit Wochen.', ans:[['Der']]},
+  {text:'Ich glaube ___ Quelle (f., Dat.) nicht.', ans:[['der']]},
+  {text:'Die Glaubwürdigkeit ___ Nachricht (f., Gen.) ist zweifelhaft.', ans:[['der']]},
+  {text:'Er hat ___ Artikel (m., Akk.) veröffentlicht.', ans:[['den']]},
+  {text:'Ohne ___ Beweise (Pl., Akk.) sollte man nichts behaupten.', ans:[['die']]},
+]),
+4: fill('W4-art','Práctica extra — Semana 4 (Umwelt und Nachhaltigkeit)',[
+  {text:'___ Klimawandel (m., Nom.) betrifft uns alle.', ans:[['Der']]},
+  {text:'Man muss ___ Umwelt (f., Akk.) schützen.', ans:[['die']]},
+  {text:'Dank ___ erneuerbaren Energien (Pl., Gen.) sinkt der CO₂-Ausstoß.', ans:[['der']]},
+  {text:'Wir sprechen über ___ Auswirkungen (Pl., Akk.) des Klimawandels.', ans:[['die']]},
+  {text:'Wegen ___ Dürre (f., Gen.) ist das Wasser knapp.', ans:[['der']]},
+]),
+5: fill('W5-art','Práctica extra — Semana 5 (Gesundheit und Lebensstil)',[
+  {text:'___ Ernährung (f., Nom.) beeinflusst die Gesundheit stark.', ans:[['Die']]},
+  {text:'Er leidet unter ___ Schlafmangel (m., Dat.).', ans:[['dem']]},
+  {text:'Trotz ___ Stresses (m., Gen.) bleibt sie ruhig.', ans:[['des']]},
+  {text:'Ich möchte ___ Sportart (f., Akk.) erlernen.', ans:[['eine']]},
+  {text:'Wegen ___ Erschöpfung (f., Gen.) macht er eine Pause.', ans:[['der']]},
+]),
+6: fill('W6-art','Práctica extra — Semana 6 (Wirtschaft und Finanzen)',[
+  {text:'___ Zinssatz (m., Nom.) ist stark gestiegen.', ans:[['Der']]},
+  {text:'Er investiert in ___ Immobilie (f., Akk.).', ans:[['eine']]},
+  {text:'Die Rendite ___ Investition (f., Gen.) ist hoch.', ans:[['der']]},
+  {text:'Ohne ___ Kredit (m., Akk.) kann er nicht kaufen.', ans:[['einen']]},
+  {text:'Er spricht mit ___ Bank (f., Dat.) über die Konditionen.', ans:[['der']]},
+]),
+7: fill('W7-art','Práctica extra — Semana 7 (Gesellschaft und Zusammenleben)',[
+  {text:'___ Gesellschaft (f., Nom.) wird immer vielfältiger.', ans:[['Die']]},
+  {text:'Er engagiert sich für ___ Geflüchteten (Pl., Akk.).', ans:[['die']]},
+  {text:'Der Zusammenhalt ___ Nachbarschaft (f., Gen.) ist wichtig.', ans:[['der']]},
+  {text:'Wir sprechen über ___ Vorurteile (Pl., Akk.).', ans:[['die']]},
+  {text:'Dank ___ Toleranz (f., Gen.) funktioniert das Zusammenleben.', ans:[['der']]},
+]),
+8: fill('W8-art','Práctica extra — Semana 8 (Repaso general de los 4 casos)',[
+  {text:'Trotz ___ Schwierigkeiten (Pl., Gen.) hat er sein Ziel erreicht.', ans:[['der']]},
+  {text:'___ Regelung (f., Nom.), die letzte Woche verabschiedet wurde, tritt bald in Kraft.', ans:[['Die']]},
+  {text:'Er dankte ___ Kollegen (Pl., Dat.) für die Unterstützung.', ans:[['den']]},
+  {text:'Ohne ___ Erfahrung (f., Akk.) ist die Bewerbung schwierig.', ans:[['die']]},
+  {text:'Wegen ___ Termins (m., Gen.) musste sie früher gehen.', ans:[['des']]},
+  {text:'Ich suche ___ Wohnung (f., Akk.) in der Nähe des Bahnhofs.', ans:[['eine']]},
+]),
+};
+
+function renderRedemittelAccordion(){
+  return `
+    <details class="acc"><summary>🧱 Presentar / estructurar (Teil 1)</summary><div class="accbody">
+      <p>Ich möchte heute über … sprechen.<br>Zunächst / Erstens … · Außerdem / Zweitens … · Schließlich / Zum Schluss …<br>Auf der einen Seite … auf der anderen Seite …<br>Ein Vorteil / Nachteil ist, dass …<br>Zusammenfassend lässt sich sagen, dass …</p>
+    </div></details>
+    <details class="acc"><summary>💭 Opinar</summary><div class="accbody">
+      <p>Meiner Meinung / Ansicht nach …<br>Ich bin (fest) davon überzeugt, dass …<br>Ich vertrete den Standpunkt, dass …<br>Aus meiner Sicht / Aus meiner Erfahrung …</p>
+    </div></details>
+    <details class="acc"><summary>⚖️ Argumentar / matizar</summary><div class="accbody">
+      <p>Das hängt (stark) davon ab, ob …<br>Es kommt darauf an, ob …<br>Einerseits stimmt das, andererseits …<br>Man sollte allerdings bedenken, dass …</p>
+    </div></details>
+    <details class="acc"><summary>🔁 Reaccionar al otro (Teil 2 — lo más valorado)</summary><div class="accbody">
+      <p>Da haben Sie recht, aber …<br>Das sehe ich (etwas) anders, denn …<br>Das ist ein guter Punkt, trotzdem …<br>Kann ich kurz etwas ergänzen?<br>Wie stehen Sie dazu?<br>Ich verstehe Ihren Standpunkt, jedoch …</p>
+    </div></details>
+    <details class="acc"><summary>🤝 Proponer / acordar</summary><div class="accbody">
+      <p>Wie wäre es, wenn wir …?<br>Ich würde vorschlagen, dass …<br>Könnten wir uns darauf einigen, dass …?<br>Da sind wir uns einig.</p>
+    </div></details>
+    <details class="acc"><summary>⏱️ Ganar tiempo</summary><div class="accbody">
+      <p>Das ist eine interessante Frage …<br>Lassen Sie mich kurz überlegen …<br>Wie soll ich sagen …</p>
+    </div></details>`;
+}
+
+const WEEKLY_VORTRAG = {
+  1:'Sollte man sich selbstständig machen oder lieber angestellt bleiben?',
+  2:'Ist Wohneigentum oder Miete die bessere Wahl?',
+  3:'Bringt Social Media mehr Vor- oder Nachteile?',
+  4:'Wie kann man im Alltag nachhaltiger leben?',
+  5:'Ist ein gesunder Lebensstil wichtiger als beruflicher Erfolg?',
+  6:'Sollten Unternehmen Homeoffice verpflichtend anbieten?',
+  7:'Wie wichtig ist ehrenamtliches Engagement für die Gesellschaft?',
+  8:'Was war deine größte Herausforderung beim Deutschlernen — und wie hast du sie gelöst?',
+};
+
+const C_BLOCKS = [
+ {w:1, t:'Las vocales que no existen en español: ü, ö', body:`<b>ü</b> [yː/ʏ]: pon la boca para decir "u" española pero di "i". → <i>über, Tür, für, Bücher, München, natürlich, fünf, müssen</i><br><b>ö</b> [øː/œ]: pon la boca para decir "o" pero di "e". → <i>schön, hören, können, Köln, möchte, Löffel, zwölf</i><br>⚠️ Contraste crítico: <i>Mutter</i> (madre) vs <i>Mütter</i> (madres) · <i>schon</i> (ya) vs <i>schön</i> (bonito).`},
+ {w:2, t:'La longitud vocálica (¡es fonémica!)', body:`El español no distingue vocal larga/corta, pero en alemán CAMBIA el significado: <i>Miete</i> (alquiler, larga) vs <i>Mitte</i> (centro, corta) · <i>Staat</i> (Estado) vs <i>Stadt</i> (ciudad) · <i>ihn</i> (a él) vs <i>in</i> (en) · <i>Ofen</i> vs <i>offen</i>.<br><b>Regla útil:</b> vocal + h muda = larga (<i>gehen, Ruhe, ihm</i>); vocal + doble consonante = corta (<i>kommen, Sonne, offen</i>).`},
+ {w:3, t:'Las dos "ch" y la r', body:`<b>ich-Laut</b> [ç] (suave, tras e,i,ä,ö,ü,consonante): <i>ich, nicht, Milch, Recht, München, richtig</i>. NO es la jota española.<br><b>ach-Laut</b> [x] (fuerte, tras a,o,u,au): <i>Bach, Buch, auch, noch, Sprache</i>. Esta SÍ se parece a la jota fuerte.<br><b>r</b> alemana [ʁ]: gutural: <i>rot, Rhein, Frau, Büro</i>. Al final de sílaba se vocaliza: <i>Vater</i> ≈ "Fáta", <i>aber</i> ≈ "ába".`},
+ {w:4, t:'Consonantes traicioneras: w, v, z, s', body:`<b>w</b> = [v] (como v inglesa "van"): <i>Wein, Wasser, wo, wir</i>. No es "u".<br><b>v</b> = normalmente [f]: <i>Vater, viel, von, verkaufen</i> (extranjerismos [v]: <i>Vase, Villa</i>).<br><b>z</b> = [ts]: <i>zahlen, Zeit, zwei, Zimmer, Konzert</i>. Nunca como la "z" española/inglesa.<br><b>s</b> antes de vocal = [z] sonora: <i>Sonne, sagen, sie, Reise</i>.`},
+ {w:5, t:'st, sp y el final ensordecido', body:`<b>st/sp</b> a principio de palabra = [ʃt]/[ʃp] ("sht"/"shp"): <i>Stadt, Stunde, sprechen, Sport, spät, verstehen</i>.<br><b>Auslautverhärtung</b> (ensordecimiento final): b→p, d→t, g→k al final de sílaba: <i>Tag</i> [taːk], <i>und</i> [unt], <i>Hund</i> [hunt], <i>gelb</i> [gɛlp], <i>Weg</i> [veːk]. Evita sonorizarlas.`},
+ {w:6, t:'Diptongos y el ataque glotal', body:`<b>ei</b> = [ai] ("ái"): <i>mein, Wein, Zeit, drei</i>.<br><b>ie</b> = [iː] ("i larga"): <i>Miete, Liebe, wieder, Brief</i>. ¡No confundas ei con ie!<br><b>eu/äu</b> = [ɔy] ("oi"): <i>neu, Deutsch, Häuser, Gebäude</i>.<br><b>Ataque glotal (Knacklaut):</b> el alemán separa palabras que empiezan por vocal con un golpe de glotis: <i>am ˈAbend, das ˈEnde</i>. El español enlaza; el alemán no.`},
+ {w:7, t:'Entonación y acento de palabra', body:`El acento suele ir en la <b>primera sílaba</b> en palabras germánicas: <i>ˈArbeit, ˈaufstehen, ˈUnternehmen</i>.<br>Prefijos separables llevan acento (<i>ˈaufstehen, ˈeinkaufen</i>); los inseparables NO (<i>verˈstehen, beˈkommen, entˈscheiden</i>).<br>Pregunta sí/no: sube al final. Pregunta con W-Wort: baja al final.`},
+ {w:8, t:'Integración', body:`Lee en voz alta un texto de examen y grábate aplicando TODO: vocales largas/cortas, ü/ö, las dos ch, w/v/z/s sonora, final ensordecido, ataque glotal. Compara con un audio modelo.`},
+];
+
+/* ============================================================
+   PRÁCTICA ACTIVA DIARIA (lunes-jueves, 30 min) — se inyecta
+   directamente en cada día de la semana para que las tareas de
+   Hören/Sprechen/lectura/escritura no dependan de ir a otra pestaña.
+   ============================================================ */
+const DW_TOPTHEMA = 'https://learngerman.dw.com/de/kurz-und-leicht/s-69137519';
+const DW_LANGSAM = 'https://open.spotify.com/show/5RmPp62b0j3u6MqXtwmjJS';
+
+function tierForWeek(wid){
+  if(wid<=2) return 'entrada';
+  if(wid<=5) return 'medio';
+  return 'examen';
+}
+
+const REPASO_ORAL_PROMPTS = {
+  1:'Resume en voz alta, en alemán, la regla de los 4 casos y da 2 ejemplos con preposiciones de Genitiv.',
+  2:'Describe en voz alta tu vivienda ideal usando 3 oraciones de relativo distintas.',
+  3:'Explica en voz alta, con tus palabras, cuándo usar würde y cuándo una forma propia de Konjunktiv II (wäre, hätte, könnte...).',
+  4:'Cuenta en voz alta cómo se renueva un edificio, usando la voz pasiva en 3 frases.',
+  5:'Habla 1 minuto sobre tu equilibrio entre trabajo y ocio usando al menos 3 conectores distintos.',
+  6:'Explica en voz alta 3 Nomen-Verb-Verbindungen de esta semana con un ejemplo cada una.',
+  7:'Reporta en voz alta (discurso indirecto) una noticia inventada de 3 frases.',
+  8:'Lee en voz alta una frase con Partizipialkonstruktion y "descomprímela" oralmente en una oración de relativo.',
+};
+function renderRepasoOralCard(wid){
+  return `<div class="card">
+    <h2>🗣️ Repaso oral en alemán (10 min)</h2>
+    <p>${escapeHtml(REPASO_ORAL_PROMPTS[wid]||'Resume en voz alta lo que aprendiste hoy, usando la gramática de esta lección.')}</p>
+  </div>`;
+}
+
+function renderPracticaActiva(wid, dayNum){
+  const w = WEEKS.find(x=>x.id===wid);
+  if(!w || dayNum<1 || dayNum>4) return '';
+  let html = '';
+
+  if(dayNum===1){
+    html = `<div class="card">
+      <h2>📖 Práctica activa (30 min) — Lectura</h2>
+      <p>Lee un artículo corto en alemán relacionado con el tema de esta semana (<b>${escapeHtml(w.title)}</b>), o si no encuentras uno del tema exacto, cualquier noticia breve del día. No busques cada palabra: capta la idea general primero, luego relee. Subraya 5 palabras nuevas y añádelas a tu Anki.</p>
+      <div class="btnrow"><a class="btn" href="${DW_TOPTHEMA}" target="_blank" rel="noopener">🔗 DW — Kurz und leicht (noticias breves en vídeo, nivel B1/B2)</a></div>
+    </div>`;
+  } else if(dayNum===2){
+    const tier = tierForWeek(wid);
+    const info = tier==='entrada'
+      ? {url:DW_LANGSAM, label:'🔗 DW — Langsam Gesprochene Nachrichten (Spotify)', desc:'noticias habladas despacio, con transcripción en la descripción de cada episodio.'}
+      : tier==='medio'
+      ? {url:DW_TOPTHEMA, label:'🔗 DW — Kurz und leicht', desc:'noticias breves en vídeo + texto, nivel B1/B2.'}
+      : {url:DW_LANGSAM, label:'🔗 DW — Langsam Gesprochene Nachrichten (Spotify)', desc:'intenta escuchar SIN mirar la transcripción en la primera pasada (velocidad de examen).'};
+    html = `<div class="card">
+      <h2>🎧 Práctica activa (30 min) — Hören</h2>
+      <p>Recurso recomendado esta semana (nivel "${tier}"): ${info.desc}</p>
+      <div class="btnrow"><a class="btn" href="${info.url}" target="_blank" rel="noopener">${info.label}</a></div>
+      <p><b>Método:</b> 1) escucha una vez SIN texto → apunta las 3 ideas principales · 2) escucha otra vez CON transcripción → subraya lo que no entendiste de oído · 3) elige 4–5 frases y haz un <b>Diktat</b>: escríbelas sin mirar, luego compara con el original.</p>
+      <p class="small">💡 Señales útiles al escuchar: <i>das heißt, mit anderen Worten</i> → viene una reformulación importante. <i>allerdings, jedoch, im Gegensatz dazu</i> → viene una opinión/contraste.</p>
+    </div>`;
+  } else if(dayNum===3){
+    html = `<div class="card">
+      <h2>✍️ Práctica activa (30 min) — Escritura corta</h2>
+      ${renderFalseFriendsTip(wid)}
+      <p>Escribe un mini-texto de 5–8 frases sobre el tema de esta semana (<b>${escapeHtml(w.title)}</b>), usando la gramática vista hoy. Intenta evitar la trampa de arriba. No hace falta que sea perfecto: el objetivo es automatizar la estructura.</p>
+      <textarea class="freeans" id="miniwrite-${wid}-${dayNum}" oninput="saveMiniWrite(${wid},${dayNum})" placeholder="Escribe aquí tu mini-texto... (se guarda automáticamente)">${escapeHtml(state.texts['miniwrite_'+wid+'_'+dayNum]||'')}</textarea>
+      <p class="small">Cuando lo tengas, pégalo en el chat para que te dé correcciones rápidas.</p>
+    </div>`;
+  } else {
+    // dayNum===4 → Sprechen
+    html = `<div class="card">
+      <h2>🗣️ Práctica activa (30 min) — Sprechen</h2>
+      <p>Tema de la semana: <b>"${escapeHtml(WEEKLY_VORTRAG[wid]||'')}"</b></p>
+      <details class="acc"><summary>🧱 Redemittel esenciales (ábrelos y elige 5)</summary><div class="accbody">${renderRedemittelAccordion()}</div></details>
+      <p style="margin-top:10px;"><span class="stepnum">1</span>Prepara mentalmente 5 Redemittel de la lista.<br>
+      <span class="stepnum">2</span>Grábate presentando el tema 2–3 min (introducción → 2 pros → 2 contras → opinión → cierre).<br>
+      <span class="stepnum">3</span>Escúchate: anota dónde dudaste o te faltó vocabulario.</p>
+      ${renderAudioRecorder('day'+wid+'_4', 'Vortrag de 2–3 minutos sobre: "'+ (WEEKLY_VORTRAG[wid]||'') +'"')}
+      <div class="gold">💬 <b>Simulacro de examen oral CONMIGO:</b> escríbeme "Simulemos la parte oral B2 sobre [tema]". Haré de examinador: te doy una tarjeta con tema + 4 puntos guía, te dejo presentar, te hago preguntas de seguimiento y contraargumentos, y al final te doy feedback según <i>Erfüllung der Aufgabe, Kohärenz, Wortschatz, Strukturen</i> y <i>Aussprache</i>.</div>
+    </div>`;
+  }
+
+  return html + renderRepasoOralCard(wid);
+}
+function saveMiniWrite(wid,dayNum){ state.texts['miniwrite_'+wid+'_'+dayNum] = document.getElementById('miniwrite-'+wid+'-'+dayNum).value; saveState(); }
+
+const D_VOCAB = [
+ ['die Firma','firma (rúbrica)','la empresa','firma = die Unterschrift'],
+ ['die Rente','la renta','la pensión / jubilación','renta = das Einkommen / die Mieteinnahmen'],
+ ['der Chef','el chef (cocinero)','el jefe','cocinero = der Koch'],
+ ['der Termin','el término','la cita / el plazo','término = der Begriff / das Ende'],
+ ['das Gymnasium','el gimnasio','el instituto (bachillerato)','gimnasio = das Fitnessstudio / die Turnhalle'],
+ ['das Regal','el regalo','la estantería','regalo = das Geschenk'],
+ ['das Gift','el regalo (ing.)','el veneno','—'],
+ ['die Mappe','el mapa','la carpeta','mapa = die Karte / die Landkarte'],
+ ['brav','bravo/valiente','obediente, formal','valiente = mutig / tapfer'],
+ ['eventuell','eventualmente','posiblemente, quizá','eventualmente = schließlich'],
+ ['sensibel','sensato','sensible','sensato = vernünftig'],
+ ['der Kompromiss','el compromiso (obligación)','el acuerdo / la concesión','compromiso = die Verpflichtung'],
+ ['die Konkurrenz','la concurrencia','la competencia','—'],
+ ['die Angel','el ángel','la caña de pescar','ángel = der Engel'],
+ ['der Rock','el rock (solo música)','la falda','—'],
+ ['das Kompliment','(ok, cumplido) pero ⚠️','el cumplido / halago','cumplir = erfüllen'],
+ ['absolvieren','absolver','cursar / completar (estudios)','absolver = freisprechen'],
+ ['die Karte','la carta (correo)','tarjeta / mapa / entrada','carta (correo) = der Brief'],
+];
+
+const D_TRAPS = [
+ {t:'El género NO se transfiere del español', body:`<i>el problema</i> (m.) → <b>das</b> Problem (n.) · <i>la leche</i> → <b>die</b> Milch (ok) · <i>el mapa</i> → <b>die</b> Karte (f.)<br>Regla de oro: aprende SIEMPRE cada sustantivo con su artículo; nunca deduzcas el género del español.`},
+ {t:'Orden de las palabras', body:`Verbo en 2ª posición en la principal: <i>Morgen <b>gehe</b> ich…</i> (no <i>Morgen ich gehe</i>).<br>Verbo al final en subordinada: <i>…, weil ich müde <b>bin</b>.</i><br>Doble infinitivo y participios al final: <i>Ich habe das Haus <b>gekauft</b>.</i>`},
+ {t:'No hay "gerundio de presente" (estar + -ando)', body:`<i>Estoy comiendo</i> → simplemente <b>Ich esse.</b> (no existe <i>ich bin essend</i>). Coloquial: <i>ich bin am Essen</i>.`},
+ {t:'Una sola negación', body:`<i>No vi nada</i> → <b>Ich habe nichts gesehen.</b> (no "nicht nichts"). El español dobla; el alemán no.`},
+ {t:'Preposiciones que rigen verbos — memorízalas como bloque', body:`pensar EN → <b>denken AN</b> (+Akk.) · esperar con ilusión → <b>sich freuen AUF</b> (+Akk.) · alegrarse por algo pasado → <b>sich freuen ÜBER</b> · esperar (aguardar) → <b>warten AUF</b> (+Akk.) · depender DE → <b>abhängen VON</b> (+Dat.) · participar EN → <b>teilnehmen AN</b> (+Dat.)`},
+ {t:'No existe la "a personal"', body:`<i>Veo a María</i> → <b>Ich sehe Maria.</b> (sin "a")`},
+ {t:'"que" no siempre es "dass"', body:`Conjunción → <i>dass</i>: <i>Ich weiß, <b>dass</b> er kommt.</i><br>Relativo → <i>der/die/das</i>: <i>Das Buch, <b>das</b> ich lese.</i><br>Comparativo → <i>als</i>: <i>größer <b>als</b>…</i>`},
+ {t:'sein cubre ser Y estar (¡esto SÍ ayuda!)', body:`<i>Ich <b>bin</b> Ingenieur. Ich <b>bin</b> müde.</i>`},
+];
+
+function renderFalseFriendsTip(wid){
+  const friends = D_VOCAB.filter((_,i)=> i%8 === (wid-1));
+  const trap = D_TRAPS[wid-1];
+  const friendCards = friends.map(v=>`<b>${escapeHtml(v[0])}</b> NO es "${escapeHtml(v[1])}" → es <b>${escapeHtml(v[2])}</b> (${escapeHtml(v[3])})`).join('<br>');
+  return `<div class="warn">⚠️ <b>Falsos amigos de esta semana:</b><br>${friendCards}
+    <p style="margin-top:8px;"><b>Trampa gramatical — ${escapeHtml(trap.t)}:</b><br>${trap.body}</p></div>`;
+}
+
+const G_MODELS = [
+ {w:1, title:'Mein beruflicher Werdegang', text:'Ich bin Wirtschaftsingenieur und habe mehrere Jahre Berufserfahrung im Qualitätsmanagement gesammelt. Zurzeit befinde ich mich in einer beruflichen Übergangsphase: Trotz eines sicheren Arbeitsvertrags habe ich mich entschieden, mich selbstständig zu machen. Während meiner Freistellung bereite ich die Existenzgründung sorgfältig vor. Mein Ziel ist es, eine Beratung für spanischsprachige Immobilieninvestoren aufzubauen. Dafür lege ich großen Wert auf zwei Voraussetzungen: die §34c-Lizenz und ein gutes Sprachniveau. Aufgrund meiner technischen Ausbildung kann ich komplexe Sachverhalte verständlich erklären, was für die Beratung ein klarer Vorteil ist. Ich bin ehrgeizig und überzeugt davon, dass sich diese Entscheidung langfristig auszahlen wird.',
+  tip:'2 Genitiv (trotz eines…, aufgrund meiner…), adjetivos declinados, 8+ palabras del campo laboral, was-relativo.'},
+ {w:2, title:'E-Mail an einen Makler', text:'Betreff: Anfrage zur Eigentumswohnung in Speyer — Sehr geehrte Damen und Herren, mit großem Interesse habe ich Ihr Angebot gelesen, das Sie auf Ihrer Website veröffentlicht haben. Ich bin ein Investor, der sich auf Wohnungen im Rhein-Neckar-Raum konzentriert, und suche derzeit ein Objekt, das sich gut vermieten lässt. Ich hätte gerne einige Informationen: Erstens würde mich interessieren, wie hoch die monatlichen Nebenkosten sind, die auf den Eigentümer entfallen. Zweitens wüsste ich gern, ob die Wohnung, die Sie anbieten, bereits saniert ist. Drittens frage ich mich, welche Rendite realistisch zu erwarten ist. Über einen Besichtigungstermin, der auch am Wochenende möglich wäre, würde ich mich sehr freuen. Mit freundlichen Grüßen, Henry Conza',
+  tip:'5 oraciones de relativo (das, der, die, der + preposición), Konjunktiv II de cortesía, registro formal.'},
+ {w:3, title:'Was hätte ich anders gemacht?', text:'Wenn ich früher gewusst hätte, wie wichtig Fremdsprachen sind, hätte ich schon als Jugendlicher intensiver Deutsch gelernt. Damals informierte ich mich fast nur über gedruckte Zeitungen; hätte es schon soziale Netzwerke gegeben, wäre der Zugang zu Informationen viel leichter gewesen. Rückblickend hätte ich auch mutiger sein sollen: Ich hätte früher investieren können, statt so lange zu zögern. Allerdings bereue ich wenig, denn aus meinen Fehlern habe ich viel gelernt. Wenn ich heute noch einmal anfangen könnte, würde ich vieles genauso machen – nur schneller.',
+  tip:'3 condicionales irreales (presente y pasado), 2 modales en Konj. II pasado (hätte sein sollen, hätte investieren können), vocabulario de medios.'},
+ {w:4, title:'Wie wird ein Altbau energetisch saniert?', text:'Bei der energetischen Sanierung eines Altbaus werden mehrere Maßnahmen durchgeführt. Zunächst wird das Dach gedämmt, damit weniger Wärme verloren geht. Anschließend werden die alten Fenster durch dreifach verglaste Fenster ersetzt. Die veraltete Heizung muss ebenfalls ausgetauscht werden; häufig wird eine Wärmepumpe eingebaut, die staatlich gefördert wird. Auch die Fassade lässt sich mit modernem Material dämmen. Sobald alle Arbeiten abgeschlossen sind, ist das Gebäude deutlich energieeffizienter und der Energieverbrauch ist stark gesenkt. Solche Sanierungen sind zwar teuer, aber langfristig zahlen sie sich aus, weil die Kosten reduziert werden können.',
+  tip:'pasiva en varios tiempos, pasiva con modal (muss ausgetauscht werden), alternativas (lässt sich dämmen), Zustandspassiv (ist gesenkt).'},
+ {w:5, title:'Balance zwischen Arbeit und Freizeit', text:'Für mein Wohlbefinden ist der Ausgleich zwischen Arbeit und Freizeit entscheidend. Je mehr ich arbeite, desto wichtiger wird es, bewusst abzuschalten. Deshalb plane ich meine freien Wochenenden fest ein. In meiner Freizeit spiele ich nicht nur Geige, sondern tanze auch gern – beides hilft mir beim Stressabbau. Obwohl ich manchmal unter Druck stehe, verzichte ich nie ganz auf Bewegung, denn Sport stärkt sowohl den Körper als auch den Geist. Zwar habe ich nicht immer viel Zeit, aber ich versuche, mich ausgewogen zu ernähren und genug zu schlafen. Sobald ich gut erholt bin, arbeite ich außerdem konzentrierter.',
+  tip:'je…desto, nicht nur…sondern auch, sowohl…als auch, obwohl, deshalb, denn, zwar…aber — 7 conectores distintos.'},
+ {w:6, title:'Warum in deutsche Immobilien investieren?', text:'Viele meiner Kunden fragen sich, ob sich eine Investition in deutsche Immobilien lohnt. Aus meiner Erfahrung kann ich das klar bejahen. Zunächst spielt die Stabilität des Marktes eine große Rolle: Trotz gelegentlicher Schwankungen gelten Immobilien als sichere Geldanlage. Außerdem sollte man die steuerlichen Vorteile in Betracht ziehen, denn durch die Abschreibung lässt sich die Steuerlast senken. Wer wenig Eigenkapital hat, kann eine Finanzierung in Anspruch nehmen, da die Zinsen historisch niedrig waren. Natürlich trägt jeder Investor auch Verantwortung für die Instandhaltung. Zusammenfassend lässt sich sagen, dass eine gut geplante Investition langfristig eine solide Rendite bringt. Gern stehe ich Ihnen für eine Beratung zur Verfügung.',
+  tip:'5 NVV (eine Rolle spielen, in Betracht ziehen, in Anspruch nehmen, Verantwortung tragen für, zur Verfügung stehen), nominalización, vocabulario financiero.'},
+ {w:7, title:'Nachricht in indirekter Rede', text:'In einem aktuellen Artikel geht es um den Immobilienmarkt. Der Autor schreibt, die Mieten in deutschen Großstädten seien im letzten Jahr erneut gestiegen. Fachleute erwarteten, dass sich dieser Trend fortsetze. Die Regierung plane deshalb neue Maßnahmen, um bezahlbaren Wohnraum zu schaffen. Viele Bürger könnten sich das Wohnen in den Zentren kaum noch leisten, heißt es weiter. Meiner Einschätzung nach dürfte sich die Lage kurzfristig nicht entspannen. Die Politik müsste eigentlich schneller handeln, sonst könnte die Wohnungsnot weiter zunehmen.',
+  tip:'Konjunktiv I (seien, fortsetze, plane) con sustitución en plural (erwarteten, könnten), y modales subjetivos (dürfte, könnte, müsste) para la valoración.'},
+ {w:8, title:'Argumentativer Text: Selbstständigkeit', text:'Zurzeit wird viel darüber diskutiert, ob sich immer mehr Menschen selbstständig machen sollten. Diese Entwicklung hat sowohl Vor- als auch Nachteile. Ein wichtiger Vorteil ist die Freiheit: Wer selbstständig ist, kann seine Arbeitszeit selbst bestimmen und eigene Entscheidungen treffen. Außerdem ist das Einkommen nicht begrenzt, denn der Gewinn hängt vom eigenen Einsatz ab. Aus eigener Erfahrung kann ich sagen, dass diese Selbstbestimmung sehr motivierend ist. Dagegen spricht allerdings die Unsicherheit. Einerseits gibt es kein festes Gehalt, andererseits trägt man die volle Verantwortung für Risiken und Steuern. Man darf auch nicht vergessen, dass die soziale Absicherung schwieriger ist. Meiner Meinung nach überwiegen die Vorteile, sofern man gut vorbereitet ist. Zusammenfassend lässt sich sagen, dass die Selbstständigkeit für engagierte und gut informierte Menschen eine große Chance darstellt.',
+  tip:'estructura de examen (introducción → pros → contras → opinión → conclusión) y Redemittel del Módulo B en cada bloque. ~180 palabras.'},
+];
+
+const H_CANDO = [
+ {w:1, items:['los adjetivos declinar sin mirar la tabla','usar 5 preposiciones de Genitiv en frases formales','hablar de mi trayectoria profesional con vocabulario preciso']},
+ {w:2, items:['formar relativas con dessen/deren','formar relativas con preposición (mit dem, für die…)','escribir un correo formal a un Makler']},
+ {w:3, items:['expresar deseos y cortesía con Konjunktiv II','formar hipótesis pasadas (hätte/wäre + P.II)','expresar reproches (hätte + Inf. + modal)']},
+ {w:4, items:['usar la pasiva en presente, Präteritum y Perfekt','formar pasiva con verbos modales','usar 2 alternativas a la pasiva (sich lassen, -bar)']},
+ {w:5, items:['usar conectores bipartitos (nicht nur…sondern auch, etc.)','usar je…desto correctamente','distinguir la posición del verbo según el tipo de conector']},
+ {w:6, items:['usar 8 Nomen-Verb-Verbindungen con naturalidad','nominalizar (bei/nach/vor/trotz/wegen + sustantivo)','presentar argumentos comerciales en alemán formal']},
+ {w:7, items:['reportar en Konjunktiv I (3ª persona)','usar Konjunktiv II como sustitución en plural','interpretar modales subjetivos (soll/will/dürfte/müsste)']},
+ {w:8, items:['leer Partizipialkonstruktionen sin bloquearme','escribir un texto argumentativo con Redemittel','aprobar mentalmente un modelo de examen B2 completo']},
+];
+
+/* ============================================================
+   VIERNES (dos bloques de 45 min) + FIN DE SEMANA (90 min cada día)
+   Se añaden como días 5, 6 y 7 a cada semana del curso principal.
+   Reutilizan ejercicios ya existentes de la semana para el repaso,
+   así el tiempo objetivo de 90 min queda respaldado con práctica real.
+   ============================================================ */
+const WEEKEND_REDO = {
+  1:{sun:[1,0], sat:[4,0]}, 2:{sun:[1,0], sat:[3,0]}, 3:{sun:[1,0], sat:[2,0]},
+  4:{sun:[2,0], sat:[3,0]}, 5:{sun:[1,0], sat:[2,0]}, 6:{sun:[1,0], sat:[3,0]},
+  7:{sun:[1,0], sat:[3,1]}, 8:{sun:[1,0], sat:[2,1]},
+};
+function pickExercise(w, dayNum, idx){
+  const day = w.days.find(d=>d.day===dayNum);
+  return day && day.exercises && day.exercises[idx];
+}
+
+/* Módulo E (Fehlerkorrektur) — cada texto repasa la gramática de un tramo de semanas;
+   se inserta en el Domingo de la semana donde ese repaso corresponde. */
+const E_FEHLER_BY_WEEK = {
+  2: {label:'Corrección de errores — repaso S1–S2 (casos, adjetivos, relativas) · 6 errores',
+    q:'Ich habe letzte Woche eine neue Wohnung besichtigt. Die Wohnung, die ich besichtigt habe, hat einen große Balkon. Der Makler, mit den ich gesprochen habe, war sehr freundlich. Wegen dem hohen Preis konnte ich sie aber nicht kaufen. Ich suche jetzt eine Wohnung, das billiger ist. Trotz der Schwierigkeiten ich bleibe optimistisch.',
+    a:'1) einen großen Balkon (Akk. masc. → -en) · 2) mit dem ich gesprochen habe (relativo Dativ masc.) · 3) Wegen des hohen Preises (wegen + Genitiv) · 4) eine Wohnung, die billiger ist (relativo fem.) · 5) …bleibe ich optimistisch (verbo en 2ª posición) · 6) bonus de estilo: billiger → günstiger (más natural en contexto inmobiliario)'},
+  4: {label:'Corrección de errores — repaso S3–S4 (Konjunktiv II, Passiv) · 6 errores',
+    q:'Wenn ich mehr Zeit hätte, ich würde jeden Tag Deutsch lernen. Gestern das Haus wurde renoviert. Die Fenster müssen ausgetauscht werden worden. Wenn ich das gewusst hätte, hätte ich anders entscheiden. Das Problem kann leicht gelöst. Ich hätte dich anrufen gesollt.',
+    a:'1) …, würde ich jeden Tag… (verbo 2ª posición) · 2) Gestern wurde das Haus renoviert · 3) Die Fenster müssen ausgetauscht werden (sin "worden") · 4) …hätte ich anders entschieden (Partizip II) · 5) Das Problem kann leicht gelöst werden (falta "werden") · 6) Ich hätte dich anrufen sollen (doble infinitivo)'},
+  7: {label:'Corrección de errores — repaso S5–S7 (conectores, NVV, Konjunktiv I) · 6 errores',
+    q:'Obwohl er wenig Zeit hat, trotzdem arbeitet er hart. Je mehr ich lerne, desto ich fühle mich sicherer. Wir müssen eine Entscheidung machen. Der Minister sagte, dass die Lage ist stabil. Ich lege viel Wert für Pünktlichkeit. Weil der schlechten Wirtschaft wurden Stellen abgebaut.',
+    a:'1) Obwohl er wenig Zeit hat, arbeitet er hart (obwohl ya marca concesión; sobra "trotzdem") · 2) …, desto sicherer fühle ich mich · 3) eine Entscheidung treffen (NVV) · 4) …die Lage sei stabil (Konjunktiv I) · 5) Ich lege viel Wert auf Pünktlichkeit · 6) Wegen der schlechten Wirtschaft… (wegen + Genitiv)'},
+};
+function renderFehlerkorrekturCheckpoint(wid){
+  const e = E_FEHLER_BY_WEEK[wid];
+  if(!e) return '';
+  return `<hr style="border:none;border-top:1px dashed var(--border);margin:22px 0;">
+    <h3>🔍 Punto de control — Fehlerkorrektur</h3>
+    <p class="small">Cada pocas semanas conviene revisar la gramática acumulada buscando errores típicos en un texto. Escribe la versión corregida completa antes de revelar la solución.</p>
+    ${renderOpenExercise(open_('E-w'+wid,e.label,[{q:e.q, a:e.a}]))}`;
+}
+
+/* Módulo F (Pruebas acumulativas) — control intermedio al cerrar la Semana 4, examen final al cerrar la Semana 8. */
+function renderPruebaIntermedia(){
+  return `<hr style="border:none;border-top:1px dashed var(--border);margin:22px 0;">
+    <h3>📝 Punto de control — Prueba acumulativa intermedia (Gramática S1–S4)</h3>
+    <p class="small">Cierre de las primeras 4 semanas. Complétala antes de seguir a la Semana 5.</p>
+    ${renderFillExercise(fill('F-int-1','Parte 1 – Casos y preposiciones (S1)',[
+      {text:'Trotz ___ (das schlechte Wetter) fand das Fest statt.', ans:[['des schlechten Wetters']]},
+      {text:'Ich arbeite seit ___ (ein Jahr) an diesem Projekt.', ans:[['einem Jahr']]},
+      {text:'Während ___ (die Besprechung) klingelte sein Handy.', ans:[['der Besprechung']]},
+    ]))}
+    ${renderFillExercise(fill('F-int-2','Parte 2 – Adjetivos y relativas (S1–S2)',[
+      {text:'Ich suche einen erfahren___ Makler, ___ mir hilft.', ans:['en','der']},
+      {text:'Die Wohnung, ___ Balkon nach Süden zeigt, ist ideal. (cuyo)', ans:[['deren']]},
+      {text:'Das ist der Notar, bei ___ wir unterschrieben haben.', ans:[['dem']]},
+    ]))}
+    ${renderOpenExercise(open_('F-int-3','Parte 3 – Konjunktiv II (S3)',[
+      {q:'(Consejo) Du solltest… → "Yo en tu lugar sería más prudente":', a:'An deiner Stelle wäre ich vorsichtiger.'},
+      {q:'(Pasado irreal) "Si lo hubiera sabido, habría venido antes":', a:'Wenn ich das gewusst hätte, wäre ich früher gekommen.'},
+      {q:'(Reproche) "Deberías haberme llamado":', a:'Du hättest mich anrufen sollen.'},
+    ]))}
+    ${renderOpenExercise(open_('F-int-4','Parte 4 – Pasiva (S4)',[
+      {q:'Man renoviert das Gebäude. →', a:'Das Gebäude wird renoviert.'},
+      {q:'Man hat das Gesetz verabschiedet. →', a:'Das Gesetz ist verabschiedet worden.'},
+      {q:'(Alternativa con sich lassen) "El error puede corregirse fácilmente":', a:'Der Fehler lässt sich leicht korrigieren.'},
+    ]))}
+    <div class="gold">📊 <b>Baremo:</b> 12/12 = excelente · 9–11 = bien, repasa fallos · &lt;9 = repite las semanas de los temas fallados antes de seguir.</div>`;
+}
+function renderPruebaFinal(){
+  return `<hr style="border:none;border-top:1px dashed var(--border);margin:22px 0;">
+    <h3>📝 Punto de control — Prueba final (Gramática S1–S8)</h3>
+    <p class="small">Cierre de las 8 semanas del curso.</p>
+    ${renderFillExercise(fill('F-fin-1','Parte 1 – Mixta',[
+      {text:'___ (Aufgrund + die steigende Nachfrage) sind die Preise gestiegen.', ans:[['Aufgrund der steigenden Nachfrage']]},
+      {text:'Er tut so, als ob er alles ___ (wissen – Konjunktiv II).', ans:[['wüsste']]},
+      {text:'Das ist die beste Lösung, ___ mir eingefallen ist. (was/die)', ans:[['die']]},
+      {text:'Die vor kurzem ___ (verabschieden – Partizip) Regelung tritt bald in Kraft.', ans:[['verabschiedete']]},
+    ]))}
+    ${renderOpenExercise(open_('F-fin-2','Parte 2 – Transformación',[
+      {q:'(NVV) "Tenemos que tomar una decisión":', a:'Wir müssen eine Entscheidung treffen.'},
+      {q:'(Nominalización) "Bevor wir kaufen, prüfen wir alles" → ___ prüfen wir alles.', a:'Vor dem Kauf prüfen wir alles.'},
+      {q:'(Discurso indirecto) "Die Mieten steigen weiter", sagt der Experte. →', a:'Der Experte sagt, die Mieten stiegen weiter. / …würden weiter steigen.'},
+      {q:'(Modal subjetivo: rumor) "Dicen que la empresa tiene problemas":', a:'Die Firma soll Probleme haben.'},
+      {q:'(Relativa → participio) "Die Kunden, die aus Spanien kommen…" →', a:'Die aus Spanien kommenden Kunden…'},
+    ]))}
+    ${renderOpenExercise(open_('F-fin-3','Parte 3 – Corrección: encuentra y corrige el error',[
+      {q:'Wegen dem Regen blieben wir zu Hause.', a:'Wegen des Regens (Genitiv).'},
+      {q:'Ich freue mich über die Reise nächste Woche. (matiz de futuro)', a:'Ich freue mich auf die Reise (futuro → auf).'},
+      {q:'Wir müssen das Problem lösen werden.', a:'Wir müssen das Problem lösen. (sobra "werden")'},
+    ]))}
+    <div class="gold">📊 <b>Baremo:</b> 12/12 = listo para B2 · 9–11 = casi, pule los fallos · &lt;9 = dedica una semana extra de repaso.</div>
+  </div>`;
+}
+
+function addWeekendDays(w){
+  const wid = w.id;
+  const cBlock = C_BLOCKS[(wid-1) % C_BLOCKS.length];
+  const redo = WEEKEND_REDO[wid] || {sun:[1,0], sat:[1,0]};
+  const sunEx = pickExercise(w, redo.sun[0], redo.sun[1]);
+  const satEx = pickExercise(w, redo.sat[0], redo.sat[1]);
+
+  w.days.push({
+    day:5, dlabel:'Viernes', title:'Redacción + clase de conversación (45 + 45 min = 90 min)',
+    theory:`
+      <div class="note">📌 Este día se divide en <b>dos bloques de 45 minutos</b> (90 min en total, igual que cualquier otro día). Escribe tu texto en el Bloque 1 y envíamelo por chat — te devolveré la corrección detallada el <b>sábado o el domingo</b> (lo que prefieras). Guárdala en la pestaña "Domingo" para llevar un historial de tu progreso.</div>
+      <h3>🕐 Bloque 1 (45 min) — Redacción de la semana</h3>
+      <p>${escapeHtml(w.friday || '')}</p>
+      <textarea class="freeans" id="fridayarea-${wid}" oninput="saveFridayText(${wid})" placeholder="Escribe tu redacción aquí... (se guarda automáticamente)">${escapeHtml(state.texts['friday_'+wid]||'')}</textarea>
+      <h3>🕑 Bloque 2 (45 min) — Clase de conversación (Sprechen)</h3>
+      <p>Tema de la semana: <b>"${escapeHtml(WEEKLY_VORTRAG[wid]||'')}"</b>. Prepara 5 Redemittel (10 min, lista abajo) → grábate presentándolo en 2–3 minutos (10 min) → escúchate y anota dudas (10 min) → grábate una segunda vez corrigiendo lo anotado (15 min).</p>
+      <details class="acc"><summary>🧱 Redemittel esenciales</summary><div class="accbody">${renderRedemittelAccordion()}</div></details>
+      ${renderAudioRecorder('w'+wid, 'Lee en voz alta tu redacción de este viernes, o improvisa 2–3 minutos hablando sobre: "'+(WEEKLY_VORTRAG[wid]||'')+'"')}`,
+    exercises:[],
+  });
+
+  w.days.push({
+    day:6, dlabel:'Sábado', title:'Repaso y refuerzo (90 min)',
+    theory:`
+      <div class="note weekendcard" style="border-left:3px solid var(--accent); padding:12px 16px;">🔁 El fin de semana es para <b>consolidar</b>, no para contenido nuevo — pero mantiene tus 90 minutos de estudio diario.</div>
+      <h3>🔁 Vocabulario (15 min)</h3><p>Repasa las tarjetas de vocabulario de esta semana (sección "📚 Vocabulario", más abajo en esta misma página).</p>
+      <h3>📝 Mini-test de repaso (20 min) — sin mirar las soluciones</h3>
+      <p>Repite este ejercicio de la semana desde cero, sin consultar tus respuestas anteriores.</p>
+      ${renderAnyExercise(satEx, wid, 6)}
+      <h3>🔤 Gramática — artículos (15 min)</h3>
+      <p>Baja hasta la sección "🔤 Práctica extra" al final de esta página, pulsa <b>🔄 Limpiar</b> y repítela desde cero.</p>
+      <h3>👄 Pronunciación (15 min) — Módulo C, bloque de esta semana</h3>
+      <p><b>${escapeHtml(cBlock.t)}</b></p><p>${cBlock.body}</p>
+      <h3>🎧🗣️ Práctica activa (25 min)</h3>
+      <p>Dedica 25 minutos a: repetir el <b>dictado</b> (elige 4–5 frases de un audio, escúchalas y escríbelas sin mirar, luego compara) y grabarte resumiendo en 2–3 minutos lo que aprendiste esta semana.</p>
+      <div class="btnrow"><a class="btn" href="${DW_TOPTHEMA}" target="_blank" rel="noopener">🔗 DW Kurz und leicht</a><a class="btn" href="${DW_LANGSAM}" target="_blank" rel="noopener">🔗 DW Langsam Gesprochene Nachrichten (Spotify)</a></div>
+      ${renderAudioRecorder('sat'+wid, 'Resume en 2–3 minutos lo que aprendiste esta semana.')}`,
+    exercises:[],
+  });
+
+  const candoWeek = H_CANDO.find(c=>c.w===wid);
+  const nextWeek = WEEKS.find(x=>x.id===wid+1);
+  const gModel = G_MODELS.find(m=>m.w===wid);
+  const savedFriday = state.texts['friday_'+wid] || '';
+  w.days.push({
+    day:7, dlabel:'Domingo', title:'Corrección y cierre semanal (90 min)',
+    theory:`
+      <h3>📩 Corrección recibida (15 min)</h3>
+      <div class="gold">Pega aquí la corrección que te envío de tu texto del viernes — así guardas un historial de tu progreso.</div>
+      <textarea class="freeans" id="correction-${wid}" oninput="saveCorrection(${wid})" placeholder="Pega aquí la corrección que recibiste...">${escapeHtml(state.texts['correction_'+wid]||'')}</textarea>
+      ${gModel ? `<p class="small" style="margin-top:10px;">⭐ Solo después de escribir tu propio texto el viernes:</p>
+      <button class="btn small" onclick="this.nextElementSibling.classList.toggle('show')">🔍 Ver modelo de respuesta (Musterlösung) — ${escapeHtml(gModel.title)}</button>
+      <div class="solution">
+        <blockquote class="model">${escapeHtml(gModel.text)}</blockquote>
+        <p class="small">💡 Fíjate: ${escapeHtml(gModel.tip)}</p>
+        ${savedFriday ? `<div class="note">📝 Tu redacción guardada de esta semana:<br><i>${escapeHtml(savedFriday)}</i></div>` : ''}
+      </div>` : ''}
+      <h3>📝 Mi lista de errores personales (10 min)</h3>
+      <textarea class="freeans" id="errores-${wid}" oninput="saveErrores(${wid})" placeholder="Anota aquí los errores que más se repiten, para repasarlos en la Semana 8...">${escapeHtml(state.texts['errores_'+wid]||'')}</textarea>
+      <h3>🔁 Repaso dirigido (20 min) — sin mirar las soluciones</h3>
+      <p>Repite este ejercicio de la semana antes de pasar a la siguiente.</p>
+      ${renderAnyExercise(sunEx, wid, 7)}
+      <h3>✅ Can-Do de esta semana (10 min)</h3>
+      <div class="checklist" id="cando-week-${wid}"></div>
+      <h3>🎙️ Cierre oral (25 min)</h3>
+      <p>Grábate haciendo un resumen oral de 2–3 minutos sobre lo aprendido esta semana, escúchate dos veces y anota qué mejorarías la próxima vez.</p>
+      ${renderAudioRecorder('sun'+wid, 'Resumen oral de 2–3 minutos: lo que aprendiste esta semana y qué mejorarías.')}
+      <h3>👀 Vista previa (10 min)</h3>
+      ${nextWeek ? `<div class="note">Adelanto de la Semana ${nextWeek.id}: <b>${escapeHtml(nextWeek.title)}</b> — ${escapeHtml(nextWeek.subtitle)}. Repasa el vocabulario nuevo cuando quieras, más abajo en esa semana.</div>` : `<div class="note">🎉 ¡Última semana! Revisa el punto de control de abajo y confirma tu Can-Do completo.</div>`}
+      ${renderFehlerkorrekturCheckpoint(wid)}
+      ${wid===4 ? renderPruebaIntermedia() : ''}
+      ${wid===8 ? renderPruebaFinal() : ''}`,
+    exercises:[],
+    wire: function(){
+      const box = document.getElementById('cando-week-'+wid);
+      if(!box) return;
+      box.innerHTML = (candoWeek?candoWeek.items:[]).map((it,i)=>{
+        const key = `cando_${wid}_${i}`;
+        return `<label><input type="checkbox" ${isFlag(key)?'checked':''} onchange="toggleFlag('${key}', this.checked)"> ${escapeHtml(it)}</label>`;
+      }).join('');
+    }
+  });
+}
+function saveCorrection(wid){ state.texts['correction_'+wid] = document.getElementById('correction-'+wid).value; saveState(); }
+function saveErrores(wid){ state.texts['errores_'+wid] = document.getElementById('errores-'+wid).value; saveState(); }
+
+/* ============================================================
+   STATE / STORAGE
+   ============================================================ */
+const LS_KEY='deutschb2_progress_v2';
+function loadState(){ try{ return JSON.parse(localStorage.getItem(LS_KEY))||{days:{},texts:{}}; }catch(e){ return {days:{},texts:{}}; } }
+function saveState(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+let state = loadState();
+let current = {view:'home', id:null, day:null};
+
+function isFlag(key){ return state.texts[key]==='1'; }
+function toggleFlag(key, val){
+  if(typeof val === 'boolean'){ state.texts[key] = val ? '1':'0'; }
+  else { state.texts[key] = isFlag(key) ? '0':'1'; }
+  saveState();
+}
+
+/* ============================================================
+   EXERCISE ENGINE (fill / open / free)
+   ============================================================ */
+function findExData(exid){
+  for(const w of WEEKS){ for(const d of w.days){ for(const ex of (d.exercises||[])){ if(ex.id===exid) return ex; } } }
+  for(const ex of MODULE_FILL_INDEX){ if(ex.id===exid) return ex; }
+  return null;
+}
+let MODULE_FILL_INDEX = [];
+function regModuleFill(ex){ MODULE_FILL_INDEX.push(ex); return ex; }
+
+function renderFillExercise(ex, wid, did){
+  if(!WEEKS.some(w=>w.id===wid)){ /* module context: register for lookup */ }
+  regModuleFill(ex);
+  let itemsHtml = ex.items.map((item,i)=>{
+    const parts = item.text.split('___');
+    let rowHtml = `<span class="exrow-num">${i+1}.</span>`;
+    parts.forEach((p,pi)=>{
+      rowHtml += escapeHtml(p);
+      if(pi < parts.length-1){
+        rowHtml += `<input type="text" class="blank" data-ex="${ex.id}" data-item="${i}" data-blank="${pi}" autocomplete="off">`;
+      }
+    });
+    return `<div class="exitem" id="exitem-${ex.id}-${i}">${rowHtml}<div class="result" id="result-${ex.id}-${i}"></div></div>`;
+  }).join('');
+  return `
+  <div class="exblock" data-exid="${ex.id}">
+    <h4>✏️ ${escapeHtml(ex.label)}</h4>
+    ${itemsHtml}
+    <div class="btnrow">
+      <button class="btn primary" onclick="checkFill('${ex.id}')">✅ Comprobar</button>
+      <button class="btn" onclick="revealFill('${ex.id}')">👁️ Ver soluciones</button>
+      <button class="btn" onclick="clearFill('${ex.id}')">🔄 Limpiar</button>
+    </div>
+  </div>`;
+}
+
+function checkFill(exid){
+  const ex = findExData(exid);
+  ex.items.forEach((item,i)=>{
+    const inputs = document.querySelectorAll(`input.blank[data-ex="${exid}"][data-item="${i}"]`);
+    let itemOk = true;
+    inputs.forEach(inp=>{
+      const bIdx = parseInt(inp.dataset.blank);
+      const ansSpec = item.ans[bIdx];
+      const ok = answerMatches(inp.value, ansSpec);
+      inp.classList.remove('ok','bad');
+      inp.classList.add(ok?'ok':'bad');
+      if(!ok) itemOk = false;
+    });
+    const r = document.getElementById(`result-${exid}-${i}`);
+    r.textContent = itemOk ? '✔ Correcto' : '✘ Revisa esta línea';
+    r.className = 'result ' + (itemOk?'ok':'bad');
+  });
+}
+function revealFill(exid){
+  const ex = findExData(exid);
+  ex.items.forEach((item,i)=>{
+    const inputs = document.querySelectorAll(`input.blank[data-ex="${exid}"][data-item="${i}"]`);
+    inputs.forEach(inp=>{
+      const bIdx = parseInt(inp.dataset.blank);
+      const ansSpec = item.ans[bIdx];
+      const val = Array.isArray(ansSpec) ? ansSpec[0] : ansSpec;
+      inp.value = val;
+      inp.classList.remove('bad'); inp.classList.add('ok');
+    });
+    const r = document.getElementById(`result-${exid}-${i}`);
+    r.textContent = '💡 solución mostrada';
+    r.className = 'result';
+  });
+}
+function clearFill(exid){
+  const ex = findExData(exid);
+  ex.items.forEach((item,i)=>{
+    document.querySelectorAll(`input.blank[data-ex="${exid}"][data-item="${i}"]`).forEach(inp=>{
+      inp.value=''; inp.classList.remove('ok','bad');
+    });
+    const r = document.getElementById(`result-${exid}-${i}`);
+    if(r){ r.textContent=''; }
+  });
+}
+
+function renderOpenExercise(ex){
+  let itemsHtml = ex.items.map((item,i)=>`
+    <div class="exitem">
+      <span class="exrow-num">${i+1}.</span>${escapeHtml(item.q)}
+      <textarea class="freeans" id="open-${ex.id}-${i}" placeholder="Escribe tu respuesta en alemán..."></textarea>
+      <div class="btnrow">
+        <button class="btn small" onclick="toggleSolution('${ex.id}-${i}')">👁️ Ver modelo de solución</button>
+      </div>
+      <div class="solution" id="sol-${ex.id}-${i}">${escapeHtml(item.a)}</div>
+    </div>`).join('');
+  return `<div class="exblock"><h4>✏️ ${escapeHtml(ex.label)}</h4>${itemsHtml}</div>`;
+}
+function toggleSolution(key){ document.getElementById('sol-'+key).classList.toggle('show'); }
+
+function renderFreeExercise(ex, wid, did){
+  const key = `free_${wid}_${did}_${ex.id}`;
+  const saved = state.texts[key] || '';
+  return `<div class="exblock">
+    <h4>✏️ ${escapeHtml(ex.label)}</h4>
+    <p>${escapeHtml(ex.prompt)}</p>
+    <textarea class="freeans" id="freearea-${ex.id}" oninput="saveFree('${key}','${ex.id}')" placeholder="Escribe aquí tu redacción... (se guarda automáticamente)">${escapeHtml(saved)}</textarea>
+  </div>`;
+}
+function saveFree(key, exid){ state.texts[key] = document.getElementById('freearea-'+exid).value; saveState(); }
+
+function renderAnyExercise(ex, wid, day){
+  if(!ex) return '';
+  if(ex.kind==='fill') return renderFillExercise(ex, wid, day);
+  if(ex.kind==='open') return renderOpenExercise(ex);
+  if(ex.kind==='free') return renderFreeExercise(ex, wid, day);
+  return '';
+}
+
+/* ============================================================
+   VOCAB FLASHCARDS
+   ============================================================ */
+function renderVocab(vocabArr){
+  return `<div class="vocabgrid">` + vocabArr.map((v)=>`
+    <div class="flip" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-face front"><div class="w">${v[0]} ${escapeHtml(v[1])}</div><div class="small">toca para traducir ↻</div></div>
+        <div class="flip-face back"><div class="tr">${escapeHtml(v[2])}</div><div class="ex">${escapeHtml(v[3])}</div></div>
+      </div>
+    </div>`).join('') + `</div>`;
+}
+
+/* ============================================================
+   AUDIO RECORDER — graba tu voz, escúchate y compárate con una
+   transcripción automática (Web Speech API, si el navegador la soporta)
+   ============================================================ */
+const RECORDERS = {};
+const SpeechRecognitionCtor = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+function renderAudioRecorder(uid, promptText){
+  return `
+  <div class="rec-widget" id="recwrap-${uid}">
+    <p class="small">🎙️ ${escapeHtml(promptText || 'Escribe o pega tu texto, grábate leyéndolo en voz alta y compara con la transcripción automática.')}</p>
+    <textarea class="freeans" id="rectext-${uid}" oninput="saveRecText('${uid}')" placeholder="Tu texto en alemán (opcional, para comparar con lo que dijiste)...">${escapeHtml(state.texts['rectext_'+uid]||'')}</textarea>
+    <div class="btnrow">
+      <button class="btn primary" id="recBtn-${uid}" onclick="toggleRecording('${uid}')">🎙️ Grabar</button>
+      <button class="btn" id="playBtn-${uid}" onclick="playRecording('${uid}')" disabled>▶️ Reproducir</button>
+      <button class="btn" id="dlBtn-${uid}" onclick="downloadRecording('${uid}')" disabled>⬇️ Descargar audio</button>
+      ${SpeechRecognitionCtor ? `<button class="btn" id="transBtn-${uid}" onclick="toggleTranscription('${uid}')">📝 Transcripción automática: desactivada</button>` : ''}
+    </div>
+    <div id="recStatus-${uid}" class="small" style="margin-top:8px;"></div>
+    <div class="solution" id="transcriptBox-${uid}"><b>📝 Transcripción automática (aproximada):</b><br><span id="transcriptText-${uid}"></span></div>
+    <audio id="audioPlayer-${uid}" style="display:none;"></audio>
+    <div class="note" style="margin-top:10px;">💡 Cuando termines, compara la transcripción con tu texto original y anota las diferencias. Envíame el texto (y, si tu chat admite audio, la grabación) para recibir corrección detallada de gramática, vocabulario y pronunciación.</div>
+  </div>`;
+}
+
+function saveRecText(uid){ state.texts['rectext_'+uid] = document.getElementById('rectext-'+uid).value; saveState(); }
+
+function getRec(uid){
+  if(!RECORDERS[uid]) RECORDERS[uid] = {mediaRecorder:null, stream:null, chunks:[], blob:null, recognizing:false, recognition:null, transcriptOn:false};
+  return RECORDERS[uid];
+}
+
+async function toggleRecording(uid){
+  const rec = getRec(uid);
+  const btn = document.getElementById('recBtn-'+uid);
+  const status = document.getElementById('recStatus-'+uid);
+  if(rec.mediaRecorder && rec.mediaRecorder.state==='recording'){
+    rec.mediaRecorder.stop();
+    if(rec.recognition){ try{ rec.recognition.stop(); }catch(e){} }
+    return;
+  }
+  try{
+    const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+    rec.stream = stream;
+    rec.chunks = [];
+    rec.mediaRecorder = new MediaRecorder(stream);
+    rec.mediaRecorder.ondataavailable = e => { if(e.data.size>0) rec.chunks.push(e.data); };
+    rec.mediaRecorder.onstop = () => {
+      rec.blob = new Blob(rec.chunks, {type:'audio/webm'});
+      const url = URL.createObjectURL(rec.blob);
+      const player = document.getElementById('audioPlayer-'+uid);
+      player.src = url;
+      document.getElementById('playBtn-'+uid).disabled = false;
+      document.getElementById('dlBtn-'+uid).disabled = false;
+      btn.textContent = '🎙️ Grabar'; btn.classList.remove('recording');
+      status.textContent = '✅ Grabación lista.';
+      stream.getTracks().forEach(t=>t.stop());
+    };
+    rec.mediaRecorder.start();
+    btn.textContent = '⏹️ Detener'; btn.classList.add('recording');
+    status.innerHTML = '<span class="recdot"></span>Grabando…';
+    if(rec.transcriptOn && SpeechRecognitionCtor) startRecognition(uid);
+  }catch(err){
+    status.textContent = '⚠️ No se pudo acceder al micrófono. Revisa los permisos del navegador (esta herramienta está optimizada para Google Chrome).';
+  }
+}
+function playRecording(uid){
+  const player = document.getElementById('audioPlayer-'+uid);
+  if(player.src) player.play();
+}
+function downloadRecording(uid){
+  const rec = getRec(uid);
+  if(!rec.blob) return;
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(rec.blob);
+  a.download = `grabacion-${uid}.webm`;
+  document.body.appendChild(a); a.click(); a.remove();
+}
+function toggleTranscription(uid){
+  const rec = getRec(uid);
+  rec.transcriptOn = !rec.transcriptOn;
+  document.getElementById('transBtn-'+uid).textContent = '📝 Transcripción automática: ' + (rec.transcriptOn?'activada':'desactivada');
+}
+function startRecognition(uid){
+  const rec = getRec(uid);
+  const recognition = new SpeechRecognitionCtor();
+  recognition.lang = 'de-DE';
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  let finalText = '';
+  recognition.onresult = (event) => {
+    let interim = '';
+    for(let i=event.resultIndex;i<event.results.length;i++){
+      if(event.results[i].isFinal) finalText += event.results[i][0].transcript + ' ';
+      else interim += event.results[i][0].transcript;
+    }
+    const box = document.getElementById('transcriptBox-'+uid);
+    box.classList.add('show');
+    document.getElementById('transcriptText-'+uid).textContent = finalText + interim;
+  };
+  recognition.onerror = () => {};
+  rec.recognition = recognition;
+  try{ recognition.start(); }catch(e){}
+}
+
+/* ============================================================
+   TOP BAR / BREADCRUMB / FLOATING BACK
+   ============================================================ */
+function renderTopbar(){
+  const totalDays = WEEKS.reduce((a,w)=>a+w.days.length,0);
+  const done = Object.values(state.days).filter(Boolean).length;
+  document.getElementById('progressLabel').textContent = `${done}/${totalDays} días`;
+  document.getElementById('barInner').style.width = (done/totalDays*100)+'%';
+}
+function renderBreadcrumb(parts){
+  document.getElementById('breadcrumb').innerHTML = parts.map((p,i)=>{
+    if(i===parts.length-1) return `<span>${escapeHtml(p.label)}</span>`;
+    return `<a onclick="${p.action}">${escapeHtml(p.label)}</a><span>›</span>`;
+  }).join(' ');
+}
+/* ============================================================
+   PAGE: HOME
+   ============================================================ */
+function goHome(){
+  current = {view:'home', id:null, day:null};
+  renderTopbar();
+  document.getElementById('breadcrumb').innerHTML = '';
+  const totalDays = WEEKS.reduce((a,w)=>a+w.days.length,0);
+  const doneDays = Object.values(state.days).filter(Boolean).length;
+  let candoTotal=0, candoDone=0;
+  H_CANDO.forEach(c=>c.items.forEach((it,i)=>{ candoTotal++; if(isFlag(`cando_${c.w}_${i}`)) candoDone++; }));
+
+  const weekCards = WEEKS.map(w=>{
+    const wdone = w.days.filter(d=>state.days[`${w.id}_${d.day}`]).length;
+    const pct = Math.round(wdone/w.days.length*100);
+    return `<div class="gcard ${THEME[w.id].cls}" onclick="goWeek(${w.id})">
+      <div class="wm2">${THEME[w.id].emoji}</div>
+      <div class="kicker">Semana ${w.id}</div>
+      <b>${escapeHtml(w.title)}</b>
+      <span class="desc">${escapeHtml(w.subtitle)}</span>
+      <div class="prog"><i style="width:${pct}%"></i></div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('page').innerHTML = `
+  <div class="hero t-0 homehero"><div class="wm">🇩🇪</div>
+    <div class="badge">Curso completo · 8 semanas · 7 días por semana</div>
+    <h1>Deutsch B2 — Programa Integral</h1>
+    <p class="sub">Gramática, vocabulario, comprensión auditiva, expresión oral con grabación de voz, pronunciación, falsos amigos, pruebas acumulativas y modelos de escritura — todo integrado en cada día, con corrección automática y seguimiento de tu progreso.</p>
+  </div>
+  <div class="container">
+    <div class="statrow">
+      <div class="stat"><b>${doneDays}/${totalDays}</b><span>días completados</span></div>
+      <div class="stat"><b>${candoDone}/${candoTotal}</b><span>descriptores Can-Do dominados</span></div>
+      <div class="stat"><b>8</b><span>semanas temáticas</span></div>
+    </div>
+
+    <div class="sectionhead"><h2>📘 Curso principal — 8 semanas</h2><span>Lunes a domingo: gramática, Hören, Sprechen, pronunciación, falsos amigos, vocabulario y redacción — todo dentro de cada día</span></div>
+    <div class="grid">${weekCards}</div>
+
+    <div class="card" style="margin-top:36px;">
+      <h2>📌 Cómo usar este curso — 90 minutos, los 7 días de la semana</h2>
+      <p class="small">El objetivo de hora y media diaria se mantiene <b>todos los días, incluido el fin de semana</b>. Solo cambia la mezcla de actividades — el tiempo estimado de cada tarea aparece dentro de la página de cada día:</p>
+      <p><span class="stepnum">1</span><b>Lunes a jueves (20 + 30 + 30 + 10 = 90 min):</b> vocabulario (20) → gramática y ejercicios (30) → práctica activa: lunes lectura, martes Hören, miércoles escritura corta (con falsos amigos de la semana), jueves Sprechen (30) → repaso oral en alemán (10).</p>
+      <p><span class="stepnum">2</span><b>Viernes (45 + 45 = 90 min):</b> Bloque 1 — escribes tu redacción de la semana y me la envías por chat. Bloque 2 — clase de conversación: Redemittel + grabación sobre el tema de la semana.</p>
+      <p><span class="stepnum">3</span><b>Sábado (15 + 20 + 15 + 15 + 25 = 90 min):</b> vocabulario → mini-test de repaso → artículos → pronunciación (bloque de la semana) → dictado/grabación. Sin contenido nuevo.</p>
+      <p><span class="stepnum">4</span><b>Domingo (15 + 10 + 20 + 10 + 25 + 10 = 90 min):</b> guardas mi corrección → comparas con el modelo de respuesta (Musterlösung) → anotas tu lista de errores → repaso dirigido → Can-Do semanal → cierre oral grabado → vista previa. Al cerrar las semanas 2, 4 y 7 se añade un punto de control de corrección de errores, y en las semanas 4 y 8 la prueba acumulativa (intermedia y final).</p>
+      <div class="note">🔑 Regla de oro: los errores no se borran — anótalos cada domingo y repásalos en la semana 8.</div>
+    </div>
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+const DAY_TIME_BANNER = {
+  1:'⏱ Hoy (90 min): Vocabulario 20 min → Gramática y ejercicios 30 min → Práctica activa (lectura) 30 min → Repaso oral en alemán 10 min.',
+  2:'⏱ Hoy (90 min): Vocabulario 20 min → Gramática y ejercicios 30 min → Práctica activa (Hören) 30 min → Repaso oral en alemán 10 min.',
+  3:'⏱ Hoy (90 min): Vocabulario 20 min → Gramática y ejercicios 30 min → Práctica activa (escritura corta) 30 min → Repaso oral en alemán 10 min.',
+  4:'⏱ Hoy (90 min): Vocabulario 20 min → Gramática y ejercicios 30 min → Práctica activa (Sprechen) 30 min → Repaso oral en alemán 10 min.',
+  5:'⏱ Hoy (90 min): Bloque 1 — Redacción 45 min → Bloque 2 — Clase de conversación 45 min.',
+  6:'⏱ Hoy (90 min): Vocabulario 15 min → Mini-test 20 min → Artículos 15 min → Pronunciación 15 min → Práctica activa 25 min.',
+  7:'⏱ Hoy (90 min): Corrección recibida 15 min → Lista de errores 10 min → Repaso dirigido 20 min → Can-Do 10 min → Cierre oral 25 min → Vista previa 10 min.',
+};
+
+/* ============================================================
+   PAGE: WEEK
+   ============================================================ */
+function goWeek(wid, day){
+  const w = WEEKS.find(x=>x.id===wid);
+  if(!day) day = w.days[0].day;
+  current = {view:'week', id:wid, day};
+  renderTopbar();
+  renderBreadcrumb([{label:`Semana ${wid} · ${w.title}`}]);
+
+  const d = w.days.find(x=>x.day===day);
+  const theme = THEME[wid];
+
+  let dayTabs = w.days.map(dd=>{
+    const key = `${wid}_${dd.day}`;
+    const isDone = !!state.days[key];
+    return `<button class="daytab ${dd.day===day?'active':''}" onclick="goWeek(${wid},${dd.day})"><span class="chk">${isDone?'✅':'⬜'}</span>Día ${dd.day} · ${dd.dlabel}</button>`;
+  }).join('');
+
+  let exercisesHtml = (d.exercises||[]).map(ex=>renderAnyExercise(ex, wid, day)).join('');
+
+  const key = `${wid}_${day}`;
+  const isDone = !!state.days[key];
+
+  let html = `
+  <div class="hero ${theme.cls}"><div class="wm">${theme.emoji}</div>
+    <div class="badge">Semana ${w.id}</div>
+    <h1>${theme.emoji} ${escapeHtml(w.title)}</h1>
+    <p class="sub">${escapeHtml(w.subtitle)}</p>
+  </div>
+  <div class="container">
+    <div class="daytabs">${dayTabs}</div>
+    <div class="card">
+      <h2>📖 Día ${d.day} (${d.dlabel}): ${escapeHtml(d.title)}</h2>
+      ${DAY_TIME_BANNER[d.day] ? `<div class="note">${DAY_TIME_BANNER[d.day]}</div>` : ''}
+      ${d.theory}
+      ${exercisesHtml}
+      <div class="btnrow">
+        <button class="btn ${isDone?'primary':''}" onclick="toggleDayDone(${wid},${day})">${isDone?'✅ Día completado':'⬜ Marcar día como completado'}</button>
+      </div>
+    </div>
+    ${renderPracticaActiva(wid, d.day)}
+  </div>`;
+  document.getElementById('page').innerHTML = html;
+
+  if(wid===8 && day===3){
+    document.getElementById('checklistB2').innerHTML = checklistItems.map((c,i)=>{
+      const ckey = `chk8_${i}`;
+      return `<label><input type="checkbox" ${isFlag(ckey)?'checked':''} onchange="toggleFlag('${ckey}', this.checked)"> ${escapeHtml(c)}</label>`;
+    }).join('');
+  }
+  if(typeof d.wire === 'function') d.wire(wid);
+
+  let bottomHtml = '<div class="container" style="padding-top:0;">';
+  if(w.vocab){
+    bottomHtml += `<div class="card"><h2>📚 Vocabulario — ${escapeHtml(w.title)}</h2><p class="small">Toca cada tarjeta para ver la traducción y el ejemplo.</p>${renderVocab(w.vocab)}</div>`;
+  }
+  const artEx = ARTICLE_PRACTICE[wid];
+  if(artEx){
+    bottomHtml += `<div class="card"><h2>🔤 Práctica extra — el cambio de forma de los artículos</h2><p class="small">Repasa cómo cambia el artículo (der/die/das → den/dem/des/einen/einer…) según el caso, usando vocabulario de esta semana.</p>${renderFillExercise(artEx, wid, 0)}</div>`;
+  }
+  bottomHtml += '</div>';
+  document.getElementById('page').innerHTML += bottomHtml;
+  window.scrollTo(0,0);
+}
+function saveFridayText(wid){ state.texts['friday_'+wid] = document.getElementById('fridayarea-'+wid).value; saveState(); }
+
+function toggleDayDone(wid, day){
+  const key = `${wid}_${day}`;
+  state.days[key] = !state.days[key];
+  saveState();
+  renderTopbar();
+  goWeek(wid, day);
+}
+
+/* ============================================================
+   CHROME DETECTION
+   ============================================================ */
+function isChrome(){
+  const ua = navigator.userAgent;
+  return /Chrome\//.test(ua) && !/Edg\//.test(ua) && !/OPR\//.test(ua) && !/Brave/.test(ua);
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+WEEKS.forEach(addWeekendDays);
+renderTopbar();
+if(!isChrome()) document.getElementById('chromeNotice').classList.add('show');
+goHome();
+</script>
+</body>
+</html>
