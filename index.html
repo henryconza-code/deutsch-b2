@@ -55,6 +55,22 @@ button{font-family:inherit;cursor:pointer;}
 #topProgress{margin-left:auto; display:flex; align-items:center; gap:10px; font-size:.78rem; color:var(--muted); white-space:nowrap;}
 .barOuter{width:130px; height:8px; background:var(--panel2); border-radius:6px; overflow:hidden; border:1px solid var(--border);}
 .barInner{height:100%; background:linear-gradient(90deg,var(--accent),var(--good)); width:0%; transition:width .4s;}
+#syncBtn{border:1px solid var(--border); background:var(--panel2); color:var(--text); padding:5px 11px; border-radius:16px; font-size:.75rem;}
+#syncBtn:hover{border-color:var(--accent);}
+#syncBtn.ok{border-color:var(--good);}
+#syncBtn.err{border-color:var(--bad);}
+#syncDialog{display:none; position:fixed; inset:0; z-index:300; background:rgba(0,0,0,.6); align-items:center; justify-content:center; padding:16px;}
+#syncDialog.show{display:flex;}
+.syncBox{background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:20px; max-width:480px; width:100%; max-height:90vh; overflow:auto;}
+.syncBox h3{margin-top:0;}
+.syncBox ol{padding-left:20px;}
+.syncBox a{color:var(--accent);}
+@media (max-width:640px){
+  #topbar{flex-wrap:wrap; padding:10px 16px;}
+  .brand small{display:none;}
+  #topProgress{margin-left:0; width:100%; justify-content:space-between;}
+}
+#syncToken{width:100%; padding:9px; border-radius:8px; border:1px solid var(--border); background:var(--panel2); color:var(--text); font-size:.9rem;}
 
 /* ---------- BREADCRUMB ---------- */
 #breadcrumb{
@@ -207,6 +223,36 @@ footer{text-align:center; color:var(--muted); font-size:.8rem; padding:34px 10px
   <div id="topProgress">
     <span id="progressLabel">0/56 días</span>
     <div class="barOuter"><div class="barInner" id="barInner"></div></div>
+    <button id="syncBtn" onclick="openSyncDialog()" title="Sincronización entre dispositivos">☁️ <span id="syncLabel">Sincronizar</span></button>
+  </div>
+</div>
+<div id="syncDialog">
+  <div class="syncBox">
+    <h3>☁️ Sincronizar progreso entre dispositivos</h3>
+    <div id="syncOn">
+      <p class="small">Sincronización activa en este dispositivo. Tu progreso se guarda en un Gist privado de tu GitHub.</p>
+      <p class="small" id="syncInfo"></p>
+      <div class="btnrow">
+        <button class="btn primary" onclick="syncNow(true)">🔄 Sincronizar ahora</button>
+        <button class="btn" onclick="disconnectSync()">Desconectar este dispositivo</button>
+        <button class="btn" onclick="closeSyncDialog()">Cerrar</button>
+      </div>
+    </div>
+    <div id="syncOff">
+      <p class="small">Hazlo una vez en cada dispositivo (computadora y teléfono):</p>
+      <ol class="small">
+        <li>Abre <a href="https://github.com/settings/tokens/new?scopes=gist&description=Deutsch%20B2%20sync" target="_blank" rel="noopener">este enlace de GitHub</a> (ya viene con el permiso <b>gist</b> marcado).</li>
+        <li>En <i>Expiration</i> elige <b>No expiration</b>, pulsa <b>Generate token</b> y copia el código (empieza por <code>ghp_</code>).</li>
+        <li>Pégalo aquí. Puedes usar el mismo token en todos tus dispositivos.</li>
+      </ol>
+      <input id="syncToken" type="password" placeholder="ghp_..." autocomplete="off">
+      <div class="btnrow">
+        <button class="btn primary" onclick="connectSync()">Conectar</button>
+        <button class="btn" onclick="closeSyncDialog()">Cancelar</button>
+      </div>
+      <p class="small">El token solo se guarda en este navegador y solo permite leer/escribir tus Gists.</p>
+    </div>
+    <p class="small" id="syncMsg"></p>
   </div>
 </div>
 <div id="breadcrumb"></div>
@@ -1578,9 +1624,160 @@ function saveErrores(wid){ state.texts['errores_'+wid] = document.getElementById
    STATE / STORAGE
    ============================================================ */
 const LS_KEY='deutschb2_progress_v2';
-function loadState(){ try{ return JSON.parse(localStorage.getItem(LS_KEY))||{days:{},texts:{}}; }catch(e){ return {days:{},texts:{}}; } }
-function saveState(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+function loadState(){
+  let s; try{ s = JSON.parse(localStorage.getItem(LS_KEY)); }catch(e){}
+  s = s || {}; s.days = s.days||{}; s.texts = s.texts||{}; s._ts = s._ts||{};
+  return s;
+}
+function saveState(){
+  stampChanges();
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){}
+  scheduleSyncPush();
+}
 let state = loadState();
+
+/* ============================================================
+   SYNC (GitHub Gist privado)
+   Cada clave de days/texts lleva su hora de modificación en state._ts;
+   al fusionar gana la versión más reciente de cada clave.
+   ============================================================ */
+const SYNC_TOKEN_KEY='deutschb2_sync_token', SYNC_GIST_KEY='deutschb2_sync_gist';
+const SYNC_DESC='deutsch-b2-progreso', SYNC_FILE='progreso.json';
+const SECS=['days','texts'];
+function snapOf(s){ return JSON.parse(JSON.stringify({days:s.days, texts:s.texts})); }
+let _snap = snapOf(state);
+function stampChanges(){
+  const now = Date.now();
+  for(const sec of SECS){
+    const keys = new Set([...Object.keys(state[sec]), ...Object.keys(_snap[sec])]);
+    for(const k of keys){ if(state[sec][k] !== _snap[sec][k]) state._ts[sec+':'+k] = now; }
+  }
+  _snap = snapOf(state);
+}
+function mergeStates(local, remote){
+  const out = {days:{}, texts:{}, _ts:{}};
+  for(const sec of SECS){
+    const lv = local[sec]||{}, rv = remote[sec]||{};
+    const keys = new Set([...Object.keys(lv), ...Object.keys(rv)]);
+    for(const k of keys){
+      const tk = sec+':'+k;
+      const lt = (local._ts||{})[tk]||0, rt = (remote._ts||{})[tk]||0;
+      let useRemote;
+      if(rt !== lt) useRemote = rt > lt;
+      else useRemote = !lv[k] && !!rv[k] || (typeof rv[k]==='string' && typeof lv[k]==='string' && rv[k].length > lv[k].length);
+      const v = useRemote ? rv[k] : lv[k];
+      if(v !== undefined) out[sec][k] = v;
+      const t = Math.max(lt, rt); if(t) out._ts[tk] = t;
+    }
+  }
+  return out;
+}
+function syncToken(){ try{ return localStorage.getItem(SYNC_TOKEN_KEY)||''; }catch(e){ return ''; } }
+function syncGist(){ try{ return localStorage.getItem(SYNC_GIST_KEY)||''; }catch(e){ return ''; } }
+function setSyncStatus(cls, label){
+  const b = document.getElementById('syncBtn'); if(!b) return;
+  b.className = cls||''; document.getElementById('syncLabel').textContent = label;
+}
+async function gh(path, opts={}){
+  const r = await fetch('https://api.github.com'+path, Object.assign({cache:'no-store'}, opts, {
+    headers: Object.assign({'Authorization':'Bearer '+syncToken(), 'Accept':'application/vnd.github+json'}, opts.headers||{})
+  }));
+  if(r.status===401) throw new Error('Token inválido o caducado');
+  if(!r.ok) throw new Error('GitHub respondió '+r.status);
+  return r.json();
+}
+async function findOrCreateGist(){
+  let id = syncGist();
+  if(id) return id;
+  for(let page=1; page<=10; page++){
+    const list = await gh('/gists?per_page=100&page='+page);
+    const g = list.find(x=>x.description===SYNC_DESC && x.files[SYNC_FILE]);
+    if(g){ id = g.id; break; }
+    if(list.length < 100) break;
+  }
+  if(!id){
+    const g = await gh('/gists', {method:'POST', body: JSON.stringify({description:SYNC_DESC, public:false, files:{[SYNC_FILE]:{content: JSON.stringify(state)}}})});
+    id = g.id;
+  }
+  try{ localStorage.setItem(SYNC_GIST_KEY, id); }catch(e){}
+  return id;
+}
+let _syncBusy = false, _pushTimer = null, _lastSyncAt = 0;
+function scheduleSyncPush(){
+  if(!syncToken()) return;
+  setSyncStatus('', 'Guardando…');
+  clearTimeout(_pushTimer);
+  _pushTimer = setTimeout(()=>syncNow(false), 2500);
+}
+function isEditing(){ const a = document.activeElement; return a && (a.tagName==='TEXTAREA' || a.tagName==='INPUT'); }
+function rerenderCurrent(){
+  if(isEditing()) { renderTopbar(); return; }
+  const y = window.scrollY;
+  if(current.view==='week') goWeek(current.id, current.day); else goHome();
+  window.scrollTo(0, y);
+}
+async function syncNow(fromButton){
+  if(!syncToken()) return;
+  if(_syncBusy){ scheduleSyncPush(); return; }
+  _syncBusy = true; clearTimeout(_pushTimer);
+  setSyncStatus('', 'Sincronizando…');
+  try{
+    const id = await findOrCreateGist();
+    const g = await gh('/gists/'+id);
+    let remote = {days:{}, texts:{}, _ts:{}};
+    const f = g.files[SYNC_FILE];
+    if(f){
+      const raw = f.truncated ? await (await fetch(f.raw_url, {cache:'no-store'})).text() : f.content;
+      try{ remote = JSON.parse(raw)||remote; }catch(e){}
+    }
+    stampChanges();
+    const before = JSON.stringify(snapOf(state));
+    const merged = mergeStates(state, remote);
+    const changedLocal = JSON.stringify(snapOf(merged)) !== before;
+    const mergedStr = JSON.stringify(merged);
+    state = merged; _snap = snapOf(state);
+    try{ localStorage.setItem(LS_KEY, mergedStr); }catch(e){}
+    if(mergedStr !== JSON.stringify(Object.assign({days:{},texts:{},_ts:{}}, remote))){
+      await gh('/gists/'+id, {method:'PATCH', body: JSON.stringify({files:{[SYNC_FILE]:{content: mergedStr}}})});
+    }
+    if(changedLocal) rerenderCurrent();
+    _lastSyncAt = Date.now();
+    setSyncStatus('ok', 'Sincronizado');
+    const info = document.getElementById('syncInfo');
+    if(info) info.textContent = 'Última sincronización: '+new Date(_lastSyncAt).toLocaleTimeString();
+    if(fromButton) document.getElementById('syncMsg').textContent = '✅ Sincronizado.';
+  }catch(e){
+    setSyncStatus('err', 'Sin sincronizar');
+    const m = document.getElementById('syncMsg'); if(m) m.textContent = '⚠️ '+e.message;
+  }finally{ _syncBusy = false; }
+}
+function openSyncDialog(){
+  const on = !!syncToken();
+  document.getElementById('syncOn').style.display = on ? '' : 'none';
+  document.getElementById('syncOff').style.display = on ? 'none' : '';
+  document.getElementById('syncMsg').textContent = '';
+  document.getElementById('syncDialog').classList.add('show');
+}
+function closeSyncDialog(){ document.getElementById('syncDialog').classList.remove('show'); }
+async function connectSync(){
+  const t = document.getElementById('syncToken').value.trim();
+  if(!t){ document.getElementById('syncMsg').textContent = 'Pega primero el token.'; return; }
+  try{ localStorage.setItem(SYNC_TOKEN_KEY, t); localStorage.removeItem(SYNC_GIST_KEY); }catch(e){}
+  document.getElementById('syncMsg').textContent = 'Conectando…';
+  await syncNow(true);
+  if(document.getElementById('syncBtn').className==='ok'){ document.getElementById('syncToken').value=''; openSyncDialog(); document.getElementById('syncMsg').textContent='✅ Conectado y sincronizado.'; }
+  else { try{ localStorage.removeItem(SYNC_TOKEN_KEY); }catch(e){} }
+}
+function disconnectSync(){
+  try{ localStorage.removeItem(SYNC_TOKEN_KEY); localStorage.removeItem(SYNC_GIST_KEY); }catch(e){}
+  setSyncStatus('', 'Sincronizar'); closeSyncDialog();
+}
+document.addEventListener('visibilitychange', ()=>{
+  if(!syncToken()) return;
+  if(document.visibilityState==='visible'){ if(Date.now()-_lastSyncAt > 5000) syncNow(false); }
+  else if(_pushTimer){ syncNow(false); }
+});
+window.addEventListener('focus', ()=>{ if(syncToken() && Date.now()-_lastSyncAt > 15000) syncNow(false); });
 let current = {view:'home', id:null, day:null};
 
 function isFlag(key){ return state.texts[key]==='1'; }
@@ -1991,6 +2188,7 @@ WEEKS.forEach(addWeekendDays);
 renderTopbar();
 if(!isChrome()) document.getElementById('chromeNotice').classList.add('show');
 goHome();
+if(syncToken()) syncNow(false);
 </script>
 </body>
 </html>
